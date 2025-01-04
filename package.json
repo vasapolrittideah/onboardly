@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write",
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "lint:fix": "eslint --fix src/**/*.{ts,tsx}",
+    "format": "prettier --write src/**/*.{ts,tsx}",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@tanstack/react-router": "^1.95.0",
     "autoprefixer": "^10.4.20",
+    "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwindcss-animate": "^1.0.7"
