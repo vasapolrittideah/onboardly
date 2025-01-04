@@ -8,7 +8,7 @@ module.exports = {
     {
       type: 'input',
       name: 'name',
-      message: 'What is the component name',
+      message: "What is the component's name?",
     },
   ],
   actions: () => {
@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         type: 'add',
-        path: `${componentGeneratePath}/{{pascalCase name}}/{{pascalCase name}}.test.tsx`,
+        path: `${componentGeneratePath}/{{pascalCase name}}/__tests__//{{pascalCase name}}.test.tsx`,
         templateFile: 'generators/component/component.test.tsx.hbs',
       },
     ];
