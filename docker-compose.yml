@@ -10,6 +10,7 @@ services:
       - node_modules:/usr/src/app/node_modules
 
   production:
+    image: vasapolrittideah/react-authentication:latest
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.prod

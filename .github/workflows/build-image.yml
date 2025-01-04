@@ -10,8 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Build image
-        working-directory: ./dockerfiles
-        run: docker build -f Dockerfile.prod -t vasapolrittideah/react-authentication:latest .
+        run: docker compose build production
       - name: Login to Docker Hub
         run: docker login -u vasapolrittideah -p ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: Push image to Docker Hub
