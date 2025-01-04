@@ -222,7 +222,12 @@ export const borderRadius = {
 
 const config = {
   safelist: ['.dark'],
-  content: ['src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './index.html',
+    './src/features/components/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{js,ts,jsx,tsx}',
+    './src/routes/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     colors: {
       gray: {
