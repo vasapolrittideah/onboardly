@@ -3,15 +3,22 @@ on:
   push:
     branches: [main]
 
+env:
+  REGISTRY_IMAGE: vasapolrittideah/react-authentication
+
 jobs:
   publish_image:
     runs-on: ubuntu-latest
+    env:
+      DOCKER_TLS_CERTDIR: '/certs'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Build image
-        run: docker compose build production
       - name: Login to Docker Hub
         run: docker login -u vasapolrittideah -p ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Push image to Docker Hub
-        run: docker push vasapolrittideah/react-authentication:latest
+      - name: Build and push image to Docker Hub
+        run: |
+          docker pull $REGISTRY_IMAGE:latest || true
+          docker build --cache-from $REGISTRY_IMAGE:latest --tag $REGISTRY_IMAGE:$GITHUB_SHA --tag $REGISTRY_IMAGE:latest -f ./dockerfiles/Dockerfile.prod .
+          docker push $REGISTRY_IMAGE:$GITHUB_SHA
+          docker push $REGISTRY_IMAGE:latest
