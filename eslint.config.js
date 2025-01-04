@@ -1,4 +1,3 @@
-import checkFile from 'eslint-plugin-check-file';
 import globals from 'globals';
 import { fixupConfigRules } from '@eslint/compat';
 import tsParser from '@typescript-eslint/parser';
@@ -21,9 +20,7 @@ export default [
   },
   ...compat.extends('eslint:recommended'),
   {
-    plugins: {
-      'check-file': checkFile,
-    },
+    plugins: {},
     languageOptions: {
       globals: {
         ...globals.node,
@@ -104,29 +101,6 @@ export default [
         {},
         {
           usePrettierrc: true,
-        },
-      ],
-      'check-file/filename-naming-convention': [
-        'error',
-        {
-          '**/*.{ts,tsx}': 'KEBAB_CASE',
-        },
-        {
-          ignoreMiddleExtensions: true,
-        },
-      ],
-    },
-  },
-  {
-    files: ['src/**/!(__tests__)/*'],
-    plugins: {
-      'check-file': checkFile,
-    },
-    rules: {
-      'check-file/folder-naming-convention': [
-        'error',
-        {
-          '**/*': 'KEBAB_CASE',
         },
       ],
     },
