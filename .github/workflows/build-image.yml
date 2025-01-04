@@ -1,0 +1,17 @@
+name: Build and publish image to Docker Hub
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build image
+        run: docker build ./dockerfiles/Dockerfile.prod -t vasapolrittideah/react-authentication:latest
+      - name: Login to Docker Hub
+        run: docker login -u vasapolrittideah -p ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: Push image to Docker Hub
+        run: docker push vasapolrittideah/react-authentication:latest
