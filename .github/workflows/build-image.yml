@@ -16,12 +16,20 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: 'latest'
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.bun }}-bun-
       - name: Cache node_modules
         id: cache-node_modules
         uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
       - name: Install dependencies
         if: steps.cache-node_modules.outputs.cache-hit != 'true'
         run: bun install
