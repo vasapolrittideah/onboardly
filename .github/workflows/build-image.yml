@@ -16,11 +16,6 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: 'latest'
-      - name: Cache Bun dependencies
-        uses: actions/cache@v3
-        with:
-          path: .bun
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
       - name: Cache node_modules
         id: cache-node_modules
         uses: actions/cache@v3
