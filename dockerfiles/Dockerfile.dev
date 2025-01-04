@@ -1,0 +1,9 @@
+FROM oven/bun:1
+WORKDIR /usr/src/app
+COPY package.json bun.lockb ./
+RUN bun install -g husky
+RUN bun install --frozen-lockfile
+COPY . .
+ENV NODE_ENV=development
+EXPOSE 7001
+CMD ["bun", "run", "dev"]

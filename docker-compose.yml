@@ -1,0 +1,20 @@
+services:
+  development:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.dev
+    ports:
+      - "7001:7001"
+    volumes:
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+
+  production:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.prod
+    ports:
+      - "80:80"
+
+volumes:
+  node_modules:
