@@ -385,8 +385,4 @@
     --social-zendesk: 255 255 255;
   }
   /*#endregion Colors */
-
-  :root {
-    --font-sans: 'Inter', sans-serif;
-  }
 }

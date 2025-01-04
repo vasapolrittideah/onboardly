@@ -555,7 +555,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)'],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       borderRadius: {
         ...borderRadius,
