@@ -7,6 +7,30 @@ env:
   REGISTRY_IMAGE: vasapolrittideah/react-authentication
 
 jobs:
+  install_deps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 'latest'
+      - name: Cache Bun dependencies
+        uses: actions/cache@v3
+        with:
+          path: .bun
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+      - name: Cache node_modules
+        id: cache-node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/bun.lockb') }}
+      - name: Install dependencies
+        if: steps.cache-node_modules.outputs.cache-hit != 'true'
+        run: bun install
+
   publish_image:
     runs-on: ubuntu-latest
     env:
