@@ -1,3 +1,4 @@
+import { RiLayout2Line, RiLayoutGridLine, RiListCheck } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import * as ButtonGroup from '../ButtonGroup';
@@ -12,5 +13,20 @@ export default meta;
 type Story = StoryObj<typeof ButtonGroup.Root>;
 
 export const Default: Story = {
-  render: () => <div></div>,
+  render: () => (
+    <ButtonGroup.Root>
+      <ButtonGroup.Item>
+        <ButtonGroup.Icon as={RiLayoutGridLine} />
+        Grid view
+      </ButtonGroup.Item>
+      <ButtonGroup.Item>
+        <ButtonGroup.Icon as={RiListCheck} />
+        List view
+      </ButtonGroup.Item>
+      <ButtonGroup.Item>
+        <ButtonGroup.Icon as={RiLayout2Line} />
+        Gallery view
+      </ButtonGroup.Item>
+    </ButtonGroup.Root>
+  ),
 };
