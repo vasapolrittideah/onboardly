@@ -17,7 +17,7 @@ export const buttonVariants = tv({
       // focus
       'focus:outline-none',
       // disabled
-      'disabled:cursor-not-allowed disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent',
+      'disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent',
     ],
     icon: [
       // base
