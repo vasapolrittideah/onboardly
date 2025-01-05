@@ -47,6 +47,6 @@ jobs:
       - name: Build and push image to Docker Hub
         run: |
           docker pull $REGISTRY_IMAGE:latest || true
-          docker build --cache-from $REGISTRY_IMAGE:latest --tag $REGISTRY_IMAGE:$GITHUB_SHA --tag $REGISTRY_IMAGE:latest -f ./dockerfiles/Dockerfile.prod .
+          docker build --tag $REGISTRY_IMAGE:$GITHUB_SHA --tag $REGISTRY_IMAGE:latest -f ./dockerfiles/Dockerfile.prod .
           docker push $REGISTRY_IMAGE:$GITHUB_SHA
           docker push $REGISTRY_IMAGE:latest
