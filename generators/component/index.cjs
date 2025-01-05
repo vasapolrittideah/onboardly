@@ -26,8 +26,13 @@ module.exports = {
       },
       {
         type: 'add',
-        path: `${componentGeneratePath}/{{pascalCase name}}/{{pascalCase name}}.stories.tsx`,
-        templateFile: 'generators/component/component.stories.tsx.hbs',
+        path: `${componentGeneratePath}/{{pascalCase name}}/__stories__/{{pascalCase name}}.playground.stories.tsx`,
+        templateFile: 'generators/component/component.playground.stories.tsx.hbs',
+      },
+      {
+        type: 'add',
+        path: `${componentGeneratePath}/{{pascalCase name}}/__stories__/{{pascalCase name}}.features.stories.tsx`,
+        templateFile: 'generators/component/component.features.stories.tsx.hbs',
       },
       {
         type: 'add',

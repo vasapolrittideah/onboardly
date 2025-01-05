@@ -1,8 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { {{properCase name}} } from './{{pascalCase name}}';
+import { {{properCase name}} } from '../{{pascalCase name}}';
 
 const meta: Meta<typeof {{properCase name}}> = {
+  title: 'Components/{{properCase name}}/Features',
   component: {{properCase name}},
 };
 
@@ -11,5 +12,7 @@ export default meta;
 type Story = StoryObj<typeof {{properCase name}}>;
 
 export const Default: Story = {
-  args: {}
+  render: (_) => (
+
+  ),
 };
