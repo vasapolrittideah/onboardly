@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import * as SocialButton from '../social-button';
 
-import { IconApple } from '@/components/ui/icons/icons';
+import { IconApple } from '@/components/ui/icons/social-icons';
 
 const meta: Meta<typeof SocialButton.Root> = {
   title: 'Components/SocialButton',
