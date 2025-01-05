@@ -10,6 +10,8 @@ const config = {
   semi: true,
   bracketSpacing: true,
   endOfLine: 'auto',
+  plugins: ['prettier-plugin-tailwindcss'],
+  tailwindFunctions: ['tv'],
 };
 
 export default config;

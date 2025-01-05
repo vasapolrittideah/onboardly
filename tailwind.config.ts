@@ -555,7 +555,12 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        sans: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Inter',
+          ...defaultTheme.fontFamily.serif,
+        ],
       },
       borderRadius: {
         ...borderRadius,

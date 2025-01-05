@@ -60,6 +60,9 @@ export default [
       },
       'import/resolver': {
         typescript: {},
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
       },
     },
     rules: {
@@ -87,6 +90,7 @@ export default [
         },
       ],
       'import/default': 'off',
+      'import/no-unresolved': 'off',
       'import/no-named-as-default-member': 'off',
       'import/no-named-as-default': 'off',
       'react/react-in-jsx-scope': 'off',
