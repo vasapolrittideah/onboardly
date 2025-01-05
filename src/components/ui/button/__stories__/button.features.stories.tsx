@@ -19,7 +19,8 @@ type Story = StoryObj<typeof Button.Root>;
 
 const BUTTON_TEXT = 'This is a button';
 
-export const Default: Story = {
+export const Primary: Story = {
+  name: 'Primary (Default)',
   render: () => (
     <div className="inline-flex flex-col gap-4">
       <Button.Root variant="primary" mode="filled">

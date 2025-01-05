@@ -14,7 +14,8 @@ export default meta;
 
 type Story = StoryObj<typeof CompactButton.Root>;
 
-export const Default: Story = {
+export const Stroke: Story = {
+  name: 'Stroke (Default)',
   render: () => (
     <CompactButton.Root variant="stroke">
       <CompactButton.Icon as={RiAddLine} />
