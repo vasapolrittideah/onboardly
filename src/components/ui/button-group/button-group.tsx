@@ -1,9 +1,9 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursiveCloneChildren';
+import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
 import { tv, type VariantProps } from '@/helpers/tv';
-import type { PolymorphicComponentProps } from '@/types/Polymorphic';
+import type { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const BUTTON_GROUP_ROOT_NAME = 'ButtonGroupRoot';
 const BUTTON_GROUP_ITEM_NAME = 'ButtonGroupItem';

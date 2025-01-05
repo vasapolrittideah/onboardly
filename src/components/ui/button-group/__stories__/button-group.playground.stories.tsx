@@ -1,20 +1,29 @@
 import { RiLayout2Line, RiLayoutGridLine, RiListCheck } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import * as ButtonGroup from '../ButtonGroup';
+import * as ButtonGroup from '../button-group';
 
 const meta: Meta<typeof ButtonGroup.Root> = {
-  title: 'Components/ButtonGroup/Features',
+  title: 'Components/ButtonGroup',
   component: ButtonGroup.Root,
+  argTypes: {
+    size: {
+      options: ['medium', 'small', 'xsmall'],
+      control: 'radio',
+    },
+  },
+  args: {
+    size: 'medium',
+  },
 };
 
 export default meta;
 
 type Story = StoryObj<typeof ButtonGroup.Root>;
 
-export const Default: Story = {
-  render: () => (
-    <ButtonGroup.Root>
+export const Playground: Story = {
+  render: (args) => (
+    <ButtonGroup.Root size={args.size}>
       <ButtonGroup.Item>
         <ButtonGroup.Icon as={RiLayoutGridLine} />
         Grid view
