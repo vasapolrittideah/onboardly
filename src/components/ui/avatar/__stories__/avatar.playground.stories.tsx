@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import * as Avatar from '../avatar';
 
-import portrait from '@/assets/images/avatar/portrait-1.png';
+import portrait1 from '@/assets/images/avatar/portrait-1.png';
 
 const meta: Meta<typeof Avatar.Root> = {
   title: 'Components/Avatar',
@@ -35,7 +35,7 @@ type Story = StoryObj<typeof Avatar.Root>;
 export const Playground: Story = {
   render: (args) => (
     <Avatar.Root color={args.color} size={args.size}>
-      <Avatar.Image src={portrait} />
+      <Avatar.Image src={portrait1} />
     </Avatar.Root>
   ),
 };
