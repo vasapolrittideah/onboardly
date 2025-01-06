@@ -555,11 +555,12 @@ const config = {
     },
     extend: {
       fontFamily: {
+        mono: ['GeistMono', ...defaultTheme.fontFamily.mono],
         sans: [
+          'Inter',
           '-apple-system',
           'BlinkMacSystemFont',
-          'Inter',
-          ...defaultTheme.fontFamily.serif,
+          ...defaultTheme.fontFamily.sans,
         ],
       },
       borderRadius: {
