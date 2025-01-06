@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
 import * as Avatar from '../avatar';
-import { CustomVerifiedIconSVG } from '../icons/acatar-custom-svg';
+import { CustomVerifiedIconSVG } from '../icons/avatar-custom-svg';
 
 import illustration1 from '@/assets/images/avatar/illustration-1.png';
 import memoji1 from '@/assets/images/avatar/memoji-1.png';
