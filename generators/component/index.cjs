@@ -16,27 +16,17 @@ module.exports = {
     return [
       {
         type: 'add',
-        path: `${componentGeneratePath}/{{kebabCase name}}/index.ts`,
-        templateFile: 'generators/component/index.ts.hbs',
-      },
-      {
-        type: 'add',
         path: `${componentGeneratePath}/{{kebabCase name}}/{{kebabCase name}}.tsx`,
         templateFile: 'generators/component/component.tsx.hbs',
       },
       {
         type: 'add',
-        path: `${componentGeneratePath}/{{kebabCase name}}/__stories__/{{kebabCase name}}.playground.stories.tsx`,
-        templateFile: 'generators/component/component.playground.stories.tsx.hbs',
+        path: `${componentGeneratePath}/{{kebabCase name}}/{{kebabCase name}}.stories.tsx`,
+        templateFile: 'generators/component/component.stories.tsx.hbs',
       },
       {
         type: 'add',
-        path: `${componentGeneratePath}/{{kebabCase name}}/__stories__/{{kebabCase name}}.features.stories.tsx`,
-        templateFile: 'generators/component/component.features.stories.tsx.hbs',
-      },
-      {
-        type: 'add',
-        path: `${componentGeneratePath}/{{kebabCase name}}/__tests__//{{kebabCase name}}.test.tsx`,
+        path: `${componentGeneratePath}/{{kebabCase name}}/{{kebabCase name}}.test.tsx`,
         templateFile: 'generators/component/component.test.tsx.hbs',
       },
     ];
