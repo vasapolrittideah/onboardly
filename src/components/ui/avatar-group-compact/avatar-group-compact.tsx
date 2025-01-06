@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { AVATAR_ROOT_NAME } from '@/components/ui/avatar';
+import { AVATAR_ROOT_NAME } from '@/components/ui/avatar/avatar';
 import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
 import { tv, type VariantProps } from '@/helpers/tv';
 

@@ -1,9 +1,9 @@
 import { RiCommandLine, RiSearchLine, RiUser6Line } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import * as Input from '../input';
+import * as Input from '../input/input';
 
-import * as Kbd from '@/components/ui/kbd';
+import * as Kbd from '@/components/ui/kbd/kbd';
 
 const meta: Meta<typeof Input.Root> = {
   title: 'Form Elements/Input',

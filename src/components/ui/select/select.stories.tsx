@@ -12,7 +12,7 @@ import {
 import { Meta, StoryObj } from '@storybook/react';
 import { CircleFlag } from 'react-circle-flags';
 
-import * as Select from '../select';
+import * as Select from './select';
 
 import portraitSteven from '@/assets/images/avatar/portrait-2.png';
 import portraitMamie from '@/assets/images/avatar/portrait-3.png';
@@ -27,10 +27,10 @@ import paymentMethodMetaPay from '@/assets/images/payment-methods/meta-pay.svg';
 import paymentMethodPlaceholder from '@/assets/images/payment-methods/placeholder.svg';
 import paymentMethodShopPay from '@/assets/images/payment-methods/shop-pay.svg';
 import paymentMethodVisa from '@/assets/images/payment-methods/visa.svg';
-import * as Avatar from '@/components/ui/avatar';
-import * as Hint from '@/components/ui/hint';
-import * as Input from '@/components/ui/input';
-import * as Label from '@/components/ui/label';
+import * as Avatar from '@/components/ui/avatar/avatar';
+import * as Hint from '@/components/ui/hint/hint';
+import * as Input from '@/components/ui/input/input';
+import * as Label from '@/components/ui/label/label';
 import { cn } from '@/helpers/cn';
 
 const meta: Meta<typeof Select.Root> = {

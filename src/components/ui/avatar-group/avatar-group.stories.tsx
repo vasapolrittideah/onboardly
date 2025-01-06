@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import * as AvatarGroup from '../avatar-group';
+import * as AvatarGroup from './avatar-group';
 
 import portraitMary from '@/assets/images/avatar/portrait-5.png';
 import portraitElwood from '@/assets/images/avatar/portrait-6.png';
 import portraitEmily from '@/assets/images/avatar/portrait-7.png';
-import * as Avatar from '@/components/ui/avatar';
+import * as Avatar from '@/components/ui/avatar/avatar';
 
 const meta: Meta<typeof AvatarGroup.Root> = {
   title: 'Data Display/AvatarGroup',

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import * as Label from '../label';
+import * as Label from '../label/label';
 
 import { IconInfoCustom } from '@/components/ui/icons/label-info-icons';
 

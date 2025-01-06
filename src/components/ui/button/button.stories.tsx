@@ -1,7 +1,7 @@
 import { RiHeartLine } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import * as Button from '../button';
+import * as Button from './button';
 
 const meta: Meta<typeof Button.Root> = {
   title: 'Actions/Button',

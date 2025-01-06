@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import * as SocialButton from '../social-button';
+import * as SocialButton from './social-button';
 
 import {
   IconApple,

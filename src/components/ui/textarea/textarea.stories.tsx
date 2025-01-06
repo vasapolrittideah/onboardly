@@ -3,10 +3,11 @@ import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { IconInfoCustom } from '../icons/label-info-icons';
-import * as Textarea from '../textarea';
 
-import * as Hint from '@/components/ui/hint';
-import * as Label from '@/components/ui/label';
+import * as Textarea from './textarea';
+
+import * as Hint from '@/components/ui/hint/hint';
+import * as Label from '@/components/ui/label/label';
 
 const meta: Meta<typeof Textarea.Root> = {
   title: 'Form Elements/Textarea',
