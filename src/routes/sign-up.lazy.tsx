@@ -16,7 +16,6 @@ import * as Hint from '@/components/ui/hint/hint';
 import * as Input from '@/components/ui/input/input';
 import * as Label from '@/components/ui/label/label';
 import * as LinkButton from '@/components/ui/link-button/link-button';
-
 export const Route = createLazyFileRoute('/sign-up')({
   component: RouteComponent,
 });
@@ -97,7 +96,7 @@ function RouteComponent() {
           Already have and account?
           <Link to="/login">
             <LinkButton.Root variant="gray">
-              Login to your account
+              Log in to your account
             </LinkButton.Root>
           </Link>
         </div>

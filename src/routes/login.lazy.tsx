@@ -30,7 +30,7 @@ function Login() {
       <div className="flex size-14 items-center justify-center rounded-full border border-stroke-soft-200 bg-white shadow-regular-sm">
         <RiUserLine className="text-gray-800" />
       </div>
-      <h1 className="mt-6 text-title-h4">Login to your account.</h1>
+      <h1 className="mt-6 text-title-h4">Log in to your account.</h1>
       <p className="mt-2 text-center text-paragraph-md text-gray-600">
         Enter your credentials to continue where you left off.
       </p>
