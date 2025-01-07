@@ -26,10 +26,10 @@ function Login() {
 
   return (
     <div className="flex w-full flex-col items-center justify-center pt-24">
-      <div className="flex size-10 items-center justify-center rounded-xl bg-gray-800 shadow-branding-neutral">
-        <RiUser6Line className="text-gray-300" />
+      <div className="flex size-12 items-center justify-center rounded-full border border-stroke-soft-200 bg-white shadow-regular-sm">
+        <RiUser6Line className="text-gray-800" />
       </div>
-      <h1 className="mt-6 text-title-h4">Let’s get things rolling.</h1>
+      <h1 className="mt-6 text-title-h4">Welcome back.</h1>
       <p className="mt-2 text-center text-paragraph-md text-gray-600">
         Enter your credentials to continue where you left off.
       </p>
@@ -105,15 +105,13 @@ function Login() {
           </LinkButton.Root>
         </div>
 
-        <FancyButton.Root className="w-full" variant="neutral">
+        <FancyButton.Root className="w-full" variant="primary">
           Login
         </FancyButton.Root>
 
         <div className="mt-4 flex justify-center gap-1 text-paragraph-sm text-text-sub-600">
           Don&apos;t have an account?{' '}
-          <LinkButton.Root variant="gray" underline>
-            Sign up
-          </LinkButton.Root>
+          <LinkButton.Root variant="gray">Sign up instead</LinkButton.Root>
         </div>
       </div>
     </div>
