@@ -52,19 +52,19 @@ export const socialButtonVariants = tv({
       },
     },
     size: {
-      xlarge: {
+      medium: {
         root: 'h-10 gap-3 rounded-10 px-3.5 text-label-sm',
         icon: '-mx-1',
       },
-      large: {
+      small: {
         root: 'h-9 gap-3 rounded-lg px-3 text-label-sm',
         icon: '-mx-1',
       },
-      medium: {
+      xsmall: {
         root: 'h-8 gap-2.5 rounded-lg px-2.5 text-label-sm',
         icon: '-mx-1',
       },
-      small: {
+      xxsmall: {
         root: 'h-7 gap-2.5 rounded-lg px-2 text-label-sm',
         icon: '-mx-1',
       },

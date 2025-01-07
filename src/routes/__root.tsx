@@ -5,7 +5,7 @@ import * as Button from '@/components/ui/button/button';
 
 export const Route = createRootRoute({
   component: () => (
-    <div>
+    <div className="h-screen">
       <Outlet />
       <TanStackRouterDevtools />
     </div>

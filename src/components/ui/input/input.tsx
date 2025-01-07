@@ -90,17 +90,17 @@ export const inputVariants = tv({
   },
   variants: {
     size: {
-      large: {
+      medium: {
         root: 'rounded-10',
         wrapper: 'gap-2 px-3',
         input: 'h-10',
       },
-      medium: {
+      small: {
         root: 'rounded-lg',
         wrapper: 'gap-2 px-2.5',
         input: 'h-9',
       },
-      small: {
+      xsmall: {
         root: 'rounded-lg',
         wrapper: 'gap-1.5 px-2',
         input: 'h-8',
@@ -128,13 +128,13 @@ export const inputVariants = tv({
   compoundVariants: [
     //#region affix
     {
-      size: 'medium',
+      size: 'small',
       class: {
         affix: 'px-3',
       },
     },
     {
-      size: ['medium', 'small'],
+      size: ['small', 'xsmall'],
       class: {
         affix: 'px-2.5',
       },

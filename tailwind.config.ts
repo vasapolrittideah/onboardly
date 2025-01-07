@@ -213,6 +213,15 @@ export const shadows = {
   'toggle-switch': ['0 6px 10px 0 #0e121b0f', '0 2px 4px 0 #0e121b08'],
   'switch-thumb': ['0 4px 8px 0 #1b1c1d0f', '0 2px 4px 0 #0e121b14'],
   tooltip: ['0 12px 24px 0 #0e121b0f', '0 1px 2px 0 #0e121b08'],
+  'branding-neutral': [
+    '0 19px 8px rgba(31, 31, 31, .01)',
+    '0 11px 6px rgba(31, 31, 31, .04)',
+    '0 5px 5px rgba(31, 31, 31, .07)',
+    '0 1px 3px rgba(31, 31, 31, .08)',
+    '0 0 0 1px #292929',
+    'inset 0 -0.5px 0.5px hsla(0, 0%, 100%, .24)',
+    'inset 0 -0.5px 0.5px hsla(0, 0%, 100%, .24)',
+  ],
 } as unknown as Record<string, string>;
 
 export const borderRadius = {

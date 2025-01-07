@@ -51,13 +51,6 @@ export const Icon: Story = {
 export const Size: Story = {
   render: () => (
     <div className="flex w-full max-w-[300px] flex-col gap-5">
-      <Input.Root size="large">
-        <Input.Wrapper>
-          <Input.Icon as={RiUser6Line} />
-          <Input.Input type="text" placeholder="Placeholder text" />
-        </Input.Wrapper>
-      </Input.Root>
-
       <Input.Root size="medium">
         <Input.Wrapper>
           <Input.Icon as={RiUser6Line} />
@@ -66,6 +59,13 @@ export const Size: Story = {
       </Input.Root>
 
       <Input.Root size="small">
+        <Input.Wrapper>
+          <Input.Icon as={RiUser6Line} />
+          <Input.Input type="text" placeholder="Placeholder text" />
+        </Input.Wrapper>
+      </Input.Root>
+
+      <Input.Root size="xsmall">
         <Input.Wrapper>
           <Input.Icon as={RiUser6Line} />
           <Input.Input type="text" placeholder="Placeholder text" />
