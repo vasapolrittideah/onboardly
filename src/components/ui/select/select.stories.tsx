@@ -800,7 +800,7 @@ export const MergeSize: Story = {
 
     return (
       <div className="flex w-full max-w-[300px] flex-col gap-5">
-        <Input.Root size="large">
+        <Input.Root size="medium">
           <Input.Wrapper>
             <Input.InlineAffix>€</Input.InlineAffix>
             <Input.Input placeholder="0.00" />
@@ -808,7 +808,7 @@ export const MergeSize: Story = {
           <SelectCountry size="large" />
         </Input.Root>
 
-        <Input.Root size="medium">
+        <Input.Root size="small">
           <Input.Wrapper>
             <Input.InlineAffix>€</Input.InlineAffix>
             <Input.Input placeholder="0.00" />
@@ -816,7 +816,7 @@ export const MergeSize: Story = {
           <SelectCountry size="medium" />
         </Input.Root>
 
-        <Input.Root size="small">
+        <Input.Root size="xsmall">
           <Input.Wrapper>
             <Input.InlineAffix>€</Input.InlineAffix>
             <Input.Input placeholder="0.00" />
