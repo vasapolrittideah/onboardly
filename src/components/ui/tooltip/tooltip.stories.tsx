@@ -52,7 +52,7 @@ export const Size: Story = {
       <Tooltip.Provider>
         <Tooltip.Root delayDuration={150}>
           <Tooltip.Trigger asChild>
-            <Button.Root variant="neutral" mode="stroke" size="large">
+            <Button.Root variant="neutral" mode="stroke" size="medium">
               Large
             </Button.Root>
           </Tooltip.Trigger>
@@ -61,7 +61,7 @@ export const Size: Story = {
 
         <Tooltip.Root delayDuration={150}>
           <Tooltip.Trigger asChild>
-            <Button.Root variant="neutral" mode="stroke" size="medium">
+            <Button.Root variant="neutral" mode="stroke" size="xsmall">
               Medium (default)
             </Button.Root>
           </Tooltip.Trigger>
@@ -70,7 +70,7 @@ export const Size: Story = {
 
         <Tooltip.Root delayDuration={150}>
           <Tooltip.Trigger asChild>
-            <Button.Root variant="neutral" mode="stroke" size="small">
+            <Button.Root variant="neutral" mode="stroke" size="xxsmall">
               Small
             </Button.Root>
           </Tooltip.Trigger>

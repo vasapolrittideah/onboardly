@@ -113,7 +113,7 @@ export default [
       'check-file/filename-naming-convention': [
         'error',
         {
-          '**/*.{ts,tsx}': 'KEBAB_CASE',
+          '**/!(routes)/*.{ts,tsx}': 'KEBAB_CASE',
         },
         {
           ignoreMiddleExtensions: true,
