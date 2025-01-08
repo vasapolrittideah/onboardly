@@ -1,0 +1,20 @@
+{
+  "name": "react-authentication-server",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "tsx index.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "fastify": "^5.2.1"
+  }
+}
