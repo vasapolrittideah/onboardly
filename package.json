@@ -3,9 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-  },
+  "packageManager": "bun@1.1.42",
+  "scripts": {},
   "dependencies": {
+    "turbo": "^2.3.3"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.4",
