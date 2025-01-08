@@ -12,7 +12,7 @@ module.exports = {
     },
   ],
   actions: () => {
-    const componentGeneratePath = 'src/components/ui';
+    const componentGeneratePath = 'packages/web/src/components/ui';
     return [
       {
         type: 'add',
