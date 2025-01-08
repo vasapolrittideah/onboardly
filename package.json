@@ -3,9 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "packageManager": "bun@1.1.42",
+  "packageManager": "bun@1.1.43",
   "scripts": {},
   "dependencies": {
+    "@fastify/autoload": "^6.0.3",
     "supabase": "^2.2.1",
     "turbo": "^2.3.3"
   },
@@ -13,6 +14,7 @@
     "@eslint/compat": "^1.2.4",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
+    "@types/bun": "latest",
     "check-file": "^1.1.2",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
@@ -26,7 +28,10 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "eslint-plugin-storybook": "^0.11.2",
     "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.9"
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "typescript-eslint": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest"
   },
   "eslintConfig": {
     "extends": [
@@ -35,5 +40,11 @@
       "plugin:storybook/recommended"
     ]
   },
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ],
+  "module": "index.ts",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
