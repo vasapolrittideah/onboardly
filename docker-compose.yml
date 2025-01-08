@@ -1,5 +1,5 @@
 services:
-  development:
+  web:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile.dev
@@ -8,14 +8,6 @@ services:
     volumes:
       - ./:/usr/src/app
       - node_modules:/usr/src/app/node_modules
-
-  production:
-    image: vasapolrittideah/react-authentication:latest
-    build:
-      context: .
-      dockerfile: dockerfiles/Dockerfile.prod
-    ports:
-      - "80:80"
 
 volumes:
   node_modules:
