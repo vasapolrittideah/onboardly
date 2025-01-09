@@ -62,4 +62,18 @@ export class AuthService {
 
     return token;
   }
+
+  async logout(): Promise<void | ErrorResponse> {
+    const { error } = await this.supabase.client.auth.signOut();
+
+    if (error) {
+      return <ErrorResponse>(<unknown>{
+        statusCode: error.status,
+        message: error.message,
+        error: error.name,
+      });
+    }
+
+    return;
+  }
 }
