@@ -7,8 +7,9 @@ import { PrismaService } from './providers/prisma/prisma.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { SupabaseModule } from './providers/supabase/supabase.module';
 import configuration from './config/configuration';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
+import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -22,6 +23,10 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
     },
   ],
 })
