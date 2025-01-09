@@ -1,10 +1,12 @@
 import { SupabaseService } from '@/providers/supabase/supabase.service';
 import { Injectable } from '@nestjs/common';
-import { RegisterDto } from './auth.dto';
+import { LoginDto, RegisterDto } from './auth.dto';
 import { PrismaService } from '@/providers/prisma/prisma.service';
-import { normalizeEmail } from '@/helpers/normalize-emal';
+import { normalizeEmail } from '@/helpers/normalize-email';
 import { ConfigService } from '@nestjs/config';
 import { AuthUser } from '@supabase/supabase-js';
+import { TokenResponse } from './auth.interface';
+import { ErrorResponse } from '@/errors/errors.interface';
 
 @Injectable()
 export class AuthService {
@@ -14,18 +16,50 @@ export class AuthService {
     private readonly configService: ConfigService,
   ) {}
 
-  async register(dto: RegisterDto): Promise<AuthUser> {
-    const normalizedEmail = normalizeEmail(dto.email);
-    const { data, error } = await this.supabase.client.auth.signUp({
-      email: normalizedEmail,
-      password: dto.password,
+  async register(data: RegisterDto): Promise<AuthUser | ErrorResponse> {
+    const emailNormalized = normalizeEmail(data.email);
+    const { data: result, error } = await this.supabase.client.auth.signUp({
+      email: emailNormalized,
+      password: data.password,
       options: {
         data: {
-          fullName: dto.fullName,
+          fullName: data.fullName,
         },
       },
     });
 
-    return this.prisma.expose(data.user);
+    if (error) {
+      return <ErrorResponse>(<unknown>{
+        statusCode: error.status,
+        message: error.message,
+        error: error.name,
+      });
+    }
+
+    return result.user;
+  }
+
+  async login(data: LoginDto): Promise<TokenResponse | ErrorResponse> {
+    const emailNormalized = normalizeEmail(data.email);
+    const { data: result, error } =
+      await this.supabase.client.auth.signInWithPassword({
+        email: emailNormalized,
+        password: data.password,
+      });
+
+    if (error) {
+      return <ErrorResponse>(<unknown>{
+        statusCode: error.status,
+        message: error.message,
+        error: error.name,
+      });
+    }
+
+    const token: TokenResponse = {
+      accessToken: result.session.access_token,
+      refreshToken: result.session.refresh_token,
+    };
+
+    return token;
   }
 }

@@ -7,6 +7,8 @@ import { PrismaService } from './providers/prisma/prisma.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { SupabaseModule } from './providers/supabase/supabase.module';
 import configuration from './config/configuration';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpExceptionFilter } from './filters/http-exception.filter';
 
 @Module({
   imports: [
@@ -16,6 +18,11 @@ import configuration from './config/configuration';
     SupabaseModule,
   ],
   controllers: [UsersController],
-  providers: [UsersService, PrismaService],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}

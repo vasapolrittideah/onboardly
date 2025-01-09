@@ -20,3 +20,11 @@ export class RegisterDto {
   @IsOptional()
   password?: string;
 }
+
+export class LoginDto {
+  @IsNotEmpty()
+  email: string;
+
+  @IsNotEmpty()
+  password: string;
+}
