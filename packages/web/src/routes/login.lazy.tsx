@@ -27,11 +27,11 @@ function Login() {
 
   return (
     <div className="flex w-full flex-col items-center justify-center pt-24">
-      <div className="flex size-14 items-center justify-center rounded-full border border-stroke-soft-200 bg-white shadow-regular-sm">
+      <div className="border-stroke-soft-200 shadow-regular-sm flex size-14 items-center justify-center rounded-full border bg-white">
         <RiUserLine className="text-gray-800" />
       </div>
-      <h1 className="mt-6 text-title-h4">Log in to your account.</h1>
-      <p className="mt-2 text-center text-paragraph-md text-gray-600">
+      <h1 className="text-title-h4 mt-6">Log in to your account.</h1>
+      <p className="text-paragraph-md mt-2 text-center text-gray-600">
         Enter your credentials to continue where you left off.
       </p>
       <Divider.Root
@@ -39,7 +39,7 @@ function Login() {
           background:
             'linear-gradient(90deg, currentcolor 4px, transparent 4px) 50% 50% / 8px 1px repeat-x',
         }}
-        className="mt-8 h-1 w-full max-w-[440px] text-stroke-sub-300 before:bg-transparent"></Divider.Root>
+        className="text-stroke-sub-300 mt-8 h-1 w-full max-w-[440px] before:bg-transparent"></Divider.Root>
 
       <div className="mt-4 h-80 w-full max-w-[440px] rounded-3xl bg-white p-6">
         <SocialButton.Root className="w-full" brand="google" mode="stroke">
@@ -82,9 +82,9 @@ function Login() {
               />
               <button type="button" onClick={() => setShowPassword((s) => !s)}>
                 {showPassword ? (
-                  <RiEyeOffLine className="size-5 text-text-soft-400 group-has-[disabled]:text-text-disabled-300" />
+                  <RiEyeOffLine className="text-text-soft-400 group-has-[disabled]:text-text-disabled-300 size-5" />
                 ) : (
-                  <RiEyeLine className="size-5 text-text-soft-400 group-has-[disabled]:text-text-disabled-300" />
+                  <RiEyeLine className="text-text-soft-400 group-has-[disabled]:text-text-disabled-300 size-5" />
                 )}
               </button>
             </Input.Wrapper>
@@ -110,7 +110,7 @@ function Login() {
           Login
         </FancyButton.Root>
 
-        <div className="mt-4 flex justify-center gap-1 text-paragraph-sm text-text-sub-600">
+        <div className="text-paragraph-sm text-text-sub-600 mt-4 flex justify-center gap-1">
           Don&apos;t have an account?{' '}
           <Link to="/sign-up">
             <LinkButton.Root variant="gray">

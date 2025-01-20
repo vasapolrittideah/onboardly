@@ -1,4 +1,4 @@
-import { tv, type VariantProps } from '@/helpers/tv';
+import { tv, type VariantProps } from '@/utils/tv';
 
 const DIVIDER_ROOT_NAME = 'DividerRoot';
 
@@ -6,29 +6,29 @@ export const dividerVariants = tv({
   base: 'flex w-full items-center',
   variants: {
     variant: {
-      line: 'h-0 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:-translate-y-1/2 before:bg-stroke-soft-200',
+      line: 'before:bg-stroke-soft-200 h-0 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:-translate-y-1/2',
       'line-spacing': [
         // base
         'h-1',
         // before
-        'before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:-translate-y-1/2 before:bg-stroke-soft-200',
+        'before:bg-stroke-soft-200 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:-translate-y-1/2',
       ],
       'line-text': [
         // base
         'gap-2.5',
         'text-subheading-2xs text-text-soft-400',
         // before
-        'before:h-px before:w-full before:flex-1 before:bg-stroke-soft-200',
+        'before:bg-stroke-soft-200 before:h-px before:w-full before:flex-1',
         // after
-        'after:h-px after:w-full after:flex-1 after:bg-stroke-soft-200',
+        'after:bg-stroke-soft-200 after:h-px after:w-full after:flex-1',
       ],
       content: [
         // base
         'gap-2.5',
         // before
-        'before:h-px before:w-full before:flex-1 before:bg-stroke-soft-200',
+        'before:bg-stroke-soft-200 before:h-px before:w-full before:flex-1',
         // after
-        'after:h-px after:w-full after:flex-1 after:bg-stroke-soft-200',
+        'after:bg-stroke-soft-200 after:h-px after:w-full after:flex-1',
       ],
       text: [
         // base

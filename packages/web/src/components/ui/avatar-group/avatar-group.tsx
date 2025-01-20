@@ -3,55 +3,55 @@
 import * as React from 'react';
 
 import { AVATAR_ROOT_NAME } from '@/components/ui/avatar/avatar';
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 
 const AVATAR_GROUP_ROOT_NAME = 'AvatarGroupRoot';
 const AVATAR_GROUP_OVERFLOW_NAME = 'AvatarGroupOverflow';
 
 export const avatarGroupVariants = tv({
   slots: {
-    root: 'flex *:ring-2 *:ring-stroke-white-0',
+    root: '*:ring-stroke-white-0 flex *:ring-2',
     overflow:
-      'relative flex shrink-0 items-center justify-center rounded-full bg-bg-weak-50 text-center text-text-sub-600',
+      'bg-bg-weak-50 text-text-sub-600 relative flex shrink-0 items-center justify-center rounded-full text-center',
   },
   variants: {
     size: {
       '80': {
         root: '-space-x-4',
-        overflow: 'size-20 text-title-h5',
+        overflow: 'text-title-h5 size-20',
       },
       '72': {
         root: '-space-x-4',
-        overflow: 'size-[72px] text-title-h5',
+        overflow: 'text-title-h5 size-[72px]',
       },
       '64': {
         root: '-space-x-4',
-        overflow: 'size-16 text-title-h5',
+        overflow: 'text-title-h5 size-16',
       },
       '56': {
         root: '-space-x-4',
-        overflow: 'size-14 text-title-h5',
+        overflow: 'text-title-h5 size-14',
       },
       '48': {
         root: '-space-x-3',
-        overflow: 'size-12 text-title-h6',
+        overflow: 'text-title-h6 size-12',
       },
       '40': {
         root: '-space-x-3',
-        overflow: 'size-10 text-label-md',
+        overflow: 'text-label-md size-10',
       },
       '32': {
         root: '-space-x-1.5',
-        overflow: 'size-8 text-label-sm',
+        overflow: 'text-label-sm size-8',
       },
       '24': {
         root: '-space-x-1',
-        overflow: 'size-6 text-label-xs',
+        overflow: 'text-label-xs size-6',
       },
       '20': {
         root: '-space-x-1',
-        overflow: 'size-5 text-subheading-2xs',
+        overflow: 'text-subheading-2xs size-5',
       },
     },
   },

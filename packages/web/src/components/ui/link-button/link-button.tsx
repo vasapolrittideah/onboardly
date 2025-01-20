@@ -1,8 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 import { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const LINK_BUTTON_ROOT_NAME = 'LinkButtonRoot';
@@ -20,7 +20,7 @@ export const linkButtonVariants = tv({
       // focus
       'focus:outline-none focus-visible:underline',
       // disabled
-      'disabled:pointer-events-none disabled:text-text-disabled-300 disabled:no-underline',
+      'disabled:text-text-disabled-300 disabled:pointer-events-none disabled:no-underline',
     ],
     icon: 'shrink-0',
   },
@@ -57,11 +57,11 @@ export const linkButtonVariants = tv({
     },
     size: {
       medium: {
-        root: 'h-5 gap-1 text-label-sm',
+        root: 'text-label-sm h-5 gap-1',
         icon: 'size-5',
       },
       small: {
-        root: 'h-4 gap-1 text-label-xs',
+        root: 'text-label-xs h-4 gap-1',
         icon: 'size-4',
       },
     },

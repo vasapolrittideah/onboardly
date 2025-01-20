@@ -5,9 +5,9 @@ import {
   IconEmptyCompany,
   IconEmptyUser,
 } from '@/components/ui/icons/avatar-empty-icons';
-import { cn, cnExt } from '@/helpers/cn';
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { cn, cnExt } from '@/utils/cn';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 
 export const AVATAR_ROOT_NAME = 'AvatarRoot';
 const AVATAR_IMAGE_NAME = 'AvatarImage';
@@ -29,31 +29,31 @@ export const avatarVariants = tv({
   variants: {
     size: {
       '80': {
-        root: 'size-20 text-title-h5',
+        root: 'text-title-h5 size-20',
       },
       '72': {
-        root: 'size-[72px] text-title-h5',
+        root: 'text-title-h5 size-[72px]',
       },
       '64': {
-        root: 'size-16 text-title-h5',
+        root: 'text-title-h5 size-16',
       },
       '56': {
-        root: 'size-14 text-label-lg',
+        root: 'text-label-lg size-14',
       },
       '48': {
-        root: 'size-12 text-label-lg',
+        root: 'text-label-lg size-12',
       },
       '40': {
-        root: 'size-10 text-label-md',
+        root: 'text-label-md size-10',
       },
       '32': {
-        root: 'size-8 text-label-sm',
+        root: 'text-label-sm size-8',
       },
       '24': {
-        root: 'size-6 text-label-xs',
+        root: 'text-label-xs size-6',
       },
       '20': {
-        root: 'size-5 text-label-xs',
+        root: 'text-label-xs size-5',
       },
     },
     color: {
@@ -245,7 +245,7 @@ function AvatarIndicator({
 AvatarIndicator.displayName = AVATAR_INDICATOR_NAME;
 
 export const avatarStatusVariants = tv({
-  base: 'box-content size-3 rounded-full border-4 border-bg-white-0',
+  base: 'border-bg-white-0 box-content size-3 rounded-full border-4',
   variants: {
     status: {
       online: 'bg-success-base',
@@ -288,7 +288,7 @@ const AvatarBrandLogo = React.forwardRef<
     <Component
       ref={forwardedRef}
       className={cnExt(
-        'box-content size-6 rounded-full border-2 border-bg-white-0',
+        'border-bg-white-0 box-content size-6 rounded-full border-2',
         className,
       )}
       {...rest}
@@ -304,7 +304,7 @@ function AvatarNotification({
   return (
     <div
       className={cnExt(
-        'box-content size-3 rounded-full border-2 border-bg-white-0 bg-error-base',
+        'border-bg-white-0 bg-error-base box-content size-3 rounded-full border-2',
         className,
       )}
       {...rest}

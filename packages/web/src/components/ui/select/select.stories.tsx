@@ -31,7 +31,7 @@ import * as Avatar from '@/components/ui/avatar/avatar';
 import * as Hint from '@/components/ui/hint/hint';
 import * as Input from '@/components/ui/input/input';
 import * as Label from '@/components/ui/label/label';
-import { cn } from '@/helpers/cn';
+import { cn } from '@/utils/cn';
 
 const meta: Meta<typeof Select.Root> = {
   title: 'Form Elements/Select',

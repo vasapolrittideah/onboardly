@@ -18,6 +18,6 @@ export default defineConfig({
     },
     host: true,
     strictPort: true,
-    port: 7001,
+    port: 8000,
   },
 });

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { cnExt } from '@/helpers/cn';
+import { cnExt } from '@/utils/cn';
 
 const TEXTAREA_ROOT_NAME = 'TextareaRoot';
 const TEXTAREA_NAME = 'Textarea';
@@ -19,13 +19,13 @@ const Textarea = React.forwardRef<
       className={cnExt(
         [
           // base
-          'block w-full resize-none text-paragraph-sm text-text-strong-950 outline-none',
+          'text-paragraph-sm text-text-strong-950 block w-full resize-none outline-none',
           !simple && [
             'pointer-events-auto h-full min-h-[82px] bg-transparent pl-3 pr-2.5 pt-2.5',
           ],
           simple && [
-            'min-h-28 rounded-xl bg-bg-white-0 px-3 py-2.5 shadow-regular-xs',
-            'ring-1 ring-inset ring-stroke-soft-200',
+            'bg-bg-white-0 shadow-regular-xs min-h-28 rounded-xl px-3 py-2.5',
+            'ring-stroke-soft-200 ring-1 ring-inset',
             'transition duration-200 ease-out',
             // hover
             'hover:[&:not(:focus)]:bg-bg-weak-50',
@@ -45,7 +45,7 @@ const Textarea = React.forwardRef<
           ],
           !disabled && [
             // placeholder
-            'placeholder:select-none placeholder:text-text-soft-400 placeholder:transition placeholder:duration-200 placeholder:ease-out',
+            'placeholder:text-text-soft-400 placeholder:select-none placeholder:transition placeholder:duration-200 placeholder:ease-out',
             // hover placeholder
             'group-hover/textarea:placeholder:text-text-sub-600',
             // focus
@@ -119,13 +119,13 @@ const TextareaRoot = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         className={cnExt(
           [
             // base
-            'group/textarea relative flex w-full flex-col rounded-xl bg-bg-white-0 pb-2.5 shadow-regular-xs',
-            'ring-1 ring-inset ring-stroke-soft-200',
+            'group/textarea bg-bg-white-0 shadow-regular-xs relative flex w-full flex-col rounded-xl pb-2.5',
+            'ring-stroke-soft-200 ring-1 ring-inset',
             'transition duration-200 ease-out',
             // hover
             'hover:[&:not(:focus-within)]:bg-bg-weak-50',
             // disabled
-            'has-[[disabled]]:pointer-events-none has-[[disabled]]:bg-bg-weak-50 has-[[disabled]]:ring-transparent',
+            'has-[[disabled]]:bg-bg-weak-50 has-[[disabled]]:pointer-events-none has-[[disabled]]:ring-transparent',
           ],
           !hasError && [
             // hover

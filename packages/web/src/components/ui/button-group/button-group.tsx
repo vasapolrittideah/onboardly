@@ -1,8 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 import type { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const BUTTON_GROUP_ROOT_NAME = 'ButtonGroupRoot';
@@ -14,8 +14,8 @@ export const buttonGroupVariants = tv({
     root: 'flex -space-x-[1.5px]',
     item: [
       // base
-      'group relative flex items-center justify-center whitespace-nowrap bg-bg-white-0 text-center text-text-sub-600 outline-none',
-      'border border-stroke-soft-200',
+      'bg-bg-white-0 text-text-sub-600 group relative flex items-center justify-center whitespace-nowrap text-center outline-none',
+      'border-stroke-soft-200 border',
       'transition duration-200 ease-out',
       // hover
       'hover:bg-bg-weak-50',
@@ -25,7 +25,7 @@ export const buttonGroupVariants = tv({
       'data-[state=on]:bg-bg-weak-50',
       'data-[state=on]:text-text-strong-950',
       // disabled
-      'disabled:pointer-events-none disabled:bg-bg-weak-50',
+      'disabled:bg-bg-weak-50 disabled:pointer-events-none',
       'disabled:text-text-disabled-300',
     ],
     icon: 'shrink-0',
@@ -35,7 +35,7 @@ export const buttonGroupVariants = tv({
       medium: {
         item: [
           // base
-          'h-9 gap-4 px-4 text-label-sm',
+          'text-label-sm h-9 gap-4 px-4',
           // radius
           'first:rounded-l-lg last:rounded-r-lg',
         ],
@@ -47,7 +47,7 @@ export const buttonGroupVariants = tv({
       small: {
         item: [
           // base
-          'h-8 gap-3.5 px-3.5 text-label-sm',
+          'text-label-sm h-8 gap-3.5 px-3.5',
           // radius
           'first:rounded-l-lg last:rounded-r-lg',
         ],
@@ -59,7 +59,7 @@ export const buttonGroupVariants = tv({
       xsmall: {
         item: [
           // base
-          'h-6 gap-3 px-3 text-label-xs',
+          'text-label-xs h-6 gap-3 px-3',
           // radius
           'first:rounded-l-md last:rounded-r-md',
         ],

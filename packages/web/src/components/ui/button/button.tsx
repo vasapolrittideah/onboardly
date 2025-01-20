@@ -1,8 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 import type { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const BUTTON_ROOT_NAME = 'ButtonRoot';
@@ -17,7 +17,7 @@ export const buttonVariants = tv({
       // focus
       'focus:outline-none',
       // disabled
-      'disabled:cursor-not-allowed disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent',
+      'disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:cursor-not-allowed disabled:ring-transparent',
     ],
     icon: [
       // base
@@ -44,19 +44,19 @@ export const buttonVariants = tv({
     },
     size: {
       medium: {
-        root: 'h-10 gap-3 rounded-10 px-3.5 text-label-sm',
+        root: 'rounded-10 text-label-sm h-10 gap-3 px-3.5',
         icon: '-mx-1',
       },
       small: {
-        root: 'h-9 gap-3 rounded-lg px-3 text-label-sm',
+        root: 'text-label-sm h-9 gap-3 rounded-lg px-3',
         icon: '-mx-1',
       },
       xsmall: {
-        root: 'h-8 gap-2.5 rounded-lg px-2.5 text-label-sm',
+        root: 'text-label-sm h-8 gap-2.5 rounded-lg px-2.5',
         icon: '-mx-1',
       },
       xxsmall: {
-        root: 'h-7 gap-2.5 rounded-lg px-2 text-label-sm',
+        root: 'text-label-sm h-7 gap-2.5 rounded-lg px-2',
         icon: '-mx-1',
       },
     },
@@ -111,7 +111,7 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          'bg-transparent text-primary-base ring-transparent',
+          'text-primary-base bg-transparent ring-transparent',
           // hover
           'hover:bg-primary-alpha-10',
           // focus
@@ -170,7 +170,7 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          'bg-transparent text-text-sub-600 ring-transparent',
+          'text-text-sub-600 bg-transparent ring-transparent',
           // hover
           'hover:bg-bg-weak-50 hover:text-text-strong-950',
           // focus
@@ -229,7 +229,7 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          'bg-transparent text-error-base ring-transparent',
+          'text-error-base bg-transparent ring-transparent',
           // hover
           'hover:bg-red-alpha-10',
           // focus

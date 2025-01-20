@@ -1,8 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 import type { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const SOCIAL_BUTTON_ROOT_NAME = 'SocialButtonRoot';
@@ -12,7 +12,7 @@ export const socialButtonVariants = tv({
   slots: {
     root: [
       // base
-      'relative inline-flex h-10 items-center justify-center gap-3.5 whitespace-nowrap rounded-10 px-4 text-label-sm outline-none',
+      'rounded-10 text-label-sm relative inline-flex h-10 items-center justify-center gap-3.5 whitespace-nowrap px-4 outline-none',
       'transition duration-200 ease-out',
       // focus
       'focus:outline-none',
@@ -33,7 +33,7 @@ export const socialButtonVariants = tv({
           // base
           'text-static-white',
           // before
-          'before:pointer-events-none before:absolute before:inset-0 before:rounded-10 before:opacity-0 before:transition before:duration-200 before:ease-out',
+          'before:rounded-10 before:pointer-events-none before:absolute before:inset-0 before:opacity-0 before:transition before:duration-200 before:ease-out',
           // hover
           'hover:before:opacity-100',
           // focus
@@ -43,7 +43,7 @@ export const socialButtonVariants = tv({
       stroke: {
         root: [
           // base
-          'bg-bg-white-0 text-text-strong-950 shadow-regular-xs ring-1 ring-inset ring-stroke-soft-200',
+          'bg-bg-white-0 text-text-strong-950 shadow-regular-xs ring-stroke-soft-200 ring-1 ring-inset',
           // hover
           'hover:bg-bg-weak-50 hover:shadow-none hover:ring-transparent',
           // focus
@@ -53,19 +53,19 @@ export const socialButtonVariants = tv({
     },
     size: {
       medium: {
-        root: 'h-10 gap-3 rounded-10 px-3.5 text-label-sm',
+        root: 'rounded-10 text-label-sm h-10 gap-3 px-3.5',
         icon: '-mx-1',
       },
       small: {
-        root: 'h-9 gap-3 rounded-lg px-3 text-label-sm',
+        root: 'text-label-sm h-9 gap-3 rounded-lg px-3',
         icon: '-mx-1',
       },
       xsmall: {
-        root: 'h-8 gap-2.5 rounded-lg px-2.5 text-label-sm',
+        root: 'text-label-sm h-8 gap-2.5 rounded-lg px-2.5',
         icon: '-mx-1',
       },
       xxsmall: {
-        root: 'h-7 gap-2.5 rounded-lg px-2 text-label-sm',
+        root: 'text-label-sm h-7 gap-2.5 rounded-lg px-2',
         icon: '-mx-1',
       },
     },

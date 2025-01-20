@@ -1,7 +1,7 @@
 import * as LabelPrimitives from '@radix-ui/react-label';
 import * as React from 'react';
 
-import { cnExt } from '@/helpers/cn';
+import { cnExt } from '@/utils/cn';
 
 const LabelRoot = React.forwardRef<
   React.ComponentRef<typeof LabelPrimitives.Root>,
@@ -14,7 +14,7 @@ const LabelRoot = React.forwardRef<
       ref={forwardedRef}
       className={cnExt(
         'flex items-center gap-px',
-        'group cursor-pointer text-label-sm text-text-strong-950',
+        'text-label-sm text-text-strong-950 group cursor-pointer',
         // disabled
         'aria-disabled:text-text-disabled-300',
         className,

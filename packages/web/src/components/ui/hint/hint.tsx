@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 import type { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const HINT_ROOT_NAME = 'HintRoot';
@@ -9,8 +9,8 @@ const HINT_ICON_NAME = 'HintIcon';
 
 export const hintVariants = tv({
   slots: {
-    root: 'group flex items-center gap-1 text-paragraph-xs text-text-sub-600',
-    icon: 'size-4 shrink-0 text-text-soft-400',
+    root: 'text-paragraph-xs text-text-sub-600 group flex items-center gap-1',
+    icon: 'text-text-soft-400 size-4 shrink-0',
   },
   variants: {
     disabled: {

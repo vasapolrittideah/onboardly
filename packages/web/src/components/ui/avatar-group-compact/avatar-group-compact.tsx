@@ -3,8 +3,8 @@
 import * as React from 'react';
 
 import { AVATAR_ROOT_NAME } from '@/components/ui/avatar/avatar';
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 
 const AVATAR_GROUP_COMPACT_ROOT_NAME = 'AvatarGroupCompactRoot';
 const AVATAR_GROUP_COMPACT_STACK_NAME = 'AvatarGroupCompactStack';
@@ -12,26 +12,26 @@ const AVATAR_GROUP_COMPACT_OVERFLOW_NAME = 'AvatarGroupCompactOverflow';
 
 export const avatarGroupCompactVariants = tv({
   slots: {
-    root: 'flex w-max items-center rounded-full bg-bg-white-0 p-0.5 shadow-regular-xs',
-    stack: 'flex -space-x-0.5 *:ring-2 *:ring-stroke-white-0',
+    root: 'bg-bg-white-0 shadow-regular-xs flex w-max items-center rounded-full p-0.5',
+    stack: '*:ring-stroke-white-0 flex -space-x-0.5 *:ring-2',
     overflow: 'text-text-sub-600',
   },
   variants: {
     variant: {
       default: {},
       stroke: {
-        root: 'ring-1 ring-stroke-soft-200',
+        root: 'ring-stroke-soft-200 ring-1',
       },
     },
     size: {
       '40': {
-        overflow: 'px-2.5 text-paragraph-md',
+        overflow: 'text-paragraph-md px-2.5',
       },
       '32': {
-        overflow: 'px-2 text-paragraph-sm',
+        overflow: 'text-paragraph-sm px-2',
       },
       '24': {
-        overflow: 'px-1.5 text-paragraph-xs',
+        overflow: 'text-paragraph-xs px-1.5',
       },
     },
   },

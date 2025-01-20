@@ -4,25 +4,25 @@ import { Slottable } from '@radix-ui/react-slot';
 import { RiArrowDownSLine, RiCheckLine } from '@remixicon/react';
 import * as React from 'react';
 
-import { cnExt } from '@/helpers/cn';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { cnExt } from '@/utils/cn';
+import { tv, type VariantProps } from '@/utils/tv';
 import type { PolymorphicComponentProps } from '@/types/polymorphic';
 
 export const selectVariants = tv({
   slots: {
     triggerRoot: [
       // base
-      'group/trigger min-w-0 shrink-0 bg-bg-white-0 shadow-regular-xs outline-none ring-1 ring-inset ring-stroke-soft-200',
+      'group/trigger bg-bg-white-0 shadow-regular-xs ring-stroke-soft-200 min-w-0 shrink-0 outline-none ring-1 ring-inset',
       'text-paragraph-sm text-text-strong-950',
       'flex items-center text-left',
       'transition duration-200 ease-out',
       // hover
       'hover:bg-bg-weak-50 hover:ring-transparent',
       // focus
-      'focus:shadow-button-important-focus focus:outline-none focus:ring-stroke-strong-950',
+      'focus:shadow-button-important-focus focus:ring-stroke-strong-950 focus:outline-none',
       'focus:text-text-strong-950 data-[placeholder]:focus:text-text-strong-950',
       // disabled
-      'disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:shadow-none disabled:ring-transparent data-[placeholder]:disabled:text-text-disabled-300',
+      'disabled:bg-bg-weak-50 disabled:text-text-disabled-300 data-[placeholder]:disabled:text-text-disabled-300 disabled:pointer-events-none disabled:shadow-none disabled:ring-transparent',
       // placeholder state
       'data-[placeholder]:text-text-sub-600',
     ],
@@ -45,7 +45,7 @@ export const selectVariants = tv({
     ],
     triggerIcon: [
       // base
-      'h-5 w-auto min-w-0 shrink-0 object-contain text-text-sub-600',
+      'text-text-sub-600 h-5 w-auto min-w-0 shrink-0 object-contain',
       'transition duration-200 ease-out',
       // placeholder state
       'group-data-[placeholder]/trigger:text-text-soft-400',
@@ -56,10 +56,10 @@ export const selectVariants = tv({
       'group-disabled/trigger:[&:not(.remixicon)]:opacity-[.48]',
     ],
     selectItemIcon: [
-      'size-5 shrink-0 bg-[length:1.25rem] text-text-sub-600',
+      'text-text-sub-600 size-5 shrink-0 bg-[length:1.25rem]',
       // 'group-has-[&]-ml-0.5',
       // disabled
-      '[[data-disabled]_&:not(.remixicon)]:opacity-[.48] [[data-disabled]_&]:text-text-disabled-300',
+      '[[data-disabled]_&]:text-text-disabled-300 [[data-disabled]_&:not(.remixicon)]:opacity-[.48]',
     ],
   },
   variants: {
@@ -86,9 +86,9 @@ export const selectVariants = tv({
       inline: {
         triggerRoot: [
           // base
-          'h-5 min-h-5 w-auto gap-0 rounded-none bg-transparent p-0 text-text-sub-600 shadow-none ring-0',
+          'text-text-sub-600 h-5 min-h-5 w-auto gap-0 rounded-none bg-transparent p-0 shadow-none ring-0',
           // hover
-          'hover:bg-transparent hover:text-text-strong-950',
+          'hover:text-text-strong-950 hover:bg-transparent',
           // focus
           'focus:shadow-none',
           // open
@@ -96,7 +96,7 @@ export const selectVariants = tv({
         ],
         triggerIcon: [
           // base
-          'mr-1.5 text-text-soft-400',
+          'text-text-soft-400 mr-1.5',
           // hover
           'group-hover/trigger:text-text-sub-600',
           // open
@@ -131,7 +131,7 @@ export const selectVariants = tv({
       size: 'large',
       variant: 'default',
       class: {
-        triggerRoot: 'h-10 min-h-10 gap-2 rounded-10 pl-3 pr-2.5',
+        triggerRoot: 'rounded-10 h-10 min-h-10 gap-2 pl-3 pr-2.5',
       },
     },
     {
@@ -155,7 +155,7 @@ export const selectVariants = tv({
       size: 'large',
       variant: 'compact',
       class: {
-        triggerRoot: 'h-10 gap-1 rounded-10 pl-3 pr-2.5',
+        triggerRoot: 'rounded-10 h-10 gap-1 pl-3 pr-2.5',
         triggerIcon: '-ml-0.5',
         selectItemIcon: 'group-has-[&]/trigger:-ml-0.5',
       },
@@ -319,7 +319,7 @@ const SelectContent = React.forwardRef<
         ref={forwardedRef}
         className={cnExt(
           // base
-          'relative z-50 overflow-hidden rounded-2xl bg-bg-white-0 shadow-regular-md ring-1 ring-inset ring-stroke-soft-200',
+          'bg-bg-white-0 shadow-regular-md ring-stroke-soft-200 relative z-50 overflow-hidden rounded-2xl ring-1 ring-inset',
           // widths
           'min-w-[--radix-select-trigger-width] max-w-[max(var(--radix-select-trigger-width),320px)]',
           // heights
@@ -344,7 +344,7 @@ const SelectContent = React.forwardRef<
             </ScrollAreaPrimitives.Viewport>
           </SelectPrimitives.Viewport>
           <ScrollAreaPrimitives.Scrollbar orientation="vertical">
-            <ScrollAreaPrimitives.Thumb className="!w-1 rounded bg-bg-soft-200" />
+            <ScrollAreaPrimitives.Thumb className="bg-bg-soft-200 !w-1 rounded" />
           </ScrollAreaPrimitives.Scrollbar>
         </ScrollAreaPrimitives.Root>
       </SelectPrimitives.Content>
@@ -365,10 +365,10 @@ const SelectItem = React.forwardRef<
       ref={forwardedRef}
       className={cnExt(
         // base
-        'group relative cursor-pointer select-none rounded-lg p-2 pr-9 text-paragraph-sm text-text-strong-950',
+        'text-paragraph-sm text-text-strong-950 group relative cursor-pointer select-none rounded-lg p-2 pr-9',
         'flex items-center gap-2 transition duration-200 ease-out',
         // disabled
-        'data-[disabled]:pointer-events-none data-[disabled]:text-text-disabled-300',
+        'data-[disabled]:text-text-disabled-300 data-[disabled]:pointer-events-none',
         // hover, focus
         'data-[highlighted]:bg-bg-weak-50 data-[highlighted]:outline-0',
         {
@@ -396,7 +396,7 @@ const SelectItem = React.forwardRef<
         </span>
       </SelectPrimitives.ItemText>
       <SelectPrimitives.ItemIndicator asChild>
-        <RiCheckLine className="absolute right-2 top-1/2 size-5 shrink-0 -translate-y-1/2 text-text-sub-600" />
+        <RiCheckLine className="text-text-sub-600 absolute right-2 top-1/2 size-5 shrink-0 -translate-y-1/2" />
       </SelectPrimitives.ItemIndicator>
     </SelectPrimitives.Item>
   );

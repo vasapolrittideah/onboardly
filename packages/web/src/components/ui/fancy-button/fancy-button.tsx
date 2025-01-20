@@ -1,8 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 import { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const FANCY_BUTTON_ROOT_NAME = 'FancyButtonRoot';
@@ -12,12 +12,12 @@ export const fancyButtonVariants = tv({
   slots: {
     root: [
       // base
-      'group relative inline-flex items-center justify-center whitespace-nowrap text-label-sm outline-none',
+      'text-label-sm group relative inline-flex items-center justify-center whitespace-nowrap outline-none',
       'transition duration-200 ease-out',
       // focus
       'focus:outline-none',
       // disabled
-      'disabled:pointer-events-none disabled:text-text-disabled-300',
+      'disabled:text-text-disabled-300 disabled:pointer-events-none',
       'disabled:bg-bg-weak-50 disabled:bg-none disabled:shadow-none disabled:before:hidden disabled:after:hidden',
     ],
     icon: 'relative z-10 size-5 shrink-0',
@@ -44,19 +44,19 @@ export const fancyButtonVariants = tv({
     },
     size: {
       medium: {
-        root: 'h-10 gap-3 rounded-10 px-3.5 text-label-sm',
+        root: 'rounded-10 text-label-sm h-10 gap-3 px-3.5',
         icon: '-mx-1',
       },
       small: {
-        root: 'h-9 gap-3 rounded-lg px-3 text-label-sm',
+        root: 'text-label-sm h-9 gap-3 rounded-lg px-3',
         icon: '-mx-1',
       },
       xsmall: {
-        root: 'h-8 gap-2.5 rounded-lg px-2.5 text-label-sm',
+        root: 'text-label-sm h-8 gap-2.5 rounded-lg px-2.5',
         icon: '-mx-1',
       },
       xxsmall: {
-        root: 'h-7 gap-2.5 rounded-lg px-2 text-label-sm',
+        root: 'text-label-sm h-7 gap-2.5 rounded-lg px-2',
         icon: '-mx-1',
       },
     },
@@ -73,7 +73,7 @@ export const fancyButtonVariants = tv({
           // before mask
           'before:[mask-clip:content-box,border-box] before:[mask-composite:exclude] before:[mask-image:linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)]',
           // after
-          'after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-b after:from-static-white after:to-transparent',
+          'after:from-static-white after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-b after:to-transparent',
           'after:pointer-events-none after:opacity-[.16] after:transition after:duration-200 after:ease-out',
           // hover
           'hover:after:opacity-[.24]',

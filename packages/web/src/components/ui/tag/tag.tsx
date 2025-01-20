@@ -2,8 +2,8 @@ import { Slot } from '@radix-ui/react-slot';
 import { RiCloseFill } from '@remixicon/react';
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 import { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const TAG_ROOT_NAME = 'TagRoot';
@@ -14,13 +14,13 @@ const TAG_DISMISS_ICON_NAME = 'TagDismissIcon';
 export const tagVariants = tv({
   slots: {
     root: [
-      'group/tag inline-flex h-6 items-center gap-2 rounded-md px-2 text-label-xs text-text-sub-600',
+      'group/tag text-label-xs text-text-sub-600 inline-flex h-6 items-center gap-2 rounded-md px-2',
       'transition duration-200 ease-out',
       'ring-1 ring-inset',
     ],
     icon: [
       // base
-      '-mx-1 size-4 shrink-0 text-text-soft-400 transition duration-200 ease-out',
+      'text-text-soft-400 -mx-1 size-4 shrink-0 transition duration-200 ease-out',
       // hover
       'group-hover/tag:text-text-sub-600',
     ],
@@ -30,7 +30,7 @@ export const tagVariants = tv({
       // focus
       'focus:outline-none',
     ],
-    dismissIcon: 'size-4 text-text-soft-400 transition duration-200 ease-out',
+    dismissIcon: 'text-text-soft-400 size-4 transition duration-200 ease-out',
   },
   variants: {
     variant: {
@@ -61,7 +61,7 @@ export const tagVariants = tv({
     },
     disabled: {
       true: {
-        root: 'pointer-events-none bg-bg-weak-50 text-text-disabled-300 ring-transparent',
+        root: 'bg-bg-weak-50 text-text-disabled-300 pointer-events-none ring-transparent',
         icon: 'text-text-disabled-300 [&:not(.remixicon)]:opacity-[.48]',
         dismissIcon: 'text-text-disabled-300',
       },

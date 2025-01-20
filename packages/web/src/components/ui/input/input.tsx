@@ -1,8 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 import type { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const INPUT_ROOT_NAME = 'InputRoot';
@@ -16,11 +16,11 @@ export const inputVariants = tv({
   slots: {
     root: [
       // base
-      'group relative flex w-full overflow-hidden bg-bg-white-0 text-text-strong-950 shadow-regular-xs',
+      'bg-bg-white-0 text-text-strong-950 shadow-regular-xs group relative flex w-full overflow-hidden',
       'transition duration-200 ease-out',
-      'divide-x divide-stroke-soft-200',
+      'divide-stroke-soft-200 divide-x',
       // before
-      'before:absolute before:inset-0 before:ring-1 before:ring-inset before:ring-stroke-soft-200',
+      'before:ring-stroke-soft-200 before:absolute before:inset-0 before:ring-1 before:ring-inset',
       'before:pointer-events-none before:rounded-[inherit]',
       'before:transition before:duration-200 before:ease-out',
       // hover
@@ -32,19 +32,19 @@ export const inputVariants = tv({
     ],
     wrapper: [
       // base
-      'group/input-wrapper flex w-full cursor-text items-center bg-bg-white-0',
+      'group/input-wrapper bg-bg-white-0 flex w-full cursor-text items-center',
       'transition duration-200 ease-out',
       // hover
       'hover:[&:not(&:has(input:focus))]:bg-bg-weak-50',
       // disabled
-      'has-[input:disabled]:pointer-events-none has-[input:disabled]:bg-bg-weak-50',
+      'has-[input:disabled]:bg-bg-weak-50 has-[input:disabled]:pointer-events-none',
     ],
     input: [
       // base
-      'w-full bg-transparent bg-none text-paragraph-sm text-text-strong-950 outline-none',
+      'text-paragraph-sm text-text-strong-950 w-full bg-transparent bg-none outline-none',
       'transition duration-200 ease-out',
       // placeholder
-      'placeholder:select-none placeholder:text-text-soft-400 placeholder:transition placeholder:duration-200 placeholder:ease-out',
+      'placeholder:text-text-soft-400 placeholder:select-none placeholder:transition placeholder:duration-200 placeholder:ease-out',
       // hover placeholder
       'group-hover/input-wrapper:placeholder:text-text-sub-600',
       // focus
@@ -71,7 +71,7 @@ export const inputVariants = tv({
     ],
     affix: [
       // base
-      'shrink-0 bg-bg-white-0 text-paragraph-sm text-text-sub-600',
+      'bg-bg-white-0 text-paragraph-sm text-text-sub-600 shrink-0',
       'flex items-center justify-center truncate',
       'transition duration-200 ease-out',
       // placeholder state

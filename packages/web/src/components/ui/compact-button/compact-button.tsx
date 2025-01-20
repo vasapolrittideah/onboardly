@@ -1,8 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { recursiveCloneChildren } from '@/helpers/recursive-clone-children';
-import { tv, type VariantProps } from '@/helpers/tv';
+import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
+import { tv, type VariantProps } from '@/utils/tv';
 import type { PolymorphicComponentProps } from '@/types/polymorphic';
 
 const COMPACT_BUTTON_ROOT_NAME = 'CompactButtonRoot';
@@ -15,7 +15,7 @@ export const compactButtonVariants = tv({
       'relative flex shrink-0 items-center justify-center outline-none',
       'transition duration-200 ease-out',
       // disabled
-      'disabled:pointer-events-none disabled:border-transparent disabled:bg-transparent disabled:text-text-disabled-300 disabled:shadow-none',
+      'disabled:text-text-disabled-300 disabled:pointer-events-none disabled:border-transparent disabled:bg-transparent disabled:shadow-none',
       // focus
       'focus:outline-none',
     ],
@@ -26,17 +26,17 @@ export const compactButtonVariants = tv({
       stroke: {
         root: [
           // base
-          'border border-stroke-soft-200 bg-bg-white-0 text-text-sub-600 shadow-regular-xs',
+          'border-stroke-soft-200 bg-bg-white-0 text-text-sub-600 shadow-regular-xs border',
           // hover
-          'hover:border-transparent hover:bg-bg-weak-50 hover:text-text-strong-950 hover:shadow-none',
+          'hover:bg-bg-weak-50 hover:text-text-strong-950 hover:border-transparent hover:shadow-none',
           // focus
-          'focus-visible:border-transparent focus-visible:bg-bg-strong-950 focus-visible:text-text-white-0 focus-visible:shadow-none',
+          'focus-visible:bg-bg-strong-950 focus-visible:text-text-white-0 focus-visible:border-transparent focus-visible:shadow-none',
         ],
       },
       ghost: {
         root: [
           // base
-          'bg-transparent text-text-sub-600',
+          'text-text-sub-600 bg-transparent',
           // hover
           'hover:bg-bg-weak-50 hover:text-text-strong-950',
           // focus

@@ -1,7 +1,7 @@
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import * as React from 'react';
 
-import { tv, type VariantProps } from '@/helpers/tv';
+import { tv, type VariantProps } from '@/utils/tv';
 
 const TooltipProvider = TooltipPrimitive.Provider;
 const TooltipRoot = TooltipPrimitive.Root;
@@ -10,7 +10,7 @@ const TooltipTrigger = TooltipPrimitive.Trigger;
 export const tooltipVariants = tv({
   slots: {
     content: [
-      'z-50 shadow-tooltip',
+      'shadow-tooltip z-50',
       'animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
     ],
     arrow:
@@ -19,15 +19,15 @@ export const tooltipVariants = tv({
   variants: {
     size: {
       large: {
-        content: 'rounded-xl p-3 text-label-sm',
+        content: 'text-label-sm rounded-xl p-3',
         arrow: 'rounded-bl-sm',
       },
       medium: {
-        content: 'rounded-md px-2.5 py-1 text-paragraph-sm',
+        content: 'text-paragraph-sm rounded-md px-2.5 py-1',
         arrow: 'rounded-bl-[3px]',
       },
       small: {
-        content: 'rounded px-1.5 py-0.5 text-paragraph-xs',
+        content: 'text-paragraph-xs rounded px-1.5 py-0.5',
         arrow: 'rounded-bl-sm',
       },
     },
@@ -38,7 +38,7 @@ export const tooltipVariants = tv({
       },
       light: {
         content:
-          'bg-bg-white-0 text-text-strong-950 ring-1 ring-stroke-soft-200',
+          'bg-bg-white-0 text-text-strong-950 ring-stroke-soft-200 ring-1',
         arrow: 'border-stroke-soft-200 bg-bg-white-0',
       },
     },
