@@ -122,7 +122,7 @@ export default [
     },
   },
   {
-    files: ['**/!(__tests__|__stories__)/*'],
+    files: ['**/!(routes|__tests__|__stories__)/**/'],
     rules: {
       'check-file/folder-naming-convention': [
         'error',
