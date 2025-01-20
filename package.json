@@ -1,5 +1,6 @@
 {
-  "name": "react-authentication",
+  "name": "peeko",
+  "description": "HR Management Web Application",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -34,9 +35,7 @@
     "eslint-plugin-storybook": "^0.11.2",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
-    "typescript-eslint": "latest",
-    "@typescript-eslint/eslint-plugin": "latest",
-    "@typescript-eslint/parser": "latest"
+    "typescript-eslint": "latest"
   },
   "eslintConfig": {
     "extends": [
