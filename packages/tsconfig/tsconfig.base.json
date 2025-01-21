@@ -17,8 +17,7 @@
     "preserveWatchOutput": true,
     "useDefineForClassFields": true,
     "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true
+    "strict": true
   },
   "exclude": ["node_modules"]
 }

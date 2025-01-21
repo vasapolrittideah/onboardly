@@ -6,16 +6,17 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": false,
-    "incremental": true,
     "target": "ES2022",
     "module": "commonjs",
-    "moduleResolution": "Node10",
+    "moduleResolution": "node10",
     "noFallthroughCasesInSwitch": false,
     "noImplicitAny": false,
     "removeComments": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strictNullChecks": false,
-    "strictBindCallApply": false
+    "strictBindCallApply": false,
+    "incremental": false,
+    "noEmit": false
   }
 }
