@@ -1,4 +1,6 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
+  RiErrorWarningFill,
   RiEyeLine,
   RiEyeOffLine,
   RiLock2Line,
@@ -9,11 +11,15 @@ import { Link } from '@tanstack/react-router';
 import { useId, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { LoginWithEmailAndPasswordInput } from '../api/login';
+import {
+  LoginWithEmailAndPasswordInput,
+  loginWithEmailAndPasswordInputSchema,
+} from '../api/login';
 
 import * as Checkbox from '@/components/ui/checkbox/checkbox';
 import * as Divider from '@/components/ui/divider/divider';
 import * as FancyButton from '@/components/ui/fancy-button/fancy-button';
+import * as Hint from '@/components/ui/hint/hint';
 import { IconGoogle, IconLinkedin } from '@/components/ui/icons';
 import * as Input from '@/components/ui/input/input';
 import * as Label from '@/components/ui/label/label';
@@ -23,7 +29,13 @@ import * as SocialButton from '@/components/ui/social-button/social-button';
 const LoginForm = () => {
   const uniqueId = useId();
   const [showPassword, setShowPassword] = useState(false);
-  const { register, handleSubmit } = useForm<LoginWithEmailAndPasswordInput>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginWithEmailAndPasswordInput>({
+    resolver: zodResolver(loginWithEmailAndPasswordInputSchema),
+  });
 
   const onSubmit: SubmitHandler<LoginWithEmailAndPasswordInput> = (data) => {
     console.log(data);
@@ -63,11 +75,11 @@ const LoginForm = () => {
         </Divider.Root>
 
         <form id="login-form" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-1">
+          <div id="email" className="flex flex-col gap-1">
             <Label.Root>
               Email Address <Label.Asterisk />
             </Label.Root>
-            <Input.Root>
+            <Input.Root hasError={!!errors.email}>
               <Input.Wrapper>
                 <Input.Icon as={RiMailLine} />
                 <Input.Input
@@ -77,12 +89,18 @@ const LoginForm = () => {
                 />
               </Input.Wrapper>
             </Input.Root>
+            {errors.email && (
+              <Hint.Root hasError>
+                <Hint.Icon as={RiErrorWarningFill} />
+                {errors.email?.message}
+              </Hint.Root>
+            )}
           </div>
-          <div className="mt-4 flex flex-col gap-1">
+          <div id="password" className="mt-4 flex flex-col gap-1">
             <Label.Root>
               Password <Label.Asterisk />
             </Label.Root>
-            <Input.Root>
+            <Input.Root hasError={!!errors.password}>
               <Input.Wrapper>
                 <Input.Icon as={RiLock2Line} />
                 <Input.Input
@@ -101,6 +119,12 @@ const LoginForm = () => {
                 </button>
               </Input.Wrapper>
             </Input.Root>
+            {errors.password && (
+              <Hint.Root hasError>
+                <Hint.Icon as={RiErrorWarningFill} />
+                {errors.password?.message}
+              </Hint.Root>
+            )}
           </div>
 
           <div className="my-6 flex justify-between">
