@@ -1,14 +1,4 @@
 services:
-  web:
-    build:
-      context: .
-      dockerfile: dockerfiles/Dockerfile.dev
-    ports:
-      - "7001:7001"
-    volumes:
-      - ./:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
-
   postgres:
     container_name: postgres
     image: postgres:17-alpine3.21
