@@ -5,7 +5,6 @@ import {
   RiEyeOffLine,
   RiLock2Line,
   RiMailLine,
-  RiUserLine,
 } from '@remixicon/react';
 import { Link } from '@tanstack/react-router';
 import { useId, useState } from 'react';
@@ -16,6 +15,8 @@ import {
   loginWithEmailAndPasswordInputSchema,
 } from '../api/login';
 
+import logo from '@/assets/logo.svg';
+import { Image } from '@/components/ui/avatar/avatar';
 import * as Checkbox from '@/components/ui/checkbox/checkbox';
 import * as Divider from '@/components/ui/divider/divider';
 import * as FancyButton from '@/components/ui/fancy-button/fancy-button';
@@ -48,15 +49,15 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center pt-24">
+    <section className="ring-stroke-soft-200 shadow-regular-sm flex w-full max-w-[480px] flex-col items-center justify-center rounded-3xl bg-white p-6 ring-1 ring-inset">
       <div className="relative flex size-24 shrink-0 items-center justify-center rounded-full backdrop-blur-xl before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-neutral-500 before:to-transparent before:opacity-10">
         <div className="bg-bg-white-0 shadow-regular-xs ring-stroke-soft-200 relative z-10 flex size-16 items-center justify-center rounded-full ring-1 ring-inset">
-          <RiUserLine className="text-text-sub-600 size-7" />
+          <Image src={logo} alt="Logo" className="size-[36px] rounded-none" />
         </div>
       </div>
 
-      <h1 className="text-title-h4 mt-6">Log in to your account.</h1>
-      <p className="text-paragraph-md mt-2 text-center text-gray-600">
+      <h1 className="text-title-h4 mt-3">Welcome Back</h1>
+      <p className="text-paragraph-md mt-2 text-gray-600">
         Enter your credentials to continue where you left off.
       </p>
       <Divider.Root
@@ -64,9 +65,9 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
           background:
             'linear-gradient(90deg, currentcolor 4px, transparent 4px) 50% 50% / 8px 1px repeat-x',
         }}
-        className="text-stroke-sub-300 mt-8 h-1 w-full max-w-[440px] before:bg-transparent"></Divider.Root>
+        className="text-stroke-sub-300 my-8 h-1 w-full before:bg-transparent"></Divider.Root>
 
-      <div className="mt-4 h-80 w-full max-w-[440px] rounded-3xl bg-white p-6">
+      <div className="w-full px-6">
         <SocialButton.Root className="w-full" brand="google" mode="stroke">
           <SocialButton.Icon as={IconGoogle} />
           Continue with Google
@@ -159,17 +160,15 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
             Login
           </FancyButton.Root>
 
-          <div className="text-paragraph-sm text-text-sub-600 mt-4 flex justify-center gap-1">
+          <div className="text-paragraph-sm text-text-sub-600 mt-4 flex items-center justify-center gap-1">
             Don&apos;t have an account?{' '}
             <Link to="/auth/register">
-              <LinkButton.Root variant="gray">
-                Create a new account
-              </LinkButton.Root>
+              <LinkButton.Root variant="primary">Sign up</LinkButton.Root>
             </Link>
           </div>
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 

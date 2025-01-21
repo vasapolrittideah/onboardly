@@ -10,10 +10,12 @@ function Login() {
   const navigate = useNavigate({ from: '/auth/login' });
 
   return (
-    <LoginForm
-      onSuccess={() => {
-        navigate({ to: '/' });
-      }}
-    />
+    <main className="flex h-screen w-full flex-col items-center justify-center">
+      <LoginForm
+        onSuccess={() => {
+          navigate({ to: '/' });
+        }}
+      />
+    </main>
   );
 }

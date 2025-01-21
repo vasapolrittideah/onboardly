@@ -17,7 +17,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function Root() {
   return (
-    <div className="h-screen">
+    <div className="bg-neutral-50">
       <Outlet />
       {import.meta.env.DEV && (
         <>
