@@ -25,8 +25,13 @@ import * as Input from '@/components/ui/input/input';
 import * as Label from '@/components/ui/label/label';
 import * as LinkButton from '@/components/ui/link-button/link-button';
 import * as SocialButton from '@/components/ui/social-button/social-button';
+import { useLogin } from '@/lib/react-query-auth';
 
-const LoginForm = () => {
+interface LoginFormProps {
+  onSuccess: () => void;
+}
+
+const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const uniqueId = useId();
   const [showPassword, setShowPassword] = useState(false);
   const {
@@ -36,9 +41,10 @@ const LoginForm = () => {
   } = useForm<LoginWithEmailAndPasswordInput>({
     resolver: zodResolver(loginWithEmailAndPasswordInputSchema),
   });
+  const login = useLogin({ onSuccess });
 
-  const onSubmit: SubmitHandler<LoginWithEmailAndPasswordInput> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<LoginWithEmailAndPasswordInput> = (input) => {
+    login.mutate(input);
   };
 
   return (

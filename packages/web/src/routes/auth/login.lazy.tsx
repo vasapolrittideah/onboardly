@@ -1,4 +1,4 @@
-import { createLazyFileRoute } from '@tanstack/react-router';
+import { createLazyFileRoute, useNavigate } from '@tanstack/react-router';
 
 import LoginForm from '@/features/auth/components/login-form';
 
@@ -7,5 +7,13 @@ export const Route = createLazyFileRoute('/auth/login')({
 });
 
 function Login() {
-  return <LoginForm />;
+  const navigate = useNavigate({ from: '/auth/login' });
+
+  return (
+    <LoginForm
+      onSuccess={() => {
+        navigate({ to: '/' });
+      }}
+    />
+  );
 }
