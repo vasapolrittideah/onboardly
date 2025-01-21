@@ -9,5 +9,22 @@ services:
       - ./:/usr/src/app
       - node_modules:/usr/src/app/node_modules
 
+  postgres:
+    container_name: postgres
+    image: postgres:17-alpine3.21
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PGDATA=/data/postgres
+      - POSTGRES_DB=peeko
+    volumes:
+      - db:/data/postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
 volumes:
   node_modules:
+  db:

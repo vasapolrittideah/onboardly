@@ -10,6 +10,12 @@
     "dev": {
       "persistent": true,
       "cache": false
+    },
+    "db:migrate:deploy": {},
+    "db:push": {},
+    "db:seed": {},
+    "generate": {
+      "dependsOn": ["^generate"]
     }
   }
 }
