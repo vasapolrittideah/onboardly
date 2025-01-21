@@ -42,22 +42,22 @@
     --slate-alpha-16: 153 160 174 / 16%;
     --slate-alpha-10: 153 160 174 / 10%;
 
-    --neutral-950: var(--gray-950);
-    --neutral-900: var(--gray-900);
-    --neutral-800: var(--gray-800);
-    --neutral-700: var(--gray-700);
-    --neutral-600: var(--gray-600);
-    --neutral-500: var(--gray-500);
-    --neutral-400: var(--gray-400);
-    --neutral-300: var(--gray-300);
-    --neutral-200: var(--gray-200);
-    --neutral-100: var(--gray-100);
-    --neutral-50: var(--gray-50);
-    --neutral-0: var(--gray-0);
+    --neutral-950: var(--slate-950);
+    --neutral-900: var(--slate-900);
+    --neutral-800: var(--slate-800);
+    --neutral-700: var(--slate-700);
+    --neutral-600: var(--slate-600);
+    --neutral-500: var(--slate-500);
+    --neutral-400: var(--slate-400);
+    --neutral-300: var(--slate-300);
+    --neutral-200: var(--slate-200);
+    --neutral-100: var(--slate-100);
+    --neutral-50: var(--slate-50);
+    --neutral-0: var(--slate-0);
 
-    --neutral-alpha-24: var(--gray-alpha-24);
-    --neutral-alpha-16: var(--gray-alpha-16);
-    --neutral-alpha-10: var(--gray-alpha-10);
+    --neutral-alpha-24: var(--slate-alpha-24);
+    --neutral-alpha-16: var(--slate-alpha-16);
+    --neutral-alpha-10: var(--slate-alpha-10);
 
     --blue-950: 18 35 104;
     --blue-900: 24 47 139;

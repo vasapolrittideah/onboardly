@@ -49,9 +49,12 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center pt-24">
-      <div className="border-stroke-soft-200 shadow-regular-sm flex size-14 items-center justify-center rounded-full border bg-white">
-        <RiUserLine className="text-gray-800" />
+      <div className="relative flex size-24 shrink-0 items-center justify-center rounded-full backdrop-blur-xl before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-neutral-500 before:to-transparent before:opacity-10">
+        <div className="bg-bg-white-0 shadow-regular-xs ring-stroke-soft-200 relative z-10 flex size-16 items-center justify-center rounded-full ring-1 ring-inset">
+          <RiUserLine className="text-text-sub-600 size-7" />
+        </div>
       </div>
+
       <h1 className="text-title-h4 mt-6">Log in to your account.</h1>
       <p className="text-paragraph-md mt-2 text-center text-gray-600">
         Enter your credentials to continue where you left off.
