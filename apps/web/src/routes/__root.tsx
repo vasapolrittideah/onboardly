@@ -3,8 +3,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
-import { NotificationProvider } from '@/components/ui/notification/notification-provider';
 import NotFound from '@/components/errors/not-found';
+import { NotificationProvider } from '@/components/ui/notification/notification-provider';
 
 export interface RouterContext {
   authUser: AuthUser;

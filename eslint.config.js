@@ -85,8 +85,8 @@ export default [
           ],
           'newlines-between': 'always',
           alphabetize: {
-            order: 'ignore',
-            caseInsensitive: false,
+            order: 'asc',
+            caseInsensitive: true,
           },
         },
       ],

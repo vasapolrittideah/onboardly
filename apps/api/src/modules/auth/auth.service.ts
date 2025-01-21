@@ -1,16 +1,17 @@
-import { SupabaseService } from '@/providers/supabase/supabase.service';
 import { ConflictException, Injectable } from '@nestjs/common';
-import { LoginDto, RegisterDto } from './auth.dto';
-import { PrismaService } from '@/providers/prisma/prisma.service';
-import { normalizeEmail } from '@/helpers/normalize-email';
 import { ConfigService } from '@nestjs/config';
-import { AuthUser } from '@supabase/supabase-js';
-import { TokenResponse } from './auth.interface';
-import { ErrorResponse } from '@/errors/errors.interface';
 import { User } from '@repo/database';
-import { Expose } from '@/providers/prisma/prisma.interface';
-import { EMAIL_USER_CONFLICT } from '@/errors/errors.contants';
 import argon2 from 'argon2';
+
+import { LoginDto, RegisterDto } from './auth.dto';
+import { TokenResponse } from './auth.interface';
+
+import { EMAIL_USER_CONFLICT } from '@/errors/errors.contants';
+import { ErrorResponse } from '@/errors/errors.interface';
+import { normalizeEmail } from '@/helpers/normalize-email';
+import { Expose } from '@/providers/prisma/prisma.interface';
+import { PrismaService } from '@/providers/prisma/prisma.service';
+import { SupabaseService } from '@/providers/supabase/supabase.service';
 
 @Injectable()
 export class AuthService {
