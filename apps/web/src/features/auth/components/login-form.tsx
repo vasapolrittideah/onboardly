@@ -6,6 +6,18 @@ import {
   RiLock2Line,
   RiMailLine,
 } from '@remixicon/react';
+import {
+  Divider,
+  FancyButton,
+  Hint,
+  Label,
+  LinkButton,
+  SocialButton,
+  Icons,
+  Input,
+  Avatar,
+  Checkbox,
+} from '@repo/ui/components';
 import { Link } from '@tanstack/react-router';
 import { useId, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -16,16 +28,6 @@ import {
 } from '../api/login';
 
 import logo from '@/assets/logo.svg';
-import { Image } from '@/components/ui/avatar/avatar';
-import * as Checkbox from '@/components/ui/checkbox/checkbox';
-import * as Divider from '@/components/ui/divider/divider';
-import * as FancyButton from '@/components/ui/fancy-button/fancy-button';
-import * as Hint from '@/components/ui/hint/hint';
-import { IconGoogle, IconLinkedin } from '@/components/ui/icons';
-import * as Input from '@/components/ui/input/input';
-import * as Label from '@/components/ui/label/label';
-import * as LinkButton from '@/components/ui/link-button/link-button';
-import * as SocialButton from '@/components/ui/social-button/social-button';
 import { useLogin } from '@/lib/react-query-auth';
 
 interface LoginFormProps {
@@ -52,7 +54,11 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
     <section className="ring-stroke-soft-200 shadow-regular-sm flex w-full max-w-[480px] flex-col items-center justify-center rounded-3xl bg-white p-6 ring-1 ring-inset">
       <div className="relative flex size-24 shrink-0 items-center justify-center rounded-full backdrop-blur-xl before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-neutral-500 before:to-transparent before:opacity-10">
         <div className="bg-bg-white-0 shadow-regular-xs ring-stroke-soft-200 relative z-10 flex size-16 items-center justify-center rounded-full ring-1 ring-inset">
-          <Image src={logo} alt="Logo" className="size-[36px] rounded-none" />
+          <Avatar.Image
+            src={logo}
+            alt="Logo"
+            className="size-[36px] rounded-none"
+          />
         </div>
       </div>
 
@@ -69,14 +75,14 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
 
       <div className="w-full px-6">
         <SocialButton.Root className="w-full" brand="google" mode="stroke">
-          <SocialButton.Icon as={IconGoogle} />
+          <SocialButton.Icon as={Icons.IconGoogle} />
           Continue with Google
         </SocialButton.Root>
         <SocialButton.Root
           className="mt-4 w-full"
           brand="facebook"
           mode="stroke">
-          <SocialButton.Icon as={IconLinkedin} />
+          <SocialButton.Icon as={Icons.IconLinkedin} />
           Continue with LinkedIn
         </SocialButton.Root>
 

@@ -1,0 +1,16 @@
+{
+  "name": "@repo/tailwind",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./tailwind.config.ts"
+  },
+  "devDependencies": {
+    "@repo/tsconfig": "link:@repo/tsconfig",
+    "tailwindcss": "^3.4.17",
+    "tailwind-merge": "^2.6.0",
+    "tailwind-variants": "^0.3.0",
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-text-fill-stroke": "^1.1.2"
+  }
+}

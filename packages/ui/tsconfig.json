@@ -1,0 +1,16 @@
+{
+  "extends": "@repo/tsconfig/tsconfig.react.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "paths": {
+      "@/components": ["./components/index.ts"],
+      "@/utils/*": ["./utils/*"],
+      "@/types/*": ["./types/*"],
+      "@/hooks/*": ["./hooks/*"],
+      "@/assets/*": ["./assets/*"]
+    }
+  },
+  "include": ["images.d.ts", "src", "src/types", "src/utils"],
+  "exclude": ["node_modules", "dist"]
+}
