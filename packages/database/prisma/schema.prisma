@@ -40,13 +40,16 @@ model Email {
 }
 
 model Session {
-  id        Int      @id @default(autoincrement())
-  ipAddress String
-  token     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation("userSession", fields: [userId], references: [id])
-  userId    Int
+  id              Int      @id @default(autoincrement())
+  ipAddress       String
+  token           String
+  userAgent       String?
+  browser         String?
+  operatingSystem String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation("userSession", fields: [userId], references: [id])
+  userId          Int
 
   @@index([userId], name: "userSessionId")
 }

@@ -1,10 +1,15 @@
 {
   "extends": "@repo/config-typescript/tsconfig.nestjs.json",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist",
     "paths": {
-      "@/*": ["src/*"]
+      "@/config/*": ["./config/*"],
+      "@/errors/*": ["./errors/*"],
+      "@/filters/*": ["./filters/*"],
+      "@/providers/*": ["./providers/*"],
+      "@/modules/*": ["./modules/*"],
+      "@/utils/*": ["./utils/*"]
     }
   },
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]

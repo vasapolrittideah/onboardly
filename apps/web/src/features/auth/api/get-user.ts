@@ -1,8 +1,8 @@
-import { AuthUser } from '@supabase/supabase-js';
+import { User } from '@repo/database';
 
 import { apiClient } from '@/lib/api-client';
 
-export const getAuthUser = async (): Promise<AuthUser> => {
+export const getUser = async (): Promise<User> => {
   const response = await apiClient.get('/auth/me');
   return response.data;
 };

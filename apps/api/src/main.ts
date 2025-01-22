@@ -1,3 +1,4 @@
+import { ImATeapotException } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   ExpressAdapter,
@@ -6,6 +7,7 @@ import {
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
+import { ORIGIN_NOT_ALLOWED } from './errors/errors.contants';
 
 declare const module: any;
 
@@ -13,6 +15,20 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
     new ExpressAdapter(),
+    {
+      cors: {
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+        origin: (origin, callback) => {
+          const whitelist = ['http://localhost:8000'];
+          if (!origin || whitelist.includes(origin)) {
+            return callback(null, true);
+          } else {
+            return callback(new ImATeapotException(ORIGIN_NOT_ALLOWED), false);
+          }
+        },
+      },
+    },
   );
 
   const config = new DocumentBuilder()
@@ -23,6 +39,7 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, documentFactory);
 
+  app.setGlobalPrefix('api/v1');
   await app.listen(process.env.PORT ?? 9000);
 
   if (module.hot) {

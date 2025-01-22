@@ -1,4 +1,4 @@
-import type { AuthUser } from '@supabase/supabase-js';
+import { User } from '@repo/database';
 import { z } from 'zod';
 
 import { apiClient } from '@/lib/api-client';
@@ -14,6 +14,6 @@ export type LoginWithEmailAndPasswordInput = z.infer<
 
 export const loginWithEmailAndPassword = (
   data: LoginWithEmailAndPasswordInput,
-): Promise<AuthUser> => {
+): Promise<User> => {
   return apiClient.post('/auth/login', data);
 };

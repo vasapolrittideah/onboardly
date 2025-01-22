@@ -1,8 +1,12 @@
+import { notification } from '@repo/ui/hooks/use-notification.js';
 import { redirect } from '@tanstack/react-router';
-import Axios, { InternalAxiosRequestConfig } from 'axios';
+import Axios, {
+  AxiosError,
+  HttpStatusCode,
+  InternalAxiosRequestConfig,
+} from 'axios';
 
 import { env } from '@/config/env';
-import { notification } from '@/hooks/use-notification';
 
 const authRequestInterceptor = (config: InternalAxiosRequestConfig) => {
   if (config.headers) {
@@ -22,17 +26,17 @@ apiClient.interceptors.response.use(
   (response) => {
     return response.data;
   },
-  (error) => {
+  (error: AxiosError<{ message?: string }>) => {
     const message = error.response?.data?.message || error.message;
-    notification({
-      title: 'Something went wrong',
-      description: message,
-      variant: 'filled',
-      status: 'error',
-    });
-
-    if (error.response?.status === 401) {
+    if (error.status === HttpStatusCode.Unauthorized) {
       throw redirect({ to: '/auth/login' });
+    } else {
+      notification({
+        title: 'Something went wrong',
+        description: message,
+        variant: 'filled',
+        status: 'error',
+      });
     }
 
     return Promise.reject(error);

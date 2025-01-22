@@ -1,4 +1,4 @@
-import { borderRadius, shadows, texts } from '@repo/tailwind';
+import { borderRadius, shadows, texts } from '@repo/config-tailwind';
 import clsx, { type ClassValue } from 'clsx';
 import { extendTailwindMerge } from 'tailwind-merge';
 

@@ -1,6 +1,5 @@
+import { Button } from '@repo/ui/components';
 import { Link } from '@tanstack/react-router';
-
-import * as Button from '@/components/ui/button/button';
 
 const NotFound: React.FC = () => (
   <div className="flex h-screen w-full flex-col items-center justify-center">

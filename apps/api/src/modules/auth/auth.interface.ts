@@ -1,4 +1,4 @@
-export interface TokenResponse {
-  accessToken: string;
-  refreshToken: string;
+export interface AccessTokenClaims {
+  id: number;
+  sessionId: number;
 }

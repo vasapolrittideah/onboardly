@@ -19,7 +19,7 @@ import {
   Checkbox,
 } from '@repo/ui/components';
 import { Link } from '@tanstack/react-router';
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import {
@@ -45,6 +45,10 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
     resolver: zodResolver(loginWithEmailAndPasswordInputSchema),
   });
   const login = useLogin({ onSuccess });
+
+  useEffect(() => {
+    console.log(login.failureReason);
+  }, [login]);
 
   const onSubmit: SubmitHandler<LoginWithEmailAndPasswordInput> = (input) => {
     login.mutate(input);

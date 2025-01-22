@@ -27,5 +27,8 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@nestjs/jwt": "^11.0.0"
   }
 }

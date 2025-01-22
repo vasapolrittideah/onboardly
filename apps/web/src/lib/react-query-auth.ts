@@ -1,6 +1,6 @@
 import { configureAuth } from 'react-query-auth';
 
-import { getAuthUser } from '@/features/auth/api/get-auth-user';
+import { getUser } from '@/features/auth/api/get-user';
 import {
   loginWithEmailAndPassword,
   LoginWithEmailAndPasswordInput,
@@ -10,7 +10,7 @@ import { register, RegisterInput } from '@/features/auth/api/register';
 
 export const { useUser, useLogin, useRegister, useLogout, AuthLoader } =
   configureAuth({
-    userFn: getAuthUser,
+    userFn: getUser,
     loginFn: async (input: LoginWithEmailAndPasswordInput) => {
       const response = await loginWithEmailAndPassword(input);
       return response;

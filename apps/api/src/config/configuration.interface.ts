@@ -3,6 +3,8 @@ export interface Configuration {
 
   security: {
     jwtSecret: string;
+    accessTokenExpiresIn: string;
+    refreshTokenExpiresIn: string;
   };
 
   supabase: {

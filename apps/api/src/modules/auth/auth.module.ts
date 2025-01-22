@@ -1,22 +1,26 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { JwtStrategy } from './jwt.strategy';
+import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
 
+import { AuthController } from '@/modules/auth/auth.controller';
+import { AuthService } from '@/modules/auth/auth.service';
+import { JwtStrategy } from '@/modules/auth/strategies/jwt.strategy';
+import { SessionsModule } from '@/modules/sessions/sessions.module';
+import { UsersModule } from '@/modules/users/users.module';
 import { PrismaModule } from '@/providers/prisma/prisma.modules';
-import { SupabaseModule } from '@/providers/supabase/supabase.module';
+import { TokensModule } from '@/providers/tokens/tokens.module';
 
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    SupabaseModule,
-    ConfigModule,
     PrismaModule,
+    UsersModule,
+    SessionsModule,
+    TokensModule,
   ],
-  providers: [AuthService, JwtStrategy],
+  exports: [AuthService],
+  providers: [AuthService, JwtStrategy, JwtRefreshStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

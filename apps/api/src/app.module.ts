@@ -1,22 +1,24 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { UsersController } from './modules/users/users.controller';
-import { UsersService } from './modules/users/users.service';
-import { UsersModule } from './modules/users/users.module';
-import { PrismaService } from './providers/prisma/prisma.service';
-import { AuthModule } from './modules/auth/auth.module';
-import { SupabaseModule } from './providers/supabase/supabase.module';
-import configuration from './config/configuration';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
+
+import configuration from './config/configuration';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
-import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
+import { AuthModule } from './modules/auth/auth.module';
+import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
+import { SessionsModule } from './modules/sessions/sessions.module';
+import { UsersController } from './modules/users/users.controller';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
     UsersModule,
-    ConfigModule.forRoot({ load: [configuration] }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+    }),
     AuthModule,
-    SupabaseModule,
+    SessionsModule,
   ],
   controllers: [UsersController],
   providers: [

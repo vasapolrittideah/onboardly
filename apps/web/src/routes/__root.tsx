@@ -1,5 +1,5 @@
+import { User } from '@repo/database';
 import { NotificationProvider } from '@repo/ui/components';
-import { AuthUser } from '@supabase/supabase-js';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
@@ -7,7 +7,7 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import NotFound from '@/components/errors/not-found';
 
 export interface RouterContext {
-  authUser: AuthUser;
+  user: User;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({

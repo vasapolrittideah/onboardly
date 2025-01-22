@@ -8,6 +8,7 @@ const config: Config = {
     './src/features/**/components/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/routes/**/*.{js,ts,jsx,tsx}',
+    '../../packages/ui/src/components/**/*.{js,ts,jsx,tsx}',
   ],
   presets: [sharedTailwindConfig],
 };

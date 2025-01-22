@@ -1,4 +1,4 @@
-import { AuthUser } from '@supabase/supabase-js';
+import { User } from '@repo/database';
 import { z } from 'zod';
 
 import { apiClient } from '@/lib/api-client';
@@ -11,6 +11,6 @@ export const registerInputSchema = z.object({
 
 export type RegisterInput = z.infer<typeof registerInputSchema>;
 
-export const register = async (data: RegisterInput): Promise<AuthUser> => {
+export const register = async (data: RegisterInput): Promise<User> => {
   return apiClient.post('/auth/register', data);
 };

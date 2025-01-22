@@ -1,11 +1,13 @@
 {
   "name": "@repo/ui",
   "type": "module",
+  "main": "./src/index.js",
   "exports": {
     "./components": "./src/components/index.ts",
     "./hooks/*": "./src/hooks/*",
     "./utils/*": "./src/utils/*",
-    "./types/*": "./src/types/*"
+    "./types/*": "./src/types/*",
+    "./styles.css": "./src/styles.css"
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",

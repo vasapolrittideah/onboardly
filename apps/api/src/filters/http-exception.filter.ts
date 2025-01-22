@@ -6,26 +6,42 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ErrorResponse } from '@/errors/errors.interface';
+
+import { UNKNOWN_ERROR } from '@/errors/errors.contants';
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
     const context = host.switchToHttp();
     const response = context.getResponse<Response>();
+    const request = context.getRequest<Request>();
     const status =
       exception instanceof HttpException
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    if (exception instanceof HttpException) {
-      return response.status(status).json(exception.getResponse());
-    }
+    const { error, message } = (() => {
+      if (exception instanceof HttpException) {
+        const response = exception.getResponse();
+        return {
+          error: response?.['error'] || '',
+          message: exception.message || '',
+        };
+      }
+      return {
+        error: UNKNOWN_ERROR,
+        message: 'An unknown error has occurred while processing this request',
+      };
+    })();
 
-    response.status(status).json(<ErrorResponse>{
-      statusCode: status,
-      message: 'An unknown error has occurred while processing this request',
-      error: 'InternalServerError',
-    });
+    const body = {
+      status,
+      message,
+      error,
+      path: request.url,
+      timestamp: new Date().toISOString(),
+    };
+
+    return response.status(status).json(body);
   }
 }

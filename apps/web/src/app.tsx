@@ -10,7 +10,7 @@ import { useUser } from '@/lib/react-query-auth';
 const router = createRouter({
   routeTree,
   context: {
-    authUser: undefined!,
+    user: undefined!,
   },
 });
 
@@ -36,9 +36,9 @@ function App(): JSX.Element {
 }
 
 function InnerApp(): JSX.Element {
-  const { data: authUser } = useUser();
+  const { data: user } = useUser();
 
-  return <RouterProvider router={router} context={{ authUser }} />;
+  return <RouterProvider router={router} context={{ user }} />;
 }
 
 export default App;
