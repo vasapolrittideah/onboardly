@@ -5,7 +5,9 @@
   "version": "0.0.0",
   "type": "module",
   "packageManager": "bun@1.1.43",
-  "scripts": {},
+  "scripts": {
+    "dev": "bunx turbo dev --parallel --filter='./apps/*' --filter=@repo/database"
+  },
   "dependencies": {},
   "devDependencies": {
     "@repo/config-typescript": "workspace:*",
