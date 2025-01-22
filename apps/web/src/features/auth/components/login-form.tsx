@@ -19,7 +19,7 @@ import {
   Checkbox,
 } from '@repo/ui';
 import { Link } from '@tanstack/react-router';
-import { useEffect, useId, useState } from 'react';
+import { useId, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import {
@@ -45,10 +45,6 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
     resolver: zodResolver(loginWithEmailAndPasswordInputSchema),
   });
   const login = useLogin({ onSuccess });
-
-  useEffect(() => {
-    console.log(login.failureReason);
-  }, [login]);
 
   const onSubmit: SubmitHandler<LoginWithEmailAndPasswordInput> = (input) => {
     login.mutate(input);
@@ -167,7 +163,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
             variant="primary"
             type="submit"
             form="login-form">
-            Login
+            {login.isPending ? 'Logging in...' : 'Login'}
           </FancyButton.Root>
 
           <div className="text-paragraph-sm text-text-sub-600 mt-4 flex items-center justify-center gap-1">

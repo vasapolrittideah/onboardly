@@ -29,7 +29,11 @@ import {
 } from '@/features/auth/api/register';
 import { useRegister } from '@/lib/react-query-auth';
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+  onSuccess: () => void;
+}
+
+const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -38,7 +42,7 @@ const RegisterForm = () => {
   } = useForm<RegisterInput>({
     resolver: zodResolver(registerInputSchema),
   });
-  const registering = useRegister();
+  const registering = useRegister({ onSuccess });
 
   const onSubmit: SubmitHandler<RegisterInput> = (input) => {
     registering.mutate(input);
@@ -161,7 +165,7 @@ const RegisterForm = () => {
             className="mt-6 w-full"
             variant="primary"
             type="submit">
-            Create account
+            {registering.isPending ? 'Creating account...' : 'Create account'}
           </FancyButton.Root>
         </form>
 

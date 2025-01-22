@@ -1,4 +1,4 @@
-import { createLazyFileRoute } from '@tanstack/react-router';
+import { createLazyFileRoute, useNavigate } from '@tanstack/react-router';
 
 import RegisterForm from '@/features/auth/components/register-form';
 
@@ -7,9 +7,15 @@ export const Route = createLazyFileRoute('/auth/register')({
 });
 
 function RouteComponent() {
+  const navigate = useNavigate({ from: '/auth/register' });
+
   return (
     <main className="flex h-screen w-full flex-col items-center justify-start">
-      <RegisterForm />
+      <RegisterForm
+        onSuccess={() => {
+          navigate({ to: '/auth/login' });
+        }}
+      />
     </main>
   );
 }
