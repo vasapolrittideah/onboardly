@@ -1,7 +1,7 @@
 import { RiHeartLine } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { FancyButton } from '..';
+import { FancyButton } from '@/lib/components';
 
 const meta: Meta<typeof FancyButton.Root> = {
   title: 'Actions/FancyButton',

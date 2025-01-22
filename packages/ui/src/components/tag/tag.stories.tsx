@@ -4,7 +4,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import illustration1 from '@/assets/images/avatar/illustration-1.png';
 import logoNotion from '@/assets/images/logos/notion.svg';
 import logoObsidian from '@/assets/images/logos/obsidian.svg';
-import { Avatar, Tag } from '..';
+import { Avatar, Tag } from '@/lib/components';
 
 const meta: Meta<typeof Tag.Root> = {
   title: 'Data Display/Tag',

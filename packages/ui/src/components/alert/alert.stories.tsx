@@ -7,7 +7,7 @@ import {
 } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { LinkButton, Alert } from '..';
+import { LinkButton, Alert } from '@/lib/components';
 
 const meta: Meta<typeof Alert.Root> = {
   title: 'Feedback/Alert',

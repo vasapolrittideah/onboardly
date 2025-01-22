@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import portraitMary from '@/assets/images/avatar/portrait-5.png';
 import portraitElwood from '@/assets/images/avatar/portrait-6.png';
 import portraitEmily from '@/assets/images/avatar/portrait-7.png';
-import { AvatarGroup, Avatar } from '..';
+import { AvatarGroup, Avatar } from '@/lib/components';
 
 const meta: Meta<typeof AvatarGroup.Root> = {
   title: 'Data Display/AvatarGroup',

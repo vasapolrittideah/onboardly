@@ -1,7 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
 
 import { useNotification } from '@/hooks/use-notification';
-import { Button, LinkButton, Notification, NotificationProvider } from '..';
+import {
+  Button,
+  LinkButton,
+  Notification,
+  NotificationProvider,
+} from '@/lib/components';
 
 const meta: Meta<typeof Notification.Root> = {
   title: 'Feedback/Notification',
@@ -100,6 +105,8 @@ export const WithAction: Story = {
         mode="stroke"
         onClick={() =>
           notification({
+            status: 'error',
+            variant: 'filled',
             title: 'Insert your alert title here!',
             description:
               'Insert the alert description here. It would look better as two lines of text.',
@@ -135,6 +142,7 @@ export const WithLink: Story = {
         onClick={() =>
           notification({
             status: 'error',
+            variant: 'filled',
             title: 'Database Connection Failure',
             description:
               "We're encountering issues with connecting to our system's database at the moment.",
@@ -165,7 +173,8 @@ export const WithSecondaryAction: Story = {
         mode="stroke"
         onClick={() =>
           notification({
-            status: 'warning',
+            status: 'error',
+            variant: 'filled',
             title: 'Insert your alert title here!',
             description:
               'Insert the alert description here. It would look better as two lines of text.',

@@ -1,7 +1,7 @@
 import { RiLayout2Line, RiLayoutGridLine, RiListCheck } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { ButtonGroup } from '..';
+import { ButtonGroup } from '@/lib/components';
 
 const meta: Meta<typeof ButtonGroup.Root> = {
   title: 'Actions/ButtonGroup',

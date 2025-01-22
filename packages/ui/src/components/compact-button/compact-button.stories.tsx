@@ -1,7 +1,7 @@
 import { RiAddLine } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { CompactButton } from '..';
+import { CompactButton } from '@/lib/components';
 
 const meta: Meta<typeof CompactButton.Root> = {
   title: 'Actions/CompactButton',

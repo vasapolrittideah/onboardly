@@ -1,7 +1,7 @@
 import { RiAddLine } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Button, Divider } from '..';
+import { Button, Divider } from '@/lib/components';
 
 const meta: Meta<typeof Divider.Root> = {
   title: 'Data Display/Divider',

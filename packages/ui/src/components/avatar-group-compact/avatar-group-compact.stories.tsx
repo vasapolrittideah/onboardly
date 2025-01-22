@@ -5,7 +5,7 @@ import * as AvatarGroupCompact from './avatar-group-compact';
 import portraitMary from '@/assets/images/avatar/portrait-5.png';
 import portraitElwood from '@/assets/images/avatar/portrait-6.png';
 import portraitEmily from '@/assets/images/avatar/portrait-7.png';
-import { Avatar } from '..';
+import { Avatar } from '@/lib/components';
 
 const meta: Meta<typeof AvatarGroupCompact.Root> = {
   title: 'Data Display/AvatarGroupCompact ',

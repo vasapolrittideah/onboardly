@@ -1,7 +1,7 @@
 import { RiGlobalLine } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Button, Tooltip } from '@/components';
+import { Button, Tooltip } from '@/lib/components';
 
 const meta: Meta<typeof Tooltip.Root> = {
   title: 'Data Display/Tooltip',

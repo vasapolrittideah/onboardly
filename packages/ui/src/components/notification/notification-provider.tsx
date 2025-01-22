@@ -1,5 +1,5 @@
-import { Notification } from '@/components';
 import { useNotification } from '@/hooks/use-notification';
+import { Notification } from '@/lib/components';
 
 const NotificationProvider = () => {
   const { notifications } = useNotification();

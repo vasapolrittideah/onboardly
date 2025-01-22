@@ -1,7 +1,7 @@
 import { RiInformationFill } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Hint } from '..';
+import { Hint } from '@/lib/components';
 
 const meta: Meta<typeof Hint.Root> = {
   title: 'Form Elements/Hint',

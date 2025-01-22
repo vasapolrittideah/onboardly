@@ -8,7 +8,7 @@ import {
 } from '@remixicon/react';
 import * as React from 'react';
 
-import { Alert } from '@/components';
+import { Alert } from '@/lib/components';
 import { cnExt } from '@/utils/cn';
 
 const NotificationProvider = NotificationPrimitives.Provider;

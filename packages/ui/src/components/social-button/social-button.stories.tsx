@@ -1,8 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import * as SocialButton from './social-button';
-
-import { Icons } from '..';
+import { Icons, SocialButton } from '@/lib/components';
 
 const meta: Meta<typeof SocialButton.Root> = {
   title: 'Actions/SocialButton',

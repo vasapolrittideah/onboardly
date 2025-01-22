@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Avatar } from '@/components';
+import { Avatar } from '@/lib/components';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';
 

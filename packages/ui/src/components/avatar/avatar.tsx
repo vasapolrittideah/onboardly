@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 
-import { Icons } from '@/components';
+import { Icons } from '@/lib/components';
 import { cn, cnExt } from '@/utils/cn';
 import { recursiveCloneChildren } from '@/utils/recursive-clone-children';
 import { tv, type VariantProps } from '@/utils/tv';

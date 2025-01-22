@@ -7,7 +7,7 @@ import memoji3 from '@/assets/images/avatar/memoji-3.png';
 import memoji4 from '@/assets/images/avatar/memoji-4.png';
 import memoji5 from '@/assets/images/avatar/memoji-5.png';
 import memoji6 from '@/assets/images/avatar/memoji-6.png';
-import { Avatar, Icons } from '..';
+import { Avatar, Icons } from '@/lib/components';
 
 const meta: Meta<typeof Avatar.Root> = {
   title: 'Data Display/Avatar',

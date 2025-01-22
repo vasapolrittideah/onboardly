@@ -1,7 +1,7 @@
 import { RiCommandLine } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Kbd } from '..';
+import { Kbd } from '@/lib/components';
 
 const meta: Meta<typeof Kbd.Root> = {
   title: 'Feedback/Kbd',

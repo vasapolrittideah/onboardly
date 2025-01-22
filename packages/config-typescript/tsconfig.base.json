@@ -13,7 +13,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
     "preserveWatchOutput": true,
     "useDefineForClassFields": true,
     "skipLibCheck": true,

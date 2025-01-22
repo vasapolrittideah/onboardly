@@ -2,7 +2,7 @@ import { RiInformationFill } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Hint, Icons, Label, Textarea } from '..';
+import { Hint, Icons, Label, Textarea } from '@/lib/components';
 
 const meta: Meta<typeof Textarea.Root> = {
   title: 'Form Elements/Textarea',

@@ -2,15 +2,13 @@
   "extends": "@repo/config-typescript/tsconfig.react.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "baseUrl": "./src",
+    "baseUrl": "./",
+    "noEmit": false,
     "paths": {
-      "@/components": ["./components/index.ts"],
-      "@/utils/*": ["./utils/*"],
-      "@/types/*": ["./types/*"],
-      "@/hooks/*": ["./hooks/*"],
-      "@/assets/*": ["./assets/*"]
+      "@/lib/*": ["./lib/*"],
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["images.d.ts", "src", "src/types", "src/utils"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["images.d.ts", "src", "lib", "lib/components.ts"],
+  "exclude": ["node_modules"]
 }

@@ -1,4 +1,4 @@
-import { notification } from '@repo/ui/hooks/use-notification.js';
+import { notification } from '@repo/ui/hooks';
 import { redirect } from '@tanstack/react-router';
 import Axios, {
   AxiosError,

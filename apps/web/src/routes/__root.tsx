@@ -1,5 +1,5 @@
 import { User } from '@repo/database';
-import { NotificationProvider } from '@repo/ui/components';
+import { NotificationProvider } from '@repo/ui';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';

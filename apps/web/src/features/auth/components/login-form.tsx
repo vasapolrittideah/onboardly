@@ -17,7 +17,7 @@ import {
   Input,
   Avatar,
   Checkbox,
-} from '@repo/ui/components';
+} from '@repo/ui';
 import { Link } from '@tanstack/react-router';
 import { useEffect, useId, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';

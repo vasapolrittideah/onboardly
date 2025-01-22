@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import type { NotificationProps } from '@/ui/notification/notification';
+import { Notification } from '@/lib/components';
 
 const NOTIFICATION_LIMIT = 1;
 const NOTIFICATION_REMOVE_DELAY = 1000000;
 
-type NotificationPropsWithId = NotificationProps & {
+type NotificationPropsWithId = Notification.NotificationProps & {
   id: string;
 };
 

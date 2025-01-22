@@ -1,4 +1,4 @@
-import { Button } from '@repo/ui/components';
+import { Button } from '@repo/ui';
 import { Link } from '@tanstack/react-router';
 
 const NotFound: React.FC = () => (

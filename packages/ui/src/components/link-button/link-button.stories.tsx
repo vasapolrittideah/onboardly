@@ -1,7 +1,7 @@
 import { RiHeartLine } from '@remixicon/react';
 import { Meta, StoryObj } from '@storybook/react';
 
-import { LinkButton } from '..';
+import { LinkButton } from '@/lib/components';
 
 const meta: Meta<typeof LinkButton.Root> = {
   title: 'Actions/LinkButton',

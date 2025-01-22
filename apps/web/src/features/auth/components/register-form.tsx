@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   RiEyeLine,
   RiEyeOffLine,
@@ -11,19 +12,37 @@ import {
   FancyButton,
   Hint,
   Label,
+  Input,
   LinkButton,
   SocialButton,
   Icons,
-  Input,
   Avatar,
-} from '@repo/ui/components';
+} from '@repo/ui';
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import logo from '@/assets/logo.svg';
+import {
+  RegisterInput,
+  registerInputSchema,
+} from '@/features/auth/api/register';
+import { useRegister } from '@/lib/react-query-auth';
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterInput>({
+    resolver: zodResolver(registerInputSchema),
+  });
+  const registering = useRegister();
+
+  const onSubmit: SubmitHandler<RegisterInput> = (input) => {
+    registering.mutate(input);
+  };
 
   return (
     <section className="ring-stroke-soft-200 shadow-regular-sm flex w-full max-w-[480px] flex-col items-center justify-center rounded-3xl bg-white p-6 ring-1 ring-inset">
@@ -65,57 +84,72 @@ const RegisterForm = () => {
           OR
         </Divider.Root>
 
-        <div className="flex flex-col gap-1">
-          <Label.Root>
-            Full Name <Label.Asterisk />
-          </Label.Root>
-          <Input.Root>
-            <Input.Wrapper>
-              <Input.Icon as={RiUser6Line} />
-              <Input.Input type="text" placeholder="Steven Potter" />
-            </Input.Wrapper>
-          </Input.Root>
-        </div>
-        <div className="mt-4 flex flex-col gap-1">
-          <Label.Root>
-            Email Address <Label.Asterisk />
-          </Label.Root>
-          <Input.Root>
-            <Input.Wrapper>
-              <Input.Icon as={RiMailLine} />
-              <Input.Input type="text" placeholder="arthur@example.com" />
-            </Input.Wrapper>
-          </Input.Root>
-        </div>
-        <div className="mt-4 flex flex-col gap-1">
-          <Label.Root>
-            Password <Label.Asterisk />
-          </Label.Root>
-          <Input.Root>
-            <Input.Wrapper>
-              <Input.Icon as={RiLock2Line} />
-              <Input.Input
-                type={showPassword ? 'text' : 'password'}
-                placeholder="••••••••••••••••••"
-              />
-              <button type="button" onClick={() => setShowPassword((s) => !s)}>
-                {showPassword ? (
-                  <RiEyeOffLine className="text-text-soft-400 group-has-[disabled]:text-text-disabled-300 size-5" />
-                ) : (
-                  <RiEyeLine className="text-text-soft-400 group-has-[disabled]:text-text-disabled-300 size-5" />
-                )}
-              </button>
-            </Input.Wrapper>
-          </Input.Root>
-          <Hint.Root className="pt-1">
-            <Hint.Icon as={RiInformationFill} />
-            Must contain 1 uppercase letter, 1 number, min. 8 charactors.
-          </Hint.Root>
-        </div>
-
-        <FancyButton.Root className="mt-6 w-full" variant="primary">
-          Create account
-        </FancyButton.Root>
+        <form id="register-form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex flex-col gap-1">
+            <Label.Root>
+              Full Name <Label.Asterisk />
+            </Label.Root>
+            <Input.Root hasError={!!errors.fullName}>
+              <Input.Wrapper>
+                <Input.Icon as={RiUser6Line} />
+                <Input.Input
+                  type="text"
+                  placeholder="Steven Potter"
+                  {...register('fullName')}
+                />
+              </Input.Wrapper>
+            </Input.Root>
+          </div>
+          <div className="mt-4 flex flex-col gap-1">
+            <Label.Root>
+              Email Address <Label.Asterisk />
+            </Label.Root>
+            <Input.Root hasError={!!errors.email}>
+              <Input.Wrapper>
+                <Input.Icon as={RiMailLine} />
+                <Input.Input
+                  type="text"
+                  placeholder="arthur@example.com"
+                  {...register('email')}
+                />
+              </Input.Wrapper>
+            </Input.Root>
+          </div>
+          <div className="mt-4 flex flex-col gap-1">
+            <Label.Root>
+              Password <Label.Asterisk />
+            </Label.Root>
+            <Input.Root hasError={!!errors.password}>
+              <Input.Wrapper>
+                <Input.Icon as={RiLock2Line} />
+                <Input.Input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="••••••••••••••••••"
+                  {...register('password')}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((s) => !s)}>
+                  {showPassword ? (
+                    <RiEyeOffLine className="text-text-soft-400 group-has-[disabled]:text-text-disabled-300 size-5" />
+                  ) : (
+                    <RiEyeLine className="text-text-soft-400 group-has-[disabled]:text-text-disabled-300 size-5" />
+                  )}
+                </button>
+              </Input.Wrapper>
+            </Input.Root>
+            <Hint.Root className="pt-1">
+              <Hint.Icon as={RiInformationFill} />
+              Must contain 1 uppercase letter, 1 number, min. 8 charactors.
+            </Hint.Root>
+          </div>
+          <FancyButton.Root
+            className="mt-6 w-full"
+            variant="primary"
+            type="submit">
+            Create account
+          </FancyButton.Root>
+        </form>
 
         <div className="text-paragraph-sm text-text-sub-600 mt-4 flex justify-center gap-1">
           Already have and account?

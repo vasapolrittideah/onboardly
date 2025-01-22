@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Label, Icons } from '..';
+import { Label, Icons } from '@/lib/components';
 
 const meta: Meta<typeof Label.Root> = {
   title: 'Form Elements/Label',
