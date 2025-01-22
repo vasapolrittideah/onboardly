@@ -23,7 +23,7 @@
     "@types/bun": "latest",
     "prisma": "^6.2.1",
     "prisma-types-export": "^1.0.0",
-    "@repo/tsconfig": "link:@repo/tsconfig"
+    "@repo/config-typescript": "link:@repo/config-typescript"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

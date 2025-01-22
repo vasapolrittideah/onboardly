@@ -42,8 +42,8 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@repo/tsconfig": "link:@repo/tsconfig",
-    "@repo/tailwind": "link:@repo/tailwind",
+    "@repo/config-typescript": "link:@repo/config-typescript",
+    "@repo/config-tailwind": "link:@repo/config-tailwind",
     "@tanstack/react-query-devtools": "^5.64.2",
     "@tanstack/router-devtools": "^1.95.0",
     "@tanstack/router-plugin": "^1.95.0",

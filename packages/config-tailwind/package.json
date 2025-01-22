@@ -1,12 +1,12 @@
 {
-  "name": "@repo/tailwind",
+  "name": "@repo/config-tailwind",
   "version": "0.0.0",
   "private": true,
   "exports": {
     ".": "./tailwind.config.ts"
   },
   "devDependencies": {
-    "@repo/tsconfig": "link:@repo/tsconfig",
+    "@repo/config-typescript": "link:@repo/config-typescript",
     "tailwindcss": "^3.4.17",
     "tailwind-merge": "^2.6.0",
     "tailwind-variants": "^0.3.0",
