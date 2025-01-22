@@ -55,7 +55,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
   };
 
   return (
-    <section className="ring-stroke-soft-200 shadow-regular-sm flex w-full max-w-[480px] flex-col items-center justify-center rounded-3xl bg-white p-6 ring-1 ring-inset">
+    <section className="ring-stroke-soft-200 shadow-regular-sm mt-28 flex w-full max-w-[480px] flex-col items-center justify-center rounded-3xl bg-white p-6 ring-1 ring-inset">
       <div className="relative flex size-24 shrink-0 items-center justify-center rounded-full backdrop-blur-xl before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-neutral-500 before:to-transparent before:opacity-10">
         <div className="bg-bg-white-0 shadow-regular-xs ring-stroke-soft-200 relative z-10 flex size-16 items-center justify-center rounded-full ring-1 ring-inset">
           <Avatar.Image
@@ -110,7 +110,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
               </Input.Wrapper>
             </Input.Root>
             {errors.email && (
-              <Hint.Root hasError>
+              <Hint.Root className="mt-px" hasError>
                 <Hint.Icon as={RiErrorWarningFill} />
                 {errors.email?.message}
               </Hint.Root>
@@ -140,7 +140,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
               </Input.Wrapper>
             </Input.Root>
             {errors.password && (
-              <Hint.Root hasError>
+              <Hint.Root className="mt-px" hasError>
                 <Hint.Icon as={RiErrorWarningFill} />
                 {errors.password?.message}
               </Hint.Root>

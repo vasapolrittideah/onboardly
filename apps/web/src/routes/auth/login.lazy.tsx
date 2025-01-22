@@ -10,7 +10,7 @@ function Login() {
   const navigate = useNavigate({ from: '/auth/login' });
 
   return (
-    <main className="flex h-screen w-full flex-col items-center justify-center">
+    <main className="flex h-screen w-full flex-col items-center justify-start">
       <LoginForm
         onSuccess={() => {
           navigate({ to: '/' });
