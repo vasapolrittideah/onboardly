@@ -9,6 +9,7 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { SessionsModule } from './modules/sessions/sessions.module';
 import { UsersController } from './modules/users/users.controller';
 import { UsersModule } from './modules/users/users.module';
+import { MailModule } from './providers/mail/mail.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UsersModule } from './modules/users/users.module';
       load: [configuration],
     }),
     AuthModule,
+    MailModule,
     SessionsModule,
   ],
   controllers: [UsersController],

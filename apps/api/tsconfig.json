@@ -9,7 +9,8 @@
       "@/filters/*": ["./filters/*"],
       "@/providers/*": ["./providers/*"],
       "@/modules/*": ["./modules/*"],
-      "@/utils/*": ["./utils/*"]
+      "@/utils/*": ["./utils/*"],
+      "@/templates/*": ["./templates/*"]
     }
   },
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]

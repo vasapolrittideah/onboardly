@@ -20,6 +20,7 @@ import {
 import { LoginDto, RegisterDto } from '@/modules/auth/auth.dto';
 import { AccessTokenClaims } from '@/modules/auth/auth.interface';
 import { SessionsService } from '@/modules/sessions/sessions.service';
+import { MailService } from '@/providers/mail/mail.service';
 import { Expose } from '@/providers/prisma/prisma.interface';
 import { PrismaService } from '@/providers/prisma/prisma.service';
 import {
@@ -28,6 +29,7 @@ import {
 } from '@/providers/tokens/tokens.constants';
 import { TokensService } from '@/providers/tokens/tokens.service';
 import { normalizeEmail } from '@/utils/normalize-email';
+import { randomVerificationCode } from '@/utils/random-verification-code';
 
 @Injectable()
 export class AuthService {
@@ -36,6 +38,7 @@ export class AuthService {
     private readonly configService: ConfigService,
     private readonly tokensService: TokensService,
     private readonly sessionsService: SessionsService,
+    private readonly mailService: MailService,
   ) {}
 
   async register(data: RegisterDto): Promise<Expose<User>> {
@@ -67,6 +70,15 @@ export class AuthService {
             address: data.email,
           },
         },
+      },
+    });
+
+    this.mailService.sendMail({
+      to: data.email,
+      subject: 'Email verification',
+      template: './auth/email-verification',
+      context: {
+        code: randomVerificationCode(),
       },
     });
 

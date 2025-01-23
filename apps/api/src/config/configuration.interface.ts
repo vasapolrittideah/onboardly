@@ -7,6 +7,20 @@ export interface Configuration {
     refreshTokenExpiresIn: string;
   };
 
+  email: {
+    name: string;
+    from: string;
+    transport?: {
+      host: string;
+      port: number;
+      secure: boolean;
+      auth: {
+        user: string;
+        pass: string;
+      };
+    };
+  };
+
   supabase: {
     apiUrl: string;
     anonKey: string;

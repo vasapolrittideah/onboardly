@@ -8,6 +8,7 @@ import { AuthService } from '@/modules/auth/auth.service';
 import { JwtStrategy } from '@/modules/auth/strategies/jwt.strategy';
 import { SessionsModule } from '@/modules/sessions/sessions.module';
 import { UsersModule } from '@/modules/users/users.module';
+import { MailModule } from '@/providers/mail/mail.module';
 import { PrismaModule } from '@/providers/prisma/prisma.modules';
 import { TokensModule } from '@/providers/tokens/tokens.module';
 
@@ -18,6 +19,7 @@ import { TokensModule } from '@/providers/tokens/tokens.module';
     UsersModule,
     SessionsModule,
     TokensModule,
+    MailModule,
   ],
   exports: [AuthService],
   providers: [AuthService, JwtStrategy, JwtRefreshStrategy],
