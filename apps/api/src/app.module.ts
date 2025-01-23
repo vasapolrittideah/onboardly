@@ -6,6 +6,7 @@ import configuration from './config/configuration';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
+import { EmailsModule } from './modules/emails/emails.module';
 import { SessionsModule } from './modules/sessions/sessions.module';
 import { UsersController } from './modules/users/users.controller';
 import { UsersModule } from './modules/users/users.module';
@@ -21,6 +22,7 @@ import { MailModule } from './providers/mail/mail.module';
     AuthModule,
     MailModule,
     SessionsModule,
+    EmailsModule,
   ],
   controllers: [UsersController],
   providers: [
