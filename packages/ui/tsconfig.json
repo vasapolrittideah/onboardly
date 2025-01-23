@@ -9,6 +9,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["images.d.ts", "src", "lib", "lib/components.ts"],
+  "include": [".storybook", "images.d.ts", "src", "lib"],
   "exclude": ["node_modules"]
 }
