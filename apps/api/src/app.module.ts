@@ -11,6 +11,7 @@ import { SessionsModule } from './modules/sessions/sessions.module';
 import { UsersController } from './modules/users/users.controller';
 import { UsersModule } from './modules/users/users.module';
 import { MailModule } from './providers/mail/mail.module';
+import { TasksModule } from './providers/tasks/tasks.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { MailModule } from './providers/mail/mail.module';
     MailModule,
     SessionsModule,
     EmailsModule,
+    TasksModule,
   ],
   controllers: [UsersController],
   providers: [
