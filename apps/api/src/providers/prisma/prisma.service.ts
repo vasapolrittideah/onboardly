@@ -1,6 +1,7 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { Expose } from './prisma.interface';
 import { User, PrismaClient } from '@repo/database';
+
+import { Expose } from './prisma.interface';
 
 @Injectable()
 export class PrismaService

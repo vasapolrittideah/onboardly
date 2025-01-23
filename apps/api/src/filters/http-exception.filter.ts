@@ -8,6 +8,7 @@ import {
 import { Response } from 'express';
 
 import { UNKNOWN_ERROR } from '@/errors/errors.contants';
+import { ApiErrorResponse } from '@/utils/interfaces';
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -34,7 +35,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       };
     })();
 
-    const body = {
+    const body: ApiErrorResponse = {
       status,
       message,
       error,

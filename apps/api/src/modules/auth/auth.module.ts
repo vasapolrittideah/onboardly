@@ -6,9 +6,9 @@ import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
 import { AuthController } from '@/modules/auth/auth.controller';
 import { AuthService } from '@/modules/auth/auth.service';
 import { JwtStrategy } from '@/modules/auth/strategies/jwt.strategy';
+import { EmailsModule } from '@/modules/emails/emails.module';
 import { SessionsModule } from '@/modules/sessions/sessions.module';
 import { UsersModule } from '@/modules/users/users.module';
-import { MailModule } from '@/providers/mail/mail.module';
 import { PrismaModule } from '@/providers/prisma/prisma.modules';
 import { TokensModule } from '@/providers/tokens/tokens.module';
 
@@ -19,7 +19,8 @@ import { TokensModule } from '@/providers/tokens/tokens.module';
     UsersModule,
     SessionsModule,
     TokensModule,
-    MailModule,
+    EmailsModule,
+    UsersModule,
   ],
   exports: [AuthService],
   providers: [AuthService, JwtStrategy, JwtRefreshStrategy],

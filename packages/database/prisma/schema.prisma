@@ -29,14 +29,27 @@ model User {
 }
 
 model Email {
-  id        Int      @id @default(autoincrement())
-  address   String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation("userEmail", fields: [userId], references: [id])
-  userId    Int
+  id               Int               @id @default(autoincrement())
+  address          String            @unique
+  userId           Int
+  user             User              @relation("userEmail", fields: [userId], references: [id])
+  isVerified       Boolean           @default(false)
+  verificationCode VerificationCode? @relation("emailVerificationCode")
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
 
   @@index([userId], name: "userEmailId")
+}
+
+model VerificationCode {
+  id        Int      @id @default(autoincrement())
+  code      String
+  expiresAt DateTime
+  email     Email    @relation("emailVerificationCode", fields: [emailId], references: [id])
+  emailId   Int      @unique
+  createdAt DateTime @default(now())
+
+  @@index([emailId], name: "emailVerificationCodeId")
 }
 
 model Session {
@@ -46,10 +59,10 @@ model Session {
   userAgent       String?
   browser         String?
   operatingSystem String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
   user            User     @relation("userSession", fields: [userId], references: [id])
   userId          Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([userId], name: "userSessionId")
 }

@@ -11,16 +11,21 @@ import argon2 from 'argon2';
 import { Response } from 'express';
 import { UAParser } from 'ua-parser-js';
 
+import { EmailsService } from '../emails/emails.service';
+import { UsersService } from '../users/users.service';
+
 import {
+  EMAIL_NOT_FOUND,
   EMAIL_USER_CONFLICT,
   INVALID_CREDENTIALS,
+  INVALID_VERIFICATION_CODE,
   SESSION_NOT_FOUND,
   USER_NOT_FOUND,
+  VERIFICATION_CODE_NOT_FOUND,
 } from '@/errors/errors.contants';
-import { LoginDto, RegisterDto } from '@/modules/auth/auth.dto';
+import { LoginDto, RegisterDto, VerifyEmailDto } from '@/modules/auth/auth.dto';
 import { AccessTokenClaims } from '@/modules/auth/auth.interface';
 import { SessionsService } from '@/modules/sessions/sessions.service';
-import { MailService } from '@/providers/mail/mail.service';
 import { Expose } from '@/providers/prisma/prisma.interface';
 import { PrismaService } from '@/providers/prisma/prisma.service';
 import {
@@ -28,8 +33,8 @@ import {
   LOGIN_REFRESH_TOKEN,
 } from '@/providers/tokens/tokens.constants';
 import { TokensService } from '@/providers/tokens/tokens.service';
+import { InternalErrorResponse } from '@/utils/interfaces';
 import { normalizeEmail } from '@/utils/normalize-email';
-import { randomVerificationCode } from '@/utils/random-verification-code';
 
 @Injectable()
 export class AuthService {
@@ -38,7 +43,8 @@ export class AuthService {
     private readonly configService: ConfigService,
     private readonly tokensService: TokensService,
     private readonly sessionsService: SessionsService,
-    private readonly mailService: MailService,
+    private readonly emailsService: EmailsService,
+    private readonly usersService: UsersService,
   ) {}
 
   async register(data: RegisterDto): Promise<Expose<User>> {
@@ -65,21 +71,11 @@ export class AuthService {
       data: {
         fullName: data.fullName,
         passwordHash,
-        emails: {
-          create: {
-            address: data.email,
-          },
-        },
       },
     });
 
-    this.mailService.sendMail({
-      to: data.email,
-      subject: 'Email verification',
-      template: './auth/email-verification',
-      context: {
-        code: randomVerificationCode(),
-      },
+    await this.emailsService.createEmail(user.id, {
+      address: data.email,
     });
 
     return this.prisma.expose(user);
@@ -107,13 +103,109 @@ export class AuthService {
     if (!user) {
       throw new BadRequestException({
         error: USER_NOT_FOUND,
-        message: `User with email ${data.email} was not found, please register first`,
+        message: `User with email ${data.email} not found.`,
       });
     }
     if (!(await argon2.verify(user.passwordHash, data.password))) {
       throw new UnauthorizedException(INVALID_CREDENTIALS);
     }
 
+    return this.loginResponse(ipAddress, userAgent, response, user);
+  }
+
+  async logout(token: string): Promise<void> {
+    const session = await this.prisma.session.findFirst({
+      where: { token },
+      select: {
+        id: true,
+        user: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (!session) {
+      throw new NotFoundException(SESSION_NOT_FOUND);
+    }
+
+    await this.prisma.session.delete({
+      where: {
+        id: session.id,
+      },
+    });
+  }
+
+  async verifyEmail(
+    ipAddress: string,
+    userAgent: string,
+    response: Response,
+    data: VerifyEmailDto,
+  ): Promise<void> {
+    const email = await this.emailsService.getEmails(data.userId, {
+      where: {
+        address: data.email,
+      },
+    })?.[0];
+    if (!email) {
+      throw new NotFoundException(<InternalErrorResponse>{
+        error: EMAIL_NOT_FOUND,
+        message: `Email ${data.email} not found`,
+      });
+    }
+
+    const verificationCode = await this.prisma.verificationCode.findUnique({
+      where: {
+        emailId: email.id,
+      },
+      include: {
+        email: true,
+      },
+    });
+    if (!verificationCode) {
+      throw new NotFoundException(<InternalErrorResponse>{
+        error: VERIFICATION_CODE_NOT_FOUND,
+        message: `Verification code for email ${data.email} not found`,
+      });
+    }
+    if (verificationCode.code !== data.code) {
+      throw new NotFoundException(<InternalErrorResponse>{
+        error: INVALID_VERIFICATION_CODE,
+        message: 'Verification code not valid',
+      });
+    }
+    if (new Date() > verificationCode.expiresAt) {
+      throw new BadRequestException(<InternalErrorResponse>{
+        error: INVALID_VERIFICATION_CODE,
+        message: 'Verification code has expired',
+      });
+    }
+
+    await this.prisma.email.update({
+      where: {
+        id: email.id,
+      },
+      data: {
+        isVerified: true,
+      },
+    });
+
+    await this.prisma.verificationCode.delete({
+      where: {
+        emailId: email.id,
+      },
+    });
+
+    const user = await this.usersService.getUser(data.userId);
+    return this.loginResponse(ipAddress, userAgent, response, user);
+  }
+
+  private async loginResponse(
+    ipAddress: string,
+    userAgent: string,
+    response: Response,
+    user: User,
+  ) {
     const refreshToken = await this.getRefreshToken();
     const refreshTokenHash = await argon2.hash(refreshToken);
     const ua = new UAParser(userAgent);
@@ -141,29 +233,6 @@ export class AuthService {
       refreshToken,
       response,
     );
-  }
-
-  async logout(token: string): Promise<void> {
-    const session = await this.prisma.session.findFirst({
-      where: { token },
-      select: {
-        id: true,
-        user: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
-    if (!session) {
-      throw new NotFoundException(SESSION_NOT_FOUND);
-    }
-
-    await this.prisma.session.delete({
-      where: {
-        id: session.id,
-      },
-    });
   }
 
   async verifyRefreshTokenHash(
