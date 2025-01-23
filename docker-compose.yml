@@ -6,7 +6,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - PGDATA=/data/postgres
-      - POSTGRES_DB=peeko
+      - POSTGRES_DB=onboardly
     ports:
       - 5432:5432
     volumes:

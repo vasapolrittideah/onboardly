@@ -1,4 +1,4 @@
-# @peeko/prisma-schema
+# @onboardly/prisma-schema
 
 To install dependencies:
 

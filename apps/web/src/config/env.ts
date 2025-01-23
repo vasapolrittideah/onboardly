@@ -2,7 +2,7 @@ import * as z from 'zod';
 
 const envSchema = z.object({
   API_URL: z.string(),
-  APP_URL: z.string().optional().default('http://localhost:8000'),
+  WEB_URL: z.string().optional().default('http://localhost:8000'),
 });
 
 type Environment = z.infer<typeof envSchema>;
@@ -11,8 +11,8 @@ const createEnv = () => {
   const envVariables = Object.entries(import.meta.env).reduce<
     Record<string, string>
   >((acc, [currKey, currValue]) => {
-    if (currKey.startsWith('VITE_PEEKO_')) {
-      acc[currKey.replace('VITE_PEEKO_', '')] = currValue;
+    if (currKey.startsWith('VITE_APP_')) {
+      acc[currKey.replace('VITE_APP_', '')] = currValue;
     }
     return acc;
   }, {});

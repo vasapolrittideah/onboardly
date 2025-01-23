@@ -25,7 +25,7 @@ const configuration: Configuration = {
   },
 
   email: {
-    name: process.env.EMAIL_NAME ?? 'Peeko',
+    name: process.env.EMAIL_NAME ?? 'Onboardly',
     from: process.env.EMAIL_FROM ?? '',
     transport: {
       host: process.env.EMAIL_HOST ?? '',
