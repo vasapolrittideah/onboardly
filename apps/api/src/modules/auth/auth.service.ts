@@ -21,7 +21,12 @@ import {
   USER_NOT_FOUND,
   VERIFICATION_CODE_NOT_FOUND,
 } from '@/errors/errors.contants';
-import { LoginDto, RegisterDto, VerifyEmailDto } from '@/modules/auth/auth.dto';
+import {
+  LoginDto,
+  RegisterDto,
+  ResendEmailVerificationDto,
+  VerifyEmailDto,
+} from '@/modules/auth/auth.dto';
 import { AccessTokenClaims } from '@/modules/auth/auth.interface';
 import { MailService } from '@/providers/mail/mail.service';
 import { Expose } from '@/providers/prisma/prisma.interface';
@@ -189,22 +194,56 @@ export class AuthService {
       });
     }
 
-    // await this.prisma.email.update({
-    //   where: {
-    //     id: email.id,
-    //   },
-    //   data: {
-    //     isVerified: true,
-    //   },
-    // });
+    await this.prisma.email.update({
+      where: {
+        id: email.id,
+      },
+      data: {
+        isVerified: true,
+      },
+    });
 
-    // await this.prisma.verificationCode.delete({
-    //   where: {
-    //     emailId: email.id,
-    //   },
-    // });
+    await this.prisma.verificationCode.delete({
+      where: {
+        emailId: email.id,
+      },
+    });
 
     return this.loginResponse(ipAddress, userAgent, response, email.user);
+  }
+
+  async resendEmailVerification(
+    data: ResendEmailVerificationDto,
+  ): Promise<void> {
+    const email = await this.prisma.email.findUnique({
+      where: {
+        address: data.email,
+      },
+      include: {
+        verificationCode: true,
+      },
+    });
+    if (!email) {
+      throw new NotFoundException(<InternalErrorResponse>{
+        error: EMAIL_NOT_FOUND,
+        message: `Email ${email} not found`,
+      });
+    }
+
+    const code = this.generateVerificationCode();
+    this.prisma.verificationCode.update({
+      where: {
+        id: email.verificationCode.id,
+      },
+      data: {
+        code,
+        expiresAt: this.configService.get<Date>(
+          'security.validationCodeExpiresIn',
+        ),
+      },
+    });
+
+    return this.sendEmailVerification(data.email, code);
   }
 
   async sendEmailVerification(email: string, code?: string): Promise<void> {
