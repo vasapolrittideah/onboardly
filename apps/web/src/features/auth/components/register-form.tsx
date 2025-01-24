@@ -19,7 +19,7 @@ import {
   Avatar,
 } from '@repo/ui';
 import { Link } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import logo from '@/assets/logo.svg';
@@ -30,7 +30,7 @@ import {
 import { useRegister } from '@/lib/react-query-auth';
 
 interface RegisterFormProps {
-  onSuccess: () => void;
+  onSuccess: (email: string) => void;
 }
 
 const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
@@ -38,11 +38,18 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<RegisterInput>({
     resolver: zodResolver(registerInputSchema),
   });
-  const registering = useRegister({ onSuccess });
+  const registering = useRegister();
+
+  useEffect(() => {
+    if (registering.status === 'success') {
+      onSuccess(getValues('email'));
+    }
+  }, [registering.status, getValues, onSuccess]);
 
   const onSubmit: SubmitHandler<RegisterInput> = (input) => {
     registering.mutate(input);

@@ -12,8 +12,13 @@ function RouteComponent() {
   return (
     <main className="flex h-screen w-full flex-col items-center justify-start">
       <RegisterForm
-        onSuccess={() => {
-          navigate({ to: '/auth/login' });
+        onSuccess={(email) => {
+          navigate({
+            to: '/auth/verify-email',
+            search: {
+              email: email,
+            },
+          });
         }}
       />
     </main>

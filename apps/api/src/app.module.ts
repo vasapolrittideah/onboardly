@@ -11,6 +11,7 @@ import { SessionsModule } from './modules/sessions/sessions.module';
 import { UsersController } from './modules/users/users.controller';
 import { UsersModule } from './modules/users/users.module';
 import { MailModule } from './providers/mail/mail.module';
+import { PrismaModule } from './providers/prisma/prisma.modules';
 import { TasksModule } from './providers/tasks/tasks.module';
 
 @Module({
@@ -20,6 +21,7 @@ import { TasksModule } from './providers/tasks/tasks.module';
       isGlobal: true,
       load: [configuration],
     }),
+    PrismaModule,
     AuthModule,
     MailModule,
     SessionsModule,

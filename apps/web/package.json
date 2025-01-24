@@ -24,6 +24,7 @@
     "@radix-ui/react-tooltip": "^1.1.6",
     "@remixicon/react": "^4.6.0",
     "@repo/ui": "link:@repo/ui",
+    "@tanstack/react-query": "^5.64.2",
     "@tanstack/react-router": "^1.95.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
