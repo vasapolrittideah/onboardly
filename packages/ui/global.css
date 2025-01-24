@@ -388,13 +388,19 @@
   /*#endregion Colors */
 
   html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
-    input:-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0 30px white inset !important;
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+      /* -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important; */
+      -webkit-background-clip: text;
+      /* This is a bonus from here: https://github.com/nextui-org/nextui/issues/1346#issuecomment-1855635162*/
+      transition: background-color 5000s ease-in-out 0s;
     }
   }
 }

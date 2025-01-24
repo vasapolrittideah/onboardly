@@ -12,8 +12,8 @@ function RouteComponent() {
   return (
     <main className="flex h-screen w-full flex-col items-center justify-start">
       <RegisterForm
-        onSuccess={(email) => {
-          navigate({
+        onSuccess={async (email) => {
+          await navigate({
             to: '/auth/verify-email',
             search: {
               email: email,

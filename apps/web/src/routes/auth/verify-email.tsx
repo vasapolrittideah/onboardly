@@ -17,7 +17,10 @@ function RouteComponent() {
 
   return (
     <main className="flex h-screen w-full flex-col items-center justify-start">
-      <VerifyEmailForm email={email} onSuccess={() => navigate({ to: '/' })} />
+      <VerifyEmailForm
+        email={email}
+        onSuccess={async () => await navigate({ to: '/' })}
+      />
     </main>
   );
 }
