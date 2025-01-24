@@ -6,7 +6,7 @@ import { PrismaModule } from '@/providers/prisma/prisma.modules';
 
 @Module({
   imports: [PrismaModule],
-  exports: [SessionsService],
   providers: [SessionsService],
+  exports: [SessionsService],
 })
 export class SessionsModule {}

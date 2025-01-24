@@ -5,6 +5,7 @@ export interface Configuration {
     jwtSecret: string;
     accessTokenExpiresIn: string;
     refreshTokenExpiresIn: string;
+    validationCodeExpiresIn: Date;
   };
 
   email: {

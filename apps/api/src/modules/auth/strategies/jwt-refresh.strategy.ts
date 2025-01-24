@@ -37,14 +37,17 @@ export class JwtRefreshStrategy extends PassportStrategy(
     request: Request,
     payload: AccessTokenClaims,
   ): Promise<Session> {
+    const session = await this.sessionsService.getSession(
+      payload.sessionId,
+      payload.id,
+    );
     const isValid = await this.authService.verifyRefreshTokenHash(
       request.cookies?.[LOGIN_REFRESH_TOKEN],
-      payload.id,
-      payload.sessionId,
+      session,
     );
     if (!isValid) {
       throw new UnauthorizedException(UNAUTHORIZED_RESOURCE);
     }
-    return this.sessionsService.getSession(payload.sessionId, payload.id);
+    return session;
   }
 }

@@ -11,6 +11,7 @@ import {
 import { Link } from '@tanstack/react-router';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
+import { useResendEmailVerification } from '../api/resend-email-verification';
 import {
   useVerifyEmail,
   VerifyEmailInput,
@@ -35,9 +36,10 @@ const VerifyEmailForm = ({ email, onSuccess }: VerifyEmailFormProps) => {
   const { mutate: verifyEmail } = useVerifyEmail({
     mutationConfig: { onSuccess },
   });
+  const { mutate: resendEmailVerification } = useResendEmailVerification();
 
   const onSubmit: SubmitHandler<VerifyEmailInput> = (input) => {
-    verifyEmail(input);
+    verifyEmail({ ...input, email });
   };
 
   return (
@@ -67,20 +69,20 @@ const VerifyEmailForm = ({ email, onSuccess }: VerifyEmailFormProps) => {
       <div id="verify-email-form" className="flex w-full flex-col gap-1 px-6">
         <Controller
           control={control}
-          name="verificationCode"
+          name="code"
           render={({ field: { value, onChange } }) => (
             <DigitInput.Root
-              hasError={!!errors.verificationCode}
+              hasError={!!errors.code}
               numInputs={4}
               onChange={onChange}
               value={value}
             />
           )}
         />
-        {errors.verificationCode && (
+        {errors.code && (
           <Hint.Root className="mt-px" hasError>
             <Hint.Icon as={RiErrorWarningFill} />
-            {errors.verificationCode?.message}
+            {errors.code?.message}
           </Hint.Root>
         )}
         <FancyButton.Root
@@ -95,7 +97,11 @@ const VerifyEmailForm = ({ email, onSuccess }: VerifyEmailFormProps) => {
       <div className="text-paragraph-sm text-text-sub-600 mt-4 flex flex-col items-center justify-center gap-1">
         Experiencing issues receiving the code?
         <Link to="/auth/login">
-          <LinkButton.Root variant="primary">Resend code</LinkButton.Root>
+          <LinkButton.Root
+            variant="primary"
+            onClick={() => resendEmailVerification({ email })}>
+            Resend code
+          </LinkButton.Root>
         </Link>
       </div>
     </section>

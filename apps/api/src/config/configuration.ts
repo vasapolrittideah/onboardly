@@ -1,6 +1,7 @@
 import { ConfigFactory } from '@nestjs/config/dist/interfaces';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
+import ms, { StringValue } from 'ms';
 
 import { Configuration } from './configuration.interface';
 dotenvExpand.expand(dotenv.config());
@@ -17,6 +18,10 @@ const configuration: Configuration = {
     jwtSecret: process.env.JWT_SECRET ?? '',
     accessTokenExpiresIn: process.env.ACCESS_TOKEN_EXPIRS_IN ?? '1h',
     refreshTokenExpiresIn: process.env.REFRESH_TOKEN_EXPIRS_IN ?? '7d',
+    validationCodeExpiresIn: new Date(
+      Date.now() +
+        ms(<StringValue>process.env.VALIDATION_CODE_EXPIRS_IN ?? '1h'),
+    ),
   },
 
   supabase: {

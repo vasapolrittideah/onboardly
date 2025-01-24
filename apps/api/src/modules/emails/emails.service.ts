@@ -3,33 +3,33 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Email, Prisma } from '@repo/database';
 
 import {
   EMAIL_NOT_FOUND,
   UNAUTHORIZED_RESOURCE,
 } from '@/errors/errors.contants';
-import { MailService } from '@/providers/mail/mail.service';
+import { AuthService } from '@/modules/auth/auth.service';
 import { PrismaService } from '@/providers/prisma/prisma.service';
 import { InternalErrorResponse } from '@/utils/interfaces';
-import { normalizeEmail } from '@/utils/normalize-email';
 
 @Injectable()
 export class EmailsService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly mailService: MailService,
+    private readonly configService: ConfigService,
+    private readonly authService: AuthService,
   ) {}
 
   async createEmail(
     userId: number,
     data: Omit<Prisma.EmailCreateInput, 'user'>,
   ): Promise<Email> {
-    const emailNormalized = normalizeEmail(data.address);
-    const code = this.generateVerificationCode();
+    const code = this.authService.generateVerificationCode();
     const result = await this.prisma.email.create({
       data: {
-        address: emailNormalized,
+        address: data.address,
         user: {
           connect: {
             id: userId,
@@ -38,17 +38,14 @@ export class EmailsService {
         verificationCode: {
           create: {
             code,
-            expiresAt: new Date(Date.now() + 1000 * 60 * 60), // Code expires in 1 hour
+            expiresAt: this.configService.get<Date>(
+              'security.validationCodeExpiresIn',
+            ),
           },
         },
       },
     });
-    this.mailService.sendMail({
-      to: emailNormalized,
-      subject: 'Email verification',
-      template: './auth/email-verification',
-      context: { code },
-    });
+    this.authService.sendEmailVerification(data.address, code);
     return result;
   }
 
@@ -85,18 +82,18 @@ export class EmailsService {
   async getEmail(
     userId: number,
     query: {
-      id?: number;
+      emailId?: number;
       address?: string;
     },
   ): Promise<Email> {
-    const { id, address } = query;
+    const { emailId, address } = query;
 
-    if (!id && !address) {
+    if (!emailId && !address) {
       throw new Error('Either id or address must be provided');
     }
 
     const email = await this.prisma.email.findUnique({
-      where: id ? { id } : { address },
+      where: emailId ? { id: emailId } : { address },
     });
     if (!email) {
       throw new NotFoundException(<InternalErrorResponse>{
@@ -116,18 +113,18 @@ export class EmailsService {
   async deleteEmail(
     userId: number,
     query: {
-      id?: number;
+      emailId?: number;
       address?: string;
     },
   ): Promise<void> {
-    const { id, address } = query;
+    const { emailId, address } = query;
 
-    if (!id && !address) {
+    if (!emailId && !address) {
       throw new Error('Either id or address must be provided');
     }
 
     const email = await this.prisma.email.findUnique({
-      where: id ? { id } : { address },
+      where: emailId ? { id: emailId } : { address },
     });
     if (!email) {
       throw new NotFoundException(<InternalErrorResponse>{
@@ -142,11 +139,7 @@ export class EmailsService {
       });
     }
     await this.prisma.email.delete({
-      where: { id },
+      where: { id: emailId },
     });
-  }
-
-  private generateVerificationCode(): string {
-    return Math.floor(1000 + Math.random() * 9000).toString();
   }
 }

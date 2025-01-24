@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { resolve } from 'path';
 
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -22,7 +22,7 @@ import { MailService } from './mail.service';
           },
         },
         template: {
-          dir: join(__dirname, 'templates'),
+          dir: resolve(__dirname, '../../templates'),
           adapter: new HandlebarsAdapter(),
           options: {
             strict: true,

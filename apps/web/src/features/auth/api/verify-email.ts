@@ -6,7 +6,7 @@ import { apiClient } from '@/lib/api-client';
 import { MutationConfig } from '@/lib/react-query';
 
 export const verifyEmailInputSchema = z.object({
-  verificationCode: z
+  code: z
     .string({ required_error: 'Verification code is required' })
     .min(1, 'Verification code is required')
     .regex(/^\d+$/, 'Verification code must contain only digits')
@@ -15,15 +15,17 @@ export const verifyEmailInputSchema = z.object({
 
 export type VerifyEmailInput = z.infer<typeof verifyEmailInputSchema>;
 
-export const verifyEmail = async (data: VerifyEmailInput): Promise<User> => {
+export const verifyEmail = async (
+  data: VerifyEmailInput & { email: string },
+): Promise<User> => {
   return apiClient.post('/auth/verify-email', data);
 };
 
 type VerifyEmailOptions = {
-  mutationConfig: MutationConfig<typeof verifyEmail>;
+  mutationConfig?: MutationConfig<typeof verifyEmail>;
 };
 
-export const useVerifyEmail = ({ mutationConfig }: VerifyEmailOptions) => {
+export const useVerifyEmail = ({ mutationConfig }: VerifyEmailOptions = {}) => {
   const { onSuccess } = mutationConfig || {};
 
   return useMutation({

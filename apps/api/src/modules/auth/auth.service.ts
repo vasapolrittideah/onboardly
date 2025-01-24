@@ -6,13 +6,11 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { User } from '@repo/database';
+import { Session, User } from '@repo/database';
 import argon2 from 'argon2';
 import { Response } from 'express';
+import ms, { StringValue } from 'ms';
 import { UAParser } from 'ua-parser-js';
-
-import { EmailsService } from '../emails/emails.service';
-import { UsersService } from '../users/users.service';
 
 import {
   EMAIL_NOT_FOUND,
@@ -25,7 +23,7 @@ import {
 } from '@/errors/errors.contants';
 import { LoginDto, RegisterDto, VerifyEmailDto } from '@/modules/auth/auth.dto';
 import { AccessTokenClaims } from '@/modules/auth/auth.interface';
-import { SessionsService } from '@/modules/sessions/sessions.service';
+import { MailService } from '@/providers/mail/mail.service';
 import { Expose } from '@/providers/prisma/prisma.interface';
 import { PrismaService } from '@/providers/prisma/prisma.service';
 import {
@@ -34,7 +32,6 @@ import {
 } from '@/providers/tokens/tokens.constants';
 import { TokensService } from '@/providers/tokens/tokens.service';
 import { InternalErrorResponse } from '@/utils/interfaces';
-import { normalizeEmail } from '@/utils/normalize-email';
 
 @Injectable()
 export class AuthService {
@@ -42,18 +39,15 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly configService: ConfigService,
     private readonly tokensService: TokensService,
-    private readonly sessionsService: SessionsService,
-    private readonly emailsService: EmailsService,
-    private readonly usersService: UsersService,
+    private readonly mailService: MailService,
   ) {}
 
   async register(data: RegisterDto): Promise<Expose<User>> {
-    const emailNormalized = normalizeEmail(data.email);
     const userExists = await this.prisma.user.findFirst({
       where: {
         emails: {
           some: {
-            address: emailNormalized,
+            address: data.email,
           },
         },
       },
@@ -67,16 +61,28 @@ export class AuthService {
       passwordHash = await argon2.hash(data.password);
     }
 
+    const code = this.generateVerificationCode();
     const user = await this.prisma.user.create({
       data: {
         fullName: data.fullName,
         passwordHash,
+        emails: {
+          create: {
+            address: data.email,
+            verificationCode: {
+              create: {
+                code,
+                expiresAt: this.configService.get<Date>(
+                  'security.validationCodeExpiresIn',
+                ),
+              },
+            },
+          },
+        },
       },
     });
 
-    await this.emailsService.createEmail(user.id, {
-      address: data.email,
-    });
+    await this.sendEmailVerification(data.email, code);
 
     return this.prisma.expose(user);
   }
@@ -87,12 +93,11 @@ export class AuthService {
     response: Response,
     data: LoginDto,
   ): Promise<void> {
-    const emailNormalized = normalizeEmail(data.email);
     const user = await this.prisma.user.findFirst({
       where: {
         emails: {
           some: {
-            address: emailNormalized,
+            address: data.email,
           },
         },
       },
@@ -142,11 +147,14 @@ export class AuthService {
     response: Response,
     data: VerifyEmailDto,
   ): Promise<void> {
-    const email = await this.emailsService.getEmails(data.userId, {
+    const email = await this.prisma.email.findUnique({
       where: {
         address: data.email,
       },
-    })?.[0];
+      include: {
+        user: true,
+      },
+    });
     if (!email) {
       throw new NotFoundException(<InternalErrorResponse>{
         error: EMAIL_NOT_FOUND,
@@ -181,23 +189,49 @@ export class AuthService {
       });
     }
 
-    await this.prisma.email.update({
+    // await this.prisma.email.update({
+    //   where: {
+    //     id: email.id,
+    //   },
+    //   data: {
+    //     isVerified: true,
+    //   },
+    // });
+
+    // await this.prisma.verificationCode.delete({
+    //   where: {
+    //     emailId: email.id,
+    //   },
+    // });
+
+    return this.loginResponse(ipAddress, userAgent, response, email.user);
+  }
+
+  async sendEmailVerification(email: string, code?: string): Promise<void> {
+    const emailDetails = await this.prisma.email.findUnique({
       where: {
-        id: email.id,
+        address: email,
       },
-      data: {
-        isVerified: true,
+      include: {
+        user: true,
       },
     });
+    if (!emailDetails) {
+      throw new NotFoundException(<InternalErrorResponse>{
+        error: EMAIL_NOT_FOUND,
+        message: `Email ${email} not found`,
+      });
+    }
 
-    await this.prisma.verificationCode.delete({
-      where: {
-        emailId: email.id,
-      },
+    if (!code) {
+      code = this.generateVerificationCode();
+    }
+    this.mailService.sendMail({
+      to: email,
+      subject: 'Email verification',
+      template: './auth/email-verification',
+      context: { code },
     });
-
-    const user = await this.usersService.getUser(data.userId);
-    return this.loginResponse(ipAddress, userAgent, response, user);
   }
 
   private async loginResponse(
@@ -237,15 +271,17 @@ export class AuthService {
 
   async verifyRefreshTokenHash(
     token: string,
-    userId: number,
-    sessionId: number,
+    session: Session,
   ): Promise<boolean> {
     try {
-      const session = await this.sessionsService.getSession(sessionId, userId);
       return await argon2.verify(token, session.token);
     } catch (_) {
       return false;
     }
+  }
+
+  generateVerificationCode(): string {
+    return Math.floor(1000 + Math.random() * 9000).toString();
   }
 
   private async getAccessToken(user: User, sessionId: number): Promise<string> {
@@ -256,15 +292,15 @@ export class AuthService {
     return this.tokensService.signJwt(
       LOGIN_ACCESS_TOKEN,
       payload,
-      this.configService.get<string>('secuity.accessTokenExpiresIn'),
+      this.configService.get<string>('security.accessTokenExpiresIn'),
     );
   }
 
   private async getRefreshToken(): Promise<string> {
     return this.tokensService.signJwt(
       LOGIN_ACCESS_TOKEN,
-      undefined,
-      this.configService.get<string>('secuity.refreshTokenExpiresIn'),
+      {},
+      this.configService.get<string>('security.refreshTokenExpiresIn'),
     );
   }
 
@@ -276,12 +312,22 @@ export class AuthService {
     response.cookie(LOGIN_ACCESS_TOKEN, accessToken, {
       httpOnly: true,
       secure: false,
-      sameSite: 'none',
+      maxAge: ms(
+        <StringValue>(
+          this.configService.get<string>('security.accessTokenExpiresIn')
+        ),
+      ),
+      path: '/',
     });
     response.cookie(LOGIN_REFRESH_TOKEN, refreshToken, {
       httpOnly: true,
       secure: false,
-      sameSite: 'none',
+      maxAge: ms(
+        <StringValue>(
+          this.configService.get<string>('security.refreshTokenExpiresIn')
+        ),
+      ),
+      path: '/',
     });
   }
 }

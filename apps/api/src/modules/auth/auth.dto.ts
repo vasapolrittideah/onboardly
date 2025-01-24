@@ -1,7 +1,6 @@
 import {
   IsEmail,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsString,
   MinLength,
@@ -32,12 +31,14 @@ export class LoginDto {
 
 export class VerifyEmailDto {
   @IsNotEmpty()
-  @IsNumber()
-  userId: number;
-
-  @IsNotEmpty()
   email: string;
 
   @IsNotEmpty()
   code: string;
+}
+
+export class ResendEmailVerificationDto {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
 }
