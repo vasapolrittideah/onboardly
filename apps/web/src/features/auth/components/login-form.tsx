@@ -57,7 +57,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
           <Avatar.Image
             src={logo}
             alt="Logo"
-            className="size-[36px] rounded-none"
+            className="size-[36px] select-none rounded-none"
           />
         </div>
       </div>
@@ -169,7 +169,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
           <div className="text-paragraph-sm text-text-sub-600 mt-4 flex items-center justify-center gap-1">
             Don&apos;t have an account?{' '}
             <Link to="/auth/register">
-              <LinkButton.Root variant="primary">Sign up</LinkButton.Root>
+              <LinkButton.Root variant="primary">Register</LinkButton.Root>
             </Link>
           </div>
         </form>

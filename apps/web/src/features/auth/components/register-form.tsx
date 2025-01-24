@@ -62,14 +62,14 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
           <Avatar.Image
             src={logo}
             alt="Logo"
-            className="size-[36px] rounded-none"
+            className="size-[36px] select-none rounded-none"
           />
         </div>
       </div>
 
-      <h1 className="text-title-h4 mt-6">Sign up to get started</h1>
+      <h1 className="text-title-h4 mt-3">Create a new account</h1>
       <p className="text-paragraph-md mt-2 text-center text-gray-600">
-        Filling in your personal information to sign up
+        Enter your personal information to register
       </p>
       <Divider.Root
         style={{
@@ -147,6 +147,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                 <Input.Icon as={RiLock2Line} />
                 <Input.Input
                   type={showPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
                   placeholder="••••••••••••••••••"
                   {...register('password')}
                 />
@@ -177,7 +178,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         </form>
 
         <div className="text-paragraph-sm text-text-sub-600 mt-4 flex justify-center gap-1">
-          Already have and account?
+          Already have an account?
           <Link to="/auth/login">
             <LinkButton.Root variant="primary">Login</LinkButton.Root>
           </Link>

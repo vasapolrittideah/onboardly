@@ -8,6 +8,7 @@ import {
   Post,
   Res,
   Get,
+  UseGuards,
 } from '@nestjs/common';
 import { Session, User } from '@repo/database';
 import { Response } from 'express';
@@ -21,6 +22,7 @@ import {
 import { AuthService } from './auth.service';
 import { Public } from './decorators/public.decorator';
 import { SessionWithUser } from '../sessions/sessions.interface';
+import { JwtRefreshAuthGuard } from './guards/jwt-refresh-auth-guard';
 
 import { CurrentSession } from '@/modules/auth/decorators/current-session.decorator';
 import { Expose } from '@/providers/prisma/prisma.interface';
@@ -79,5 +81,16 @@ export class AuthController {
     @CurrentSession() session: SessionWithUser,
   ): Promise<User> {
     return session.user;
+  }
+
+  @Public()
+  @Get('refresh')
+  @UseGuards(JwtRefreshAuthGuard)
+  @HttpCode(HttpStatus.OK)
+  async refresh(
+    @Res({ passthrough: true }) response: Response,
+    @CurrentSession() session: SessionWithUser,
+  ): Promise<void> {
+    return this.authService.refresh(response, session);
   }
 }

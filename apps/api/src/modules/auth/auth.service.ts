@@ -28,6 +28,7 @@ import {
   VerifyEmailDto,
 } from '@/modules/auth/auth.dto';
 import { AccessTokenClaims } from '@/modules/auth/auth.interface';
+import { SessionWithUser } from '@/modules/sessions/sessions.interface';
 import { MailService } from '@/providers/mail/mail.service';
 import { Expose } from '@/providers/prisma/prisma.interface';
 import { PrismaService } from '@/providers/prisma/prisma.service';
@@ -278,13 +279,11 @@ export class AuthService {
     userAgent: string,
     response: Response,
     user: User,
-  ) {
-    const refreshToken = await this.getRefreshToken();
-    const refreshTokenHash = await argon2.hash(refreshToken);
+  ): Promise<void> {
     const ua = new UAParser(userAgent);
     const { id } = await this.prisma.session.create({
       data: {
-        token: refreshTokenHash,
+        token: '',
         ipAddress,
         userAgent,
         browser:
@@ -301,9 +300,25 @@ export class AuthService {
       },
     });
 
-    this.setCookies(
-      await this.getAccessToken(user, id),
-      refreshToken,
+    const refreshToken = await this.getRefreshToken(user, id);
+    const refreshTokenHash = await argon2.hash(refreshToken);
+
+    await this.prisma.session.update({
+      where: {
+        id,
+      },
+      data: {
+        token: refreshTokenHash,
+      },
+    });
+
+    this.setAccessTokenCookie(await this.getAccessToken(user, id), response);
+    this.setRefreshTokenCookie(refreshToken, response);
+  }
+
+  async refresh(response: Response, session: SessionWithUser): Promise<void> {
+    this.setAccessTokenCookie(
+      await this.getAccessToken(session.user, session.id),
       response,
     );
   }
@@ -313,7 +328,7 @@ export class AuthService {
     session: Session,
   ): Promise<boolean> {
     try {
-      return await argon2.verify(token, session.token);
+      return await argon2.verify(session.token, token);
     } catch (_) {
       return false;
     }
@@ -335,19 +350,7 @@ export class AuthService {
     );
   }
 
-  private async getRefreshToken(): Promise<string> {
-    return this.tokensService.signJwt(
-      LOGIN_ACCESS_TOKEN,
-      {},
-      this.configService.get<string>('security.refreshTokenExpiresIn'),
-    );
-  }
-
-  private setCookies(
-    accessToken: string,
-    refreshToken: string,
-    response: Response,
-  ): void {
+  private setAccessTokenCookie(accessToken: string, response: Response): void {
     response.cookie(LOGIN_ACCESS_TOKEN, accessToken, {
       httpOnly: true,
       secure: false,
@@ -358,6 +361,27 @@ export class AuthService {
       ),
       path: '/',
     });
+  }
+
+  private async getRefreshToken(
+    user: User,
+    sessionId: number,
+  ): Promise<string> {
+    const payload: AccessTokenClaims = {
+      id: user.id,
+      sessionId: sessionId,
+    };
+    return this.tokensService.signJwt(
+      LOGIN_REFRESH_TOKEN,
+      payload,
+      this.configService.get<string>('security.refreshTokenExpiresIn'),
+    );
+  }
+
+  private setRefreshTokenCookie(
+    refreshToken: string,
+    response: Response,
+  ): void {
     response.cookie(LOGIN_REFRESH_TOKEN, refreshToken, {
       httpOnly: true,
       secure: false,

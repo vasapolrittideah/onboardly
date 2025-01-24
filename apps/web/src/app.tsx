@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { routeTree } from './routeTree.gen';
 
@@ -36,7 +36,15 @@ function App(): JSX.Element {
 }
 
 function InnerApp(): JSX.Element {
-  const { data: user } = useUser();
+  const { data: user, isLoading } = useUser();
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return <RouterProvider router={router} context={{ user }} />;
 }

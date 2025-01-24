@@ -49,7 +49,7 @@ const VerifyEmailForm = ({ email, onSuccess }: VerifyEmailFormProps) => {
           <Avatar.Image
             src={logo}
             alt="Logo"
-            className="size-[36px] rounded-none"
+            className="size-[36px] select-none rounded-none"
           />
         </div>
       </div>

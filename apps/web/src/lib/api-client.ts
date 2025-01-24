@@ -1,10 +1,5 @@
 import { notification } from '@repo/ui/hooks';
-import { redirect } from '@tanstack/react-router';
-import Axios, {
-  AxiosError,
-  HttpStatusCode,
-  InternalAxiosRequestConfig,
-} from 'axios';
+import Axios, { InternalAxiosRequestConfig } from 'axios';
 
 import { env } from '@/config/env';
 
@@ -17,27 +12,37 @@ const authRequestInterceptor = (config: InternalAxiosRequestConfig) => {
   return config;
 };
 
+export const apiRefreshClient = Axios.create({
+  baseURL: env.API_URL,
+});
+apiRefreshClient.interceptors.request.use(authRequestInterceptor);
+
 export const apiClient = Axios.create({
   baseURL: env.API_URL,
 });
-
 apiClient.interceptors.request.use(authRequestInterceptor);
 apiClient.interceptors.response.use(
-  (response) => {
-    return response.data;
-  },
-  (error: AxiosError<{ message?: string }>) => {
-    const message = error.response?.data?.message || error.message;
-    if (error.status === HttpStatusCode.Unauthorized) {
-      throw redirect({ to: '/auth/login' });
-    } else {
-      notification({
-        title: 'Something went wrong',
-        description: message,
-        variant: 'filled',
-        status: 'error',
-      });
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response?.status === 401 && !originalRequest?._retry) {
+      originalRequest._retry = true;
+
+      try {
+        await apiRefreshClient.get('auth/refresh');
+        return apiClient(originalRequest);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
     }
+
+    const message = error.response?.data?.message || error.message;
+    notification({
+      title: 'Something went wrong',
+      description: message,
+      variant: 'filled',
+      status: 'error',
+    });
 
     return Promise.reject(error);
   },
