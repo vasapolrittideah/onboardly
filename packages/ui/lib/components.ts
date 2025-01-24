@@ -6,6 +6,7 @@ export * as Button from '@/components/button/button';
 export * as ButtonGroup from '@/components/button-group/button-group';
 export * as Checkbox from '@/components/checkbox/checkbox';
 export * as CompactButton from '@/components/compact-button/compact-button';
+export * as DigitInput from '@/components/digit-input/digit-input';
 export * as Divider from '@/components/divider/divider';
 export * as FancyButton from '@/components/fancy-button/fancy-button';
 export * as Hint from '@/components/hint/hint';

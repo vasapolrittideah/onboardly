@@ -60,6 +60,7 @@
   "dependencies": {
     "ajv": "latest",
     "crypto": "^1.0.1",
+    "react-otp-input": "^3.1.1",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
