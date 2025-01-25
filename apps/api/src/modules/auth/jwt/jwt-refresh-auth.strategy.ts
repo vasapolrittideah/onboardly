@@ -13,7 +13,7 @@ import { SessionsService } from '@/modules/sessions/sessions.service';
 import { LOGIN_REFRESH_TOKEN } from '@/providers/tokens/tokens.constants';
 
 @Injectable()
-export class JwtRefreshStrategy extends PassportStrategy(
+export class JwtRefreshAuthStrategy extends PassportStrategy(
   Strategy,
   'jwt-refresh',
 ) {

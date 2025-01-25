@@ -11,6 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { User } from '@repo/database';
+import { CurrentContext } from 'decorators/current-context.decorator';
 import { Response } from 'express';
 
 import {
@@ -20,11 +21,10 @@ import {
   VerifyEmailDto,
 } from './auth.dto';
 import { AuthService } from './auth.service';
-import { Public } from './decorators/public.decorator';
+import { Public } from '../../decorators/public.decorator';
 import { SessionWithUser } from '../sessions/sessions.interface';
-import { JwtRefreshAuthGuard } from './guards/jwt-refresh-auth-guard';
+import { JwtRefreshAuthGuard } from './jwt/jwt-refresh-auth.guard';
 
-import { CurrentContext } from '@/modules/auth/decorators/current-context.decorator';
 import { Expose } from '@/providers/prisma/prisma.interface';
 
 @Controller('auth')

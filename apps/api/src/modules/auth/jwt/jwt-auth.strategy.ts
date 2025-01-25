@@ -11,7 +11,7 @@ import { SessionsService } from '@/modules/sessions/sessions.service';
 import { LOGIN_ACCESS_TOKEN } from '@/providers/tokens/tokens.constants';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtAuthStrategy extends PassportStrategy(Strategy) {
   constructor(
     readonly configService: ConfigService,
     readonly sessionsService: SessionsService,
