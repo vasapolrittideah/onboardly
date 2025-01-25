@@ -10,7 +10,7 @@ import {
   Get,
   UseGuards,
 } from '@nestjs/common';
-import { Session, User } from '@repo/database';
+import { User } from '@repo/database';
 import { Response } from 'express';
 
 import {
@@ -24,7 +24,7 @@ import { Public } from './decorators/public.decorator';
 import { SessionWithUser } from '../sessions/sessions.interface';
 import { JwtRefreshAuthGuard } from './guards/jwt-refresh-auth-guard';
 
-import { CurrentSession } from '@/modules/auth/decorators/current-session.decorator';
+import { CurrentContext } from '@/modules/auth/decorators/current-context.decorator';
 import { Expose } from '@/providers/prisma/prisma.interface';
 
 @Controller('auth')
@@ -52,8 +52,8 @@ export class AuthController {
 
   @Post('logout')
   @HttpCode(HttpStatus.OK)
-  async logout(@CurrentSession() session: Session): Promise<void> {
-    await this.authService.logout(session.token);
+  async logout(@CurrentContext() context: SessionWithUser): Promise<void> {
+    await this.authService.logout(context.token);
   }
 
   @Public()
@@ -78,9 +78,9 @@ export class AuthController {
   @Get('me')
   @HttpCode(HttpStatus.OK)
   async getCurrentUser(
-    @CurrentSession() session: SessionWithUser,
+    @CurrentContext() context: SessionWithUser,
   ): Promise<User> {
-    return session.user;
+    return context.user;
   }
 
   @Public()
@@ -89,8 +89,8 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async refresh(
     @Res({ passthrough: true }) response: Response,
-    @CurrentSession() session: SessionWithUser,
+    @CurrentContext() context: SessionWithUser,
   ): Promise<void> {
-    return this.authService.refresh(response, session);
+    return this.authService.refresh(response, context);
   }
 }
