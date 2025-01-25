@@ -16,10 +16,10 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ProtectedImport } from './routes/_protected'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index.route'
 import { Route as AuthVerifyEmailImport } from './routes/auth/verify-email'
+import { Route as AuthRegisterImport } from './routes/auth/register'
 
 // Create Virtual Routes
 
-const AuthRegisterLazyImport = createFileRoute('/auth/register')()
 const AuthLoginLazyImport = createFileRoute('/auth/login')()
 const ProtectedAboutLazyImport = createFileRoute('/_protected/about')()
 
@@ -35,12 +35,6 @@ const ProtectedIndexRouteRoute = ProtectedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProtectedRoute,
 } as any)
-
-const AuthRegisterLazyRoute = AuthRegisterLazyImport.update({
-  id: '/auth/register',
-  path: '/auth/register',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/auth/register.lazy').then((d) => d.Route))
 
 const AuthLoginLazyRoute = AuthLoginLazyImport.update({
   id: '/auth/login',
@@ -62,6 +56,12 @@ const AuthVerifyEmailRoute = AuthVerifyEmailImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AuthRegisterRoute = AuthRegisterImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -71,6 +71,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof ProtectedImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth/register': {
+      id: '/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof AuthRegisterImport
       parentRoute: typeof rootRoute
     }
     '/auth/verify-email': {
@@ -92,13 +99,6 @@ declare module '@tanstack/react-router' {
       path: '/auth/login'
       fullPath: '/auth/login'
       preLoaderRoute: typeof AuthLoginLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/register': {
-      id: '/auth/register'
-      path: '/auth/register'
-      fullPath: '/auth/register'
-      preLoaderRoute: typeof AuthRegisterLazyImport
       parentRoute: typeof rootRoute
     }
     '/_protected/': {
@@ -129,28 +129,28 @@ const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof ProtectedRouteWithChildren
+  '/auth/register': typeof AuthRegisterRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/about': typeof ProtectedAboutLazyRoute
   '/auth/login': typeof AuthLoginLazyRoute
-  '/auth/register': typeof AuthRegisterLazyRoute
   '/': typeof ProtectedIndexRouteRoute
 }
 
 export interface FileRoutesByTo {
+  '/auth/register': typeof AuthRegisterRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/about': typeof ProtectedAboutLazyRoute
   '/auth/login': typeof AuthLoginLazyRoute
-  '/auth/register': typeof AuthRegisterLazyRoute
   '/': typeof ProtectedIndexRouteRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_protected': typeof ProtectedRouteWithChildren
+  '/auth/register': typeof AuthRegisterRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/_protected/about': typeof ProtectedAboutLazyRoute
   '/auth/login': typeof AuthLoginLazyRoute
-  '/auth/register': typeof AuthRegisterLazyRoute
   '/_protected/': typeof ProtectedIndexRouteRoute
 }
 
@@ -158,36 +158,36 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/auth/register'
     | '/auth/verify-email'
     | '/about'
     | '/auth/login'
-    | '/auth/register'
     | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth/verify-email' | '/about' | '/auth/login' | '/auth/register' | '/'
+  to: '/auth/register' | '/auth/verify-email' | '/about' | '/auth/login' | '/'
   id:
     | '__root__'
     | '/_protected'
+    | '/auth/register'
     | '/auth/verify-email'
     | '/_protected/about'
     | '/auth/login'
-    | '/auth/register'
     | '/_protected/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   ProtectedRoute: typeof ProtectedRouteWithChildren
+  AuthRegisterRoute: typeof AuthRegisterRoute
   AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
   AuthLoginLazyRoute: typeof AuthLoginLazyRoute
-  AuthRegisterLazyRoute: typeof AuthRegisterLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   ProtectedRoute: ProtectedRouteWithChildren,
+  AuthRegisterRoute: AuthRegisterRoute,
   AuthVerifyEmailRoute: AuthVerifyEmailRoute,
   AuthLoginLazyRoute: AuthLoginLazyRoute,
-  AuthRegisterLazyRoute: AuthRegisterLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -201,9 +201,9 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/_protected",
+        "/auth/register",
         "/auth/verify-email",
-        "/auth/login",
-        "/auth/register"
+        "/auth/login"
       ]
     },
     "/_protected": {
@@ -212,6 +212,9 @@ export const routeTree = rootRoute
         "/_protected/about",
         "/_protected/"
       ]
+    },
+    "/auth/register": {
+      "filePath": "auth/register.tsx"
     },
     "/auth/verify-email": {
       "filePath": "auth/verify-email.tsx"
@@ -222,9 +225,6 @@ export const routeTree = rootRoute
     },
     "/auth/login": {
       "filePath": "auth/login.lazy.tsx"
-    },
-    "/auth/register": {
-      "filePath": "auth/register.lazy.tsx"
     },
     "/_protected/": {
       "filePath": "_protected/index.route.tsx",

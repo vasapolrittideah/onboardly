@@ -28,12 +28,14 @@ import {
   registerInputSchema,
 } from '@/features/auth/api/register';
 import { useRegister } from '@/lib/react-query-auth';
+import { RegisterRouteSearch } from '@/routes/auth/register';
 
 interface RegisterFormProps {
+  initialData: RegisterRouteSearch;
   onSuccess: (email: string) => void;
 }
 
-const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
+const RegisterForm = ({ initialData, onSuccess }: RegisterFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -41,6 +43,10 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
     getValues,
     formState: { errors },
   } = useForm<RegisterInput>({
+    defaultValues: {
+      fullName: initialData?.name,
+      email: initialData?.email,
+    },
     resolver: zodResolver(registerInputSchema),
   });
   const registering = useRegister();
@@ -79,21 +85,25 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         className="text-stroke-sub-300 my-8 h-1 w-full before:bg-transparent"></Divider.Root>
 
       <div className="w-full px-6">
-        <SocialButton.Root className="w-full" brand="google" mode="stroke">
-          <SocialButton.Icon as={Icons.IconGoogle} />
-          Continue with Google
-        </SocialButton.Root>
-        <SocialButton.Root
-          className="mt-4 w-full"
-          brand="facebook"
-          mode="stroke">
-          <SocialButton.Icon as={Icons.IconLinkedin} />
-          Continue with LinkedIn
-        </SocialButton.Root>
+        {!initialData.provider && (
+          <>
+            <SocialButton.Root className="w-full" brand="google" mode="stroke">
+              <SocialButton.Icon as={Icons.IconGoogle} />
+              Continue with Google
+            </SocialButton.Root>
+            <SocialButton.Root
+              className="mt-4 w-full"
+              brand="facebook"
+              mode="stroke">
+              <SocialButton.Icon as={Icons.IconLinkedin} />
+              Continue with LinkedIn
+            </SocialButton.Root>
 
-        <Divider.Root className="my-6" variant="line-text">
-          OR
-        </Divider.Root>
+            <Divider.Root className="my-6" variant="line-text">
+              OR
+            </Divider.Root>
+          </>
+        )}
 
         <form id="register-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-1">
@@ -104,6 +114,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
               <Input.Wrapper>
                 <Input.Icon as={RiUser6Line} />
                 <Input.Input
+                  readOnly={!!initialData?.name}
                   type="text"
                   placeholder="Steven Potter"
                   {...register('fullName')}
@@ -125,6 +136,7 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
               <Input.Wrapper>
                 <Input.Icon as={RiMailLine} />
                 <Input.Input
+                  readOnly={!!initialData?.email}
                   type="text"
                   placeholder="arthur@example.com"
                   {...register('email')}
@@ -177,12 +189,21 @@ const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
           </FancyButton.Root>
         </form>
 
-        <div className="text-paragraph-sm text-text-sub-600 mt-4 flex justify-center gap-1">
-          Already have an account?
-          <Link to="/auth/login">
-            <LinkButton.Root variant="primary">Login</LinkButton.Root>
-          </Link>
-        </div>
+        {!initialData.provider ? (
+          <div className="text-paragraph-sm text-text-sub-600 mt-4 flex justify-center gap-1">
+            Already have an account?
+            <Link to="/auth/login">
+              <LinkButton.Root variant="primary">Login</LinkButton.Root>
+            </Link>
+          </div>
+        ) : (
+          <div className="text-paragraph-sm text-text-sub-600 mt-4 flex flex-col items-center justify-center gap-1">
+            Already have an account or want to use a different one?
+            <Link to="/auth/login">
+              <LinkButton.Root variant="primary">Click here</LinkButton.Root>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

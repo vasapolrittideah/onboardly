@@ -26,6 +26,7 @@ import {
   LoginWithEmailAndPasswordInput,
   loginWithEmailAndPasswordInputSchema,
 } from '../api/login';
+import { loginWithGoogle } from '../api/login-with-google';
 
 import logo from '@/assets/logo.svg';
 import { useLogin } from '@/lib/react-query-auth';
@@ -74,7 +75,11 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
         className="text-stroke-sub-300 my-8 h-1 w-full before:bg-transparent"></Divider.Root>
 
       <div className="w-full px-6">
-        <SocialButton.Root className="w-full" brand="google" mode="stroke">
+        <SocialButton.Root
+          className="w-full"
+          brand="google"
+          mode="stroke"
+          onClick={loginWithGoogle}>
           <SocialButton.Icon as={Icons.IconGoogle} />
           Continue with Google
         </SocialButton.Root>

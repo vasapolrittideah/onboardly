@@ -5,6 +5,7 @@ import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import configuration from './config/configuration';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { AuthModule } from './modules/auth/auth.module';
+import { GoogleOAuthModule } from './modules/auth/google/google-oauth.module';
 import { JwtAuthGuard } from './modules/auth/jwt/jwt-auth.guard';
 import { EmailsModule } from './modules/emails/emails.module';
 import { SessionsModule } from './modules/sessions/sessions.module';
@@ -23,6 +24,7 @@ import { TasksModule } from './providers/tasks/tasks.module';
     }),
     PrismaModule,
     AuthModule,
+    GoogleOAuthModule,
     MailModule,
     SessionsModule,
     EmailsModule,

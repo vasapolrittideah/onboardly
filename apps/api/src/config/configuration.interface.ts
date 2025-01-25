@@ -6,6 +6,11 @@ export interface Configuration {
     accessTokenExpiresIn: string;
     refreshTokenExpiresIn: string;
     validationCodeExpiresIn: Date;
+    googleOAuth: {
+      clientId: string;
+      clientSecret: string;
+      callbackUrl: string;
+    };
   };
 
   email: {

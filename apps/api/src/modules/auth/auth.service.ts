@@ -274,7 +274,7 @@ export class AuthService {
     });
   }
 
-  private async loginResponse(
+  async loginResponse(
     ipAddress: string,
     userAgent: string,
     response: Response,

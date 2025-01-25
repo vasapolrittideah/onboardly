@@ -19,7 +19,7 @@ async function bootstrap() {
     {
       cors: {
         credentials: true,
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         origin: (origin, callback) => {
           const whitelist = ['http://localhost:8000'];
           if (!origin || whitelist.includes(origin)) {

@@ -22,6 +22,11 @@ const configuration: Configuration = {
       Date.now() +
         ms(<StringValue>process.env.VALIDATION_CODE_EXPIRS_IN ?? '1h'),
     ),
+    googleOAuth: {
+      clientId: process.env.GOOGLE_OAUTH_CLIENT_ID ?? '',
+      clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET ?? '',
+      callbackUrl: process.env.GOOGLE_OAUTH_CALLBACK_URL ?? '',
+    },
   },
 
   supabase: {
