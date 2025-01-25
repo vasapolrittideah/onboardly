@@ -27,6 +27,11 @@ const configuration: Configuration = {
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET ?? '',
       callbackUrl: process.env.GOOGLE_OAUTH_CALLBACK_URL ?? '',
     },
+    linkedinOAuth: {
+      clientId: process.env.LINKEDIN_OAUTH_CLIENT_ID ?? '',
+      clientSecret: process.env.LINKEDIN_OAUTH_CLIENT_SECRET ?? '',
+      callbackUrl: process.env.LINKEDIN_OAUTH_CALLBACK_URL ?? '',
+    },
   },
 
   supabase: {

@@ -27,6 +27,7 @@ import {
   loginWithEmailAndPasswordInputSchema,
 } from '../api/login';
 import { loginWithGoogle } from '../api/login-with-google';
+import { loginWithLinkedin } from '../api/login-with-linkedin';
 
 import logo from '@/assets/logo.svg';
 import { useLogin } from '@/lib/react-query-auth';
@@ -86,7 +87,8 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
         <SocialButton.Root
           className="mt-4 w-full"
           brand="facebook"
-          mode="stroke">
+          mode="stroke"
+          onClick={loginWithLinkedin}>
           <SocialButton.Icon as={Icons.IconLinkedin} />
           Continue with LinkedIn
         </SocialButton.Root>

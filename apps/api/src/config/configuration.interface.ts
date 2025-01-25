@@ -11,6 +11,11 @@ export interface Configuration {
       clientSecret: string;
       callbackUrl: string;
     };
+    linkedinOAuth: {
+      clientId: string;
+      clientSecret: string;
+      callbackUrl: string;
+    };
   };
 
   email: {
