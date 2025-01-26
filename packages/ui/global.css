@@ -407,4 +407,10 @@
       transition: background-color 5000s ease-in-out 0s;
     }
   }
+
+  *::selection,
+  *::-moz-selection {
+    background: rgb(var(--primary-alpha-24));
+    text-shadow: none;
+  }
 }
