@@ -16,10 +16,9 @@ import {
   Icons,
   Input,
   Avatar,
-  Checkbox,
 } from '@repo/ui';
 import { Link } from '@tanstack/react-router';
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import {
@@ -37,7 +36,6 @@ interface LoginFormProps {
 }
 
 const LoginForm = ({ onSuccess }: LoginFormProps) => {
-  const uniqueId = useId();
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -98,14 +96,15 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
         </Divider.Root>
 
         <form id="login-form" onSubmit={handleSubmit(onSubmit)}>
-          <div id="email" className="flex flex-col gap-1">
-            <Label.Root>
+          <div className="flex flex-col gap-1">
+            <Label.Root htmlFor="email">
               Email Address <Label.Asterisk />
             </Label.Root>
             <Input.Root hasError={!!errors.email}>
               <Input.Wrapper>
                 <Input.Icon as={RiMailLine} />
                 <Input.Input
+                  id="email"
                   type="text"
                   placeholder="arthur@example.com"
                   {...register('email')}
@@ -119,14 +118,19 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
               </Hint.Root>
             )}
           </div>
-          <div id="password" className="mt-4 flex flex-col gap-1">
-            <Label.Root>
-              Password <Label.Asterisk />
-            </Label.Root>
+          <div className="mt-4 flex flex-col gap-1">
+            <div className="flex justify-between">
+              <Label.Root htmlFor="password">
+                Password <Label.Asterisk />
+              </Label.Root>
+              <LinkButton.Root variant="gray">Forget password?</LinkButton.Root>
+            </div>
+
             <Input.Root hasError={!!errors.password}>
               <Input.Wrapper>
                 <Input.Icon as={RiLock2Line} />
                 <Input.Input
+                  id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••••••••••••"
                   {...register('password')}
@@ -150,23 +154,8 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
             )}
           </div>
 
-          <div className="my-6 flex justify-between">
-            <div className="flex items-center gap-2">
-              <Checkbox.Root id={`${uniqueId}-checkbox`} />
-              <Label.Root
-                className="text-paragraph-sm"
-                htmlFor={`${uniqueId}-checkbox`}>
-                Keep me logging in
-              </Label.Root>
-            </div>
-
-            <LinkButton.Root variant="gray" underline>
-              Forget password?
-            </LinkButton.Root>
-          </div>
-
           <FancyButton.Root
-            className="w-full"
+            className="mt-6 w-full"
             variant="primary"
             type="submit"
             form="login-form">
