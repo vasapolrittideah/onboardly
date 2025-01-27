@@ -408,9 +408,18 @@
     }
   }
 
-  *::selection,
-  *::-moz-selection {
-    background: rgb(var(--primary-alpha-24));
+  ::selection {
+    background: rgb(var(--neutral-alpha-16));
+    text-shadow: none;
+  }
+
+  ::-moz-selection {
+    background: rgb(var(--neutral-alpha-16));
+    text-shadow: none;
+  }
+
+  ::-webkit-selection {
+    background: rgb(var(--neutral-alpha-16));
     text-shadow: none;
   }
 }

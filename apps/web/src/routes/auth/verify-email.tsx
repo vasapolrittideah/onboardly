@@ -18,6 +18,7 @@ function RouteComponent() {
   return (
     <main className="flex h-screen w-full flex-col items-center justify-start">
       <VerifyEmailForm
+        from="/auth/register"
         email={email}
         onSuccess={async () => await navigate({ to: '/' })}
       />
