@@ -24,10 +24,9 @@ import {
   LoginWithEmailAndPasswordInput,
   loginWithEmailAndPasswordInputSchema,
 } from '../api/login';
-import { loginWithGoogle } from '../api/login-with-google';
-import { loginWithLinkedin } from '../api/login-with-linkedin';
 
 import logo from '@/assets/logo.svg';
+import { env } from '@/config/env';
 import { useLogin } from '@/lib/react-query-auth';
 
 interface LoginFormProps {
@@ -79,7 +78,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
           className="w-full"
           brand="google"
           mode="stroke"
-          onClick={loginWithGoogle}>
+          onClick={() => window.open(`${env.API_URL}/auth/google`, '_self')}>
           <SocialButton.Icon as={Icons.IconGoogle} />
           Continue with Google
         </SocialButton.Root>
@@ -87,7 +86,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
           className="mt-4 w-full"
           brand="facebook"
           mode="stroke"
-          onClick={loginWithLinkedin}>
+          onClick={() => window.open(`${env.API_URL}/auth/linkedin`, '_self')}>
           <SocialButton.Icon as={Icons.IconLinkedin} />
           Continue with LinkedIn
         </SocialButton.Root>

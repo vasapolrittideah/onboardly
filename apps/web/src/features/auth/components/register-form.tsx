@@ -22,6 +22,7 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import logo from '@/assets/logo.svg';
+import { env } from '@/config/env';
 import {
   RegisterInput,
   registerInputSchema,
@@ -88,14 +89,23 @@ const RegisterForm = ({ initialData, onSuccess }: RegisterFormProps) => {
       <div className="w-full px-6">
         {!initialData.provider && (
           <>
-            <SocialButton.Root className="w-full" brand="google" mode="stroke">
+            <SocialButton.Root
+              className="w-full"
+              brand="google"
+              mode="stroke"
+              onClick={() =>
+                window.open(`${env.API_URL}/auth/google`, '_self')
+              }>
               <SocialButton.Icon as={Icons.IconGoogle} />
               Continue with Google
             </SocialButton.Root>
             <SocialButton.Root
               className="mt-4 w-full"
               brand="facebook"
-              mode="stroke">
+              mode="stroke"
+              onClick={() =>
+                window.open(`${env.API_URL}/auth/linkedin`, '_self')
+              }>
               <SocialButton.Icon as={Icons.IconLinkedin} />
               Continue with LinkedIn
             </SocialButton.Root>
