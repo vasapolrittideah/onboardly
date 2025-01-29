@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RiErrorWarningFill } from '@remixicon/react';
-import { Divider, DigitInput, FancyButton, LinkButton, Hint } from '@repo/ui';
+import { DigitInput, FancyButton, LinkButton, Hint } from '@repo/ui';
 import { Link, ParseRoute } from '@tanstack/react-router';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -11,7 +11,6 @@ import {
   verifyEmailInputSchema,
 } from '../api/verify-email';
 
-import logo from '@/assets/logo.svg';
 import { routeTree } from '@/routeTree.gen';
 
 interface VerifyEmailFormProps {
@@ -38,30 +37,7 @@ const VerifyEmailForm = ({ email, onSuccess }: VerifyEmailFormProps) => {
   };
 
   return (
-    <section className="ring-stroke-soft-200 shadow-regular-sm mt-28 flex w-full max-w-[480px] flex-col items-center justify-center rounded-3xl bg-white p-6 ring-1 ring-inset">
-      <div className="relative flex size-24 shrink-0 items-center justify-center rounded-full backdrop-blur-xl before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-neutral-500 before:to-transparent before:opacity-10">
-        <div className="bg-bg-white-0 shadow-regular-xs ring-stroke-soft-200 relative z-10 flex size-16 items-center justify-center rounded-full ring-1 ring-inset">
-          <Link className="cursor-pointer" to="/">
-            <img
-              src={logo}
-              alt="Logo"
-              className="size-8 select-none rounded-none"
-            />
-          </Link>
-        </div>
-      </div>
-
-      <h1 className="text-title-h4 mt-3">Enter verification code</h1>
-      <p className="text-paragraph-md mt-2 text-center text-gray-600">
-        We have sent a code to <span className="font-semibold">{email}</span>.
-      </p>
-      <Divider.Root
-        style={{
-          background:
-            'linear-gradient(90deg, currentcolor 4px, transparent 4px) 50% 50% / 8px 1px repeat-x',
-        }}
-        className="text-stroke-sub-300 my-8 h-1 w-full before:bg-transparent"></Divider.Root>
-
+    <>
       <div id="verify-email-form" className="flex w-full flex-col gap-1 px-6">
         <Controller
           control={control}
@@ -100,7 +76,7 @@ const VerifyEmailForm = ({ email, onSuccess }: VerifyEmailFormProps) => {
           </LinkButton.Root>
         </Link>
       </div>
-    </section>
+    </>
   );
 };
 

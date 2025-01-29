@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 
+import AuthLayout from '@/components/layouts/auth-layout';
 import VerifyEmailForm from '@/features/auth/components/verify-email-form';
 
 export const Route = createFileRoute('/auth/verify-email')({
@@ -17,11 +18,15 @@ function RouteComponent() {
 
   return (
     <main className="flex h-screen w-full flex-col items-center justify-start">
-      <VerifyEmailForm
-        from="/auth/register"
-        email={email}
-        onSuccess={async () => await navigate({ to: '/' })}
-      />
+      <AuthLayout
+        title="Enter verification code"
+        description={`We have sent a code to ${email}`}>
+        <VerifyEmailForm
+          from="/auth/register"
+          email={email}
+          onSuccess={async () => await navigate({ to: '/' })}
+        />
+      </AuthLayout>
     </main>
   );
 }

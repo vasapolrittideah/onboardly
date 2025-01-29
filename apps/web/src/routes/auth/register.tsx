@@ -2,6 +2,7 @@ import { AuthProvider } from '@repo/database';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { z } from 'zod';
 
+import AuthLayout from '@/components/layouts/auth-layout';
 import RegisterForm from '@/features/auth/components/register-form';
 
 const registerRouteSearchSchema = z.object({
@@ -23,17 +24,21 @@ function RouteComponent() {
 
   return (
     <main className="flex h-screen w-full flex-col items-center justify-start">
-      <RegisterForm
-        initialData={{ provider, name, email }}
-        onSuccess={async (email) => {
-          await navigate({
-            to: '/auth/verify-email',
-            search: {
-              email: email,
-            },
-          });
-        }}
-      />
+      <AuthLayout
+        title="Create a new account"
+        description="Enter your details to create a new account">
+        <RegisterForm
+          initialData={{ provider, name, email }}
+          onSuccess={async (email) => {
+            await navigate({
+              to: '/auth/verify-email',
+              search: {
+                email: email,
+              },
+            });
+          }}
+        />
+      </AuthLayout>
     </main>
   );
 }
